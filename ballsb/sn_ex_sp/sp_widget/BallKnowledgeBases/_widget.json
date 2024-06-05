@@ -1,0 +1,428 @@
+{
+    "instance": {
+        "name": "ballsb",
+        "url": "https://ballsb.service-now.com",
+        "g_ck": "d3b0ee22c3a2c214fe51effa2b013108221935cf46e58dbb0217e53063955ef6dddffce1"
+    },
+    "action": "saveWidget",
+    "tableName": "sp_widget",
+    "name": "Ball Knowledge Bases",
+    "sys_id": "369a8be6c3624614fe51effa2b01316b",
+    "widget": {
+        "template": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Body HTML template",
+            "sys_readonly": false,
+            "type": "html_template",
+            "mandatory": false,
+            "displayValue": "<div class=\"panel panel-{{::options.color}} b\">\n  <div class=\"panel-heading\">\n    <h2 class=\"h4 panel-title\">\n      <fa\n        ng-if=\"::options.glyph.length\"\n        name=\"{{::options.glyph}}\"\n        class=\"m-r-sm\"\n      ></fa>\n      ${My Favorites}\n    </h2>\n  </div>\n\n  <div class=\"panel-body\" ng-class=\"{'no-padder': data.favorites != 0}\">\n    <div ng-if=\"data.favorites == 0\">${You have no favorites}</div>\n\n    <div role=\"list\">\n      <div class=\"panel-body b-b fav-item\" role=\"listitem\">\n        <div data-index=\"{{$index}}\">\n          <!-- Knowledge Articles -->\n          <div ng-if=\"data.kbFavorites.length > 0\">\n            <div\n              class=\"panel-subheading\"\n              ng-init=\"c.kb_variable_toggle = c.kb_toggle\"\n              aria-expanded=\"{{c.kb_variable_toggle}}\"\n              aria-label=\"{{data.ariaLabel}}\"\n              ng-click=\"c.kb_variable_toggle =\n              !c.kb_variable_toggle\"\n              ng-if=\"!c.hide_control\"\n            >\n              <div>\n                <span>${Knowledge Articles}</span>\n              </div>\n              <div>\n                <span\n                  style=\"font-size: 12px\"\n                  class=\"glyphicon\"\n                  ng-class=\"c.kb_variable_toggle ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'\"\n                ></span>\n              </div>\n            </div>\n            <!-- KB Records -->\n            <div\n              ng-repeat=\"fav in data.kbFavorites\"\n              ng-if=\"c.kb_variable_toggle\"\n            >\n              <div class=\"row-container\">\n                <div class=\"content favorite-content\">\n                  <a\n                    aria-label=\"${Open} {{::fav.name}}\"\n                    ng-href=\"?id=kb_article&sys_id={{::fav.sys_id}}\"\n                    class=\"text-primary m-b-sm block\"\n                  >\n                    <span>{{::fav.name}}</span>\n                  </a>\n                </div>\n                <i\n                  class=\"fa fa-times-circle-o remove\"\n                  tabindex=\"0\"\n                  ng-click=\"remove($event, fav.sys_id)\"\n                  aria-label=\"${Remove} {{::fav.name}}\"\n                  title=\"${Remove}\"\n                ></i>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <!-- Requests -->\n        <div ng-if=\"data.itemFavorites.length > 0\">\n          <div\n            class=\"panel-subheading\"\n            ng-init=\"c.item_variable_toggle = c.item_toggle\"\n            aria-expanded=\"{{c.item_variable_toggle}}\"\n            aria-label=\"{{data.ariaLabel}}\"\n            ng-click=\"c.item_variable_toggle =\n              !c.item_variable_toggle\"\n            ng-if=\"!c.hide_control\"\n          >\n            <div>\n              <span> Requests </span>\n            </div>\n            <div>\n              <span\n                style=\"font-size: 12px\"\n                class=\"glyphicon\"\n                ng-class=\"c.item_variable_toggle ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'\"\n              ></span>\n            </div>\n          </div>\n          <div\n            ng-repeat=\"fav in data.itemFavorites\"\n            ng-if=\"c.item_variable_toggle\"\n          >\n            <div class=\"row-container\">\n              <div class=\"content favorite-content\">\n                <a\n                  aria-label=\"${Open} {{::fav.name}}\"\n                  ng-href=\"?id=sc_cat_item&sys_id={{::fav.sys_id}}\"\n                  class=\"text-primary m-b-sm block\"\n                >\n                  <p>{{::fav.name}}</p>\n                </a>\n                <!-- <h6 class=\"text\">{{fav.text}}</h6> -->\n              </div>\n              <div>\n                <i\n                  class=\"fa fa-times-circle-o remove\"\n                  tabindex=\"0\"\n                  ng-click=\"remove($event, fav.sys_id)\"\n                  aria-label=\"${Remove} {{::fav.name}}\"\n                  title=\"${Remove}\"\n                ></i>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <!-- Guide -->\n        <div ng-if=\"data.guideFavorites.length > 0\">\n          <div\n            class=\"panel-subheading\"\n            ng-init=\"c.guide_variable_toggle = c.guide_toggle\"\n            aria-expanded=\"{{c.guide_variable_toggle}}\"\n            aria-label=\"{{data.ariaLabel}}\"\n            ng-click=\"c.guide_variable_toggle =\n              !c.guide_variable_toggle\"\n            ng-if=\"!c.hide_control\"\n          >\n            <div>\n              <span> Guides </span>\n            </div>\n            <div>\n              <span\n                style=\"font-size: 12px\"\n                class=\"glyphicon\"\n                ng-class=\"c.guide_variable_toggle ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'\"\n              ></span>\n            </div>\n          </div>\n          <div\n            ng-repeat=\"fav in data.guideFavorites\"\n            ng-if=\"c.guide_variable_toggle\"\n          >\n            <div class=\"row-container\">\n              <!-- <span class=\"img\">\n                <i ng-if=\"fav.picture\" class=\"ta-img\" style=\"background-image:url('{{fav.picture}}?t=small')\"></i>\n                <i ng-if=\"!fav.picture\" class=\"ta-icon fa fa-shopping-cart text-primary\"></i>\n              </span> -->\n              <div class=\"content favorite-content\">\n                <a\n                  aria-label=\"${Open} {{::fav.name}}\"\n                  ng-href=\"?id=sc_cat_item_guide&sys_id={{::fav.sys_id}}\"\n                  class=\"text-primary m-b-sm block\"\n                >\n                  <p>{{::fav.name}}</p>\n                </a>\n                <h6 class=\"text\">{{fav.text}}</h6>\n              </div>\n              <div>\n                <i\n                  class=\"fa fa-times-circle-o remove\"\n                  tabindex=\"0\"\n                  ng-click=\"remove($event, fav.sys_id)\"\n                  aria-label=\"${Remove} {{::fav.name}}\"\n                  title=\"${Remove}\"\n                ></i>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <!-- Task -->\n        <div ng-if=\"data.taskFavorites.length > 0\">\n          <div\n            class=\"panel-subheading\"\n            ng-init=\"c.task_variable_toggle = c.task_toggle\"\n            aria-expanded=\"{{c.task_variable_toggle}}\"\n            aria-label=\"{{data.ariaLabel}}\"\n            ng-click=\"c.task_variable_toggle =\n              !c.task_variable_toggle\"\n            ng-if=\"!c.hide_control\"\n          >\n            <div>\n              <span> Guides </span>\n            </div>\n            <div>\n              <span\n                style=\"font-size: 12px\"\n                class=\"glyphicon\"\n                ng-class=\"c.task_variable_toggle ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'\"\n              ></span>\n            </div>\n          </div>\n          <div\n            ng-repeat=\"fav in data.taskFavorites\"\n            ng-if=\"c.task_variable_toggle\"\n          >\n            <div class=\"row-container\">\n              <span class=\"img\">\n                <i class=\"ta-icon fa fa-list-alt text-primary\"></i>\n              </span>\n              <div class=\"content favorite-content\">\n                <a\n                  aria-label=\"${Open} {{::fav.name}}\"\n                  ng-href=\"?id=ticket&table={{::fav.table_name}}&&sys_id={{::fav.sys_id}}\"\n                  class=\"text-primary m-b-sm block\"\n                >\n                  <p>{{::fav.name}}</p>\n                </a>\n                <p class=\"text\">{{fav.text}}</p>\n                <span class=\"block color-primary text-muted\">\n                  {{::fav.name}}\n                </span>\n              </div>\n              <div>\n                <i\n                  class=\"fa fa-times-circle-o remove\"\n                  tabindex=\"0\"\n                  ng-click=\"remove($event, fav.sys_id)\"\n                  aria-label=\"${Remove} {{::fav.name}}\"\n                  title=\"${Remove}\"\n                ></i>\n              </div>\n            </div>\n          </div>\n        </div>\n        \n        <!-- Record -->\n        <div ng-if=\"data.recordFavorites.length > 0\">\n          <div\n            class=\"panel-subheading\"\n            ng-init=\"c.record_variable_toggle = c.record_toggle\"\n            aria-expanded=\"{{c.record_variable_toggle}}\"\n            aria-label=\"{{data.ariaLabel}}\"\n            ng-click=\"c.record_variable_toggle =\n              !c.record_variable_toggle\"\n            ng-if=\"!c.hide_control\"\n          >\n            <div>\n              <span> Records </span>\n            </div>\n            <div>\n              <span\n                style=\"font-size: 12px\"\n                class=\"glyphicon\"\n                ng-class=\"c.record_variable_toggle ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'\"\n              ></span>\n            </div>\n          </div>\n\n          <div\n            ng-repeat=\"fav in data.recordFavorites\"\n            ng-if=\"c.record_variable_toggle\"\n          >\n            <div class=\"row-container\">\n              <span class=\"img\">\n                <i class=\"ta-icon fa fa-list-alt text-primary\"></i>\n              </span>\n              <div class=\"content favorite-content\">\n                <a\n                  aria-label=\"${Open} {{::fav.name}}\"\n                  ng-href=\"?id=form&table={{::fav.table_name}}&&sys_id={{::fav.sys_id}}\"\n                  class=\"text-primary m-b-sm block\"\n                >\n                  <p>{{::fav.name}}</p>\n                </a>\n              </div>\n              <div>\n                <i\n                  class=\"fa fa-times-circle-o remove\"\n                  tabindex=\"0\"\n                  ng-click=\"remove($event, fav.sys_id)\"\n                  aria-label=\"${Remove} {{::fav.name}}\"\n                  title=\"${Remove}\"\n                ></i>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+            "readonly": false,
+            "hint": "",
+            "name": "template",
+            "attributes": {},
+            "choice": 0,
+            "value": "<div class=\"panel panel-{{::options.color}} b\">\n  <div class=\"panel-heading\">\n  <h2 class=\"h4 panel-title\">\n  <fa ng-if=\"::options.glyph.length\" name=\"{{::options.glyph}}\" class=\"m-r-sm\"></fa>\n              Knowledge Bases\n  </h2>\n  </div>\n  <div class=\"panel-body\">\n  <div role=\"list\">\n  <div class=\"panel-body b-b fav-item\" role=\"listitem\">\n  <div data-index=\"{{$index}}\">\n  <div class=\"panel-subheading\">\n  <div>\n  <span>\n  <a href=\"/esc?id=kb_home\">Knowledge Homepage</a>\n  </span>\n  </div>\n  </div>\n  </div>\n  </div>\n  </div>\n  </div>\n  </div>",
+            "max_length": 65000,
+            "ed": {
+                "name": "template"
+            }
+        },
+        "css": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "CSS",
+            "sys_readonly": false,
+            "type": "css",
+            "mandatory": false,
+            "displayValue": ".panel-title {\n  color: #00A0FF;\n}\n\n.panel-heading {\n  border-bottom: 2px solid #00A0FF;\n}\n\n.panel-subheading {\n  color: #00A0FF;\n  display:grid;\n  grid-template-columns:4fr 1fr;\n}\n\n.text {\n  color: $text-color;\n}\n\n.text-primary {\n  color: #333333;\n  font-size: 14px;\n}\n\n.ta-img, .ta-icon {\n  \twidth: 5rem;\n    height: 5rem;\n    line-height: 5rem;\n    background-size: contain;\n    display: inline-block;\n    background-repeat: no-repeat;\n    background-position: center center;\n    text-align: center;\n    margin-right: 0.5rem;\n  \tfont-size: 2.8rem;\n}\n\n.row-container {\n  display:grid;\n  grid-template-columns:4fr 1fr;\n}\n\n.fa-times-circle-o {\n  color: #FF4118;\n}\n\n.radius-none {\n  border-radius: 0 !important;\n}\n\n.remove {\n  margin: 20px;\n  font-size: 1.6rem;\n}\n\n.favorite-content {\n  margin-left: 1rem;\n  margin-right: 1rem;\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n  padding-left: 1rem;\n}\n\n.m-b-sm {\n  margin-bottom: none;\n}",
+            "readonly": false,
+            "hint": "",
+            "name": "css",
+            "attributes": {},
+            "choice": 0,
+            "value": ".panel-title {\n  color: #00A0FF;\n}\n\n.panel-heading {\n  border-bottom: 2px solid #00A0FF;\n}\n\n.panel-subheading {\n  color: #00A0FF;\n  display:grid;\n  grid-template-columns:4fr 1fr;\n}\n\n.text {\n  color: $text-color;\n}\n\n.text-primary {\n  color: #333333;\n  font-size: 14px;\n}\n\n.ta-img, .ta-icon {\n  \twidth: 5rem;\n    height: 5rem;\n    line-height: 5rem;\n    background-size: contain;\n    display: inline-block;\n    background-repeat: no-repeat;\n    background-position: center center;\n    text-align: center;\n    margin-right: 0.5rem;\n  \tfont-size: 2.8rem;\n}\n\n.row-container {\n  display:grid;\n  grid-template-columns:4fr 1fr;\n}\n\n.fa-times-circle-o {\n  color: #FF4118;\n}\n\n.radius-none {\n  border-radius: 0 !important;\n}\n\n.remove {\n  margin: 20px;\n  font-size: 1.6rem;\n}\n\n.favorite-content {\n  margin-left: 1rem;\n  margin-right: 1rem;\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n  padding-left: 1rem;\n}\n\n.m-b-sm {\n  margin-bottom: none;\n}",
+            "max_length": 8000,
+            "ed": {
+                "name": "css"
+            }
+        },
+        "roles": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "Roles",
+            "sys_readonly": false,
+            "type": "user_roles",
+            "mandatory": false,
+            "displayValue": "snc_external,snc_internal",
+            "readonly": false,
+            "hint": "",
+            "name": "roles",
+            "attributes": {
+                "no_truncate": "true",
+                "update_exempt": "true",
+                "record_watcher_blacklist": "true"
+            },
+            "choice": 0,
+            "value": "snc_external,snc_internal",
+            "max_length": 255,
+            "ed": {
+                "name": "roles"
+            }
+        },
+        "link": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Link",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "function link(scope, element, attrs, controller) {\n  \n}",
+            "readonly": false,
+            "hint": "",
+            "name": "link",
+            "attributes": {
+                "client_script": "true"
+            },
+            "choice": 0,
+            "value": "function link(scope, element, attrs, controller) {\n  \n}",
+            "max_length": 65000,
+            "ed": {
+                "name": "link"
+            }
+        },
+        "description": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Description",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "Defines what the widget does",
+            "name": "description",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 300,
+            "ed": {
+                "name": "description"
+            }
+        },
+        "demo_data": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Demo data",
+            "sys_readonly": false,
+            "type": "json",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "demo_data",
+            "attributes": {},
+            "choice": 0,
+            "value": "",
+            "max_length": 8000,
+            "ed": {
+                "name": "demo_data"
+            }
+        },
+        "option_schema": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Option schema",
+            "sys_readonly": false,
+            "type": "json",
+            "mandatory": false,
+            "displayValue": "[]",
+            "readonly": false,
+            "hint": "",
+            "name": "option_schema",
+            "attributes": {},
+            "choice": 0,
+            "value": "[]",
+            "max_length": 8000,
+            "ed": {
+                "name": "option_schema"
+            }
+        },
+        "script": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Server script",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "(function() {\n    var portalId = $sp.getPortalRecord().getUniqueValue();\n    var favoritePage = new sn_ex_sp.FavoritesPage(portalId);\n\n    var gr;\n    if (input) {\n        gr = new GlideRecord(\"sp_favorite\");\n        if (gr.get('reference_document', input.removeID)) {\n            var removeMsg = gs.getMessage(\"Removed from your favorites\");\n            gs.addInfoMessage(removeMsg);\n            gr.deleteRecord();\n        }\n    }\n\n    var favoriteApi = new sn_ex_sp.FavoriteAPI();\n    var qsConfig = $sp.getValue('quick_start_config');\n    var favoriteIcon = favoriteApi.getFavoriteIcon(qsConfig);\n    data.emptyStateIcon = favoriteIcon.checkIcon;\n    data.contentTypes = favoriteApi.getFavoriteContentTypeWithCount();\n    data.totalContentCount = data.contentTypes[0].count;\n    if (data.totalContentCount == 0) {\n        return;\n    }\n    data.contentList = favoritePage.getAllFavoritesWithContent(0, 100, true);\n\n    var favorites = [];\n    var kbFavorites = [];\n    var itemFavorites = [];\n    var guideFavorites = [];\n    var taskFavorites = [];\n    var recordFavorites = [];\n\n    data.hasMore = false;\n\n    for (var i = 0; i < data.contentList.length; i++) {\n        var fav = {};\n        fav.name = data.contentList[i].primaryField;\n        fav.tableName = data.contentList[i].tableName;\n        fav.sys_id = data.contentList[i].sysId;\n        fav.type = data.contentList[i].type;\n\n        switch (fav.type) {\n            case 'Request':\n                itemFavorites.push(fav);\n                break;\n            case 'Article':\n                kbFavorites.push(fav);\n                break;\n            case 'Task':\n                taskFavorites.push(fav);\n                break;\n            case 'Record':\n                recordFavorites.push(fav);\n                break;\n        }\n\t\tfavorites.push(fav);\n    }\n\n    data.kbFavorites = kbFavorites;\n    data.itemFavorites = itemFavorites;\n    data.guideFavorites = guideFavorites;\n    data.taskFavorites = taskFavorites;\n    data.recordFavorites = recordFavorites;\n    data.favorites = favorites;\n})();",
+            "readonly": false,
+            "hint": "",
+            "name": "script",
+            "attributes": {},
+            "choice": 0,
+            "value": "(function() {\n    var portalId = $sp.getPortalRecord().getUniqueValue();\n    var favoritePage = new sn_ex_sp.FavoritesPage(portalId);\n\n    var gr;\n    if (input) {\n        gr = new GlideRecord(\"sp_favorite\");\n        if (gr.get('reference_document', input.removeID)) {\n            var removeMsg = gs.getMessage(\"Removed from your favorites\");\n            gs.addInfoMessage(removeMsg);\n            gr.deleteRecord();\n        }\n    }\n\n    var favoriteApi = new sn_ex_sp.FavoriteAPI();\n    var qsConfig = $sp.getValue('quick_start_config');\n    var favoriteIcon = favoriteApi.getFavoriteIcon(qsConfig);\n    data.emptyStateIcon = favoriteIcon.checkIcon;\n    data.contentTypes = favoriteApi.getFavoriteContentTypeWithCount();\n    data.totalContentCount = data.contentTypes[0].count;\n    if (data.totalContentCount == 0) {\n        return;\n    }\n    data.contentList = favoritePage.getAllFavoritesWithContent(0, 100, true);\n\n    var favorites = [];\n    var kbFavorites = [];\n    var itemFavorites = [];\n    var guideFavorites = [];\n    var taskFavorites = [];\n    var recordFavorites = [];\n\n    data.hasMore = false;\n\n    for (var i = 0; i < data.contentList.length; i++) {\n        var fav = {};\n        fav.name = data.contentList[i].primaryField;\n        fav.tableName = data.contentList[i].tableName;\n        fav.sys_id = data.contentList[i].sysId;\n        fav.type = data.contentList[i].type;\n\n        switch (fav.type) {\n            case 'Request':\n                itemFavorites.push(fav);\n                break;\n            case 'Article':\n                kbFavorites.push(fav);\n                break;\n            case 'Task':\n                taskFavorites.push(fav);\n                break;\n            case 'Record':\n                recordFavorites.push(fav);\n                break;\n        }\n\t\tfavorites.push(fav);\n    }\n\n    data.kbFavorites = kbFavorites;\n    data.itemFavorites = itemFavorites;\n    data.guideFavorites = guideFavorites;\n    data.taskFavorites = taskFavorites;\n    data.recordFavorites = recordFavorites;\n    data.favorites = favorites;\n})();",
+            "max_length": 65000,
+            "ed": {
+                "name": "script"
+            }
+        },
+        "has_preview": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -7,
+            "label": "Has preview",
+            "sys_readonly": false,
+            "type": "boolean",
+            "mandatory": false,
+            "displayValue": "false",
+            "readonly": false,
+            "hint": "Defines whether preview data is available",
+            "name": "has_preview",
+            "attributes": {},
+            "choice": 0,
+            "value": "false",
+            "max_length": 40,
+            "ed": {
+                "name": "has_preview"
+            }
+        },
+        "public": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -7,
+            "label": "Public",
+            "sys_readonly": false,
+            "type": "boolean",
+            "mandatory": false,
+            "displayValue": "false",
+            "readonly": false,
+            "hint": "Widget publicly available to unauthenticated users",
+            "name": "public",
+            "attributes": {
+                "update_exempt": "true"
+            },
+            "choice": 0,
+            "value": "false",
+            "max_length": 40,
+            "ed": {
+                "name": "public"
+            }
+        },
+        "docs": {
+            "sys_mandatory": false,
+            "visible": true,
+            "table_attributes": {
+                "update_synch": "true",
+                "synch_attachments": "true"
+            },
+            "dbType": 12,
+            "label": "Docs",
+            "sys_readonly": false,
+            "type": "reference",
+            "mandatory": false,
+            "refTable": "sp_documentation",
+            "reference_type": "table",
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "docs",
+            "attributes": {
+                "encode_utf8": "false"
+            },
+            "reference_key": "sys_id",
+            "readonlyClickthrough": true,
+            "choice": 0,
+            "value": "",
+            "max_length": 32,
+            "ed": {
+                "reference": "sp_documentation",
+                "searchField": "title",
+                "defaultOperator": "STARTSWITH",
+                "name": "docs"
+            }
+        },
+        "client_script": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Client controller",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "api.controller = function($scope, spUtil) {\n    var c = this;\n\n    c.kb_toggle = false;\n    c.item_toggle = false;\n    c.guide_toggle = false;\n    c.task_toggle = false;\n    c.record_toggle = false;\n\n\n    function get() {\n        spUtil.update($scope);\n    }\n\n    $scope.remove = function(event, sysId) {\n        event.stopPropagation();\n        event.preventDefault();\n        $scope.data.removeID = sysId;\n        spUtil.update($scope);\n    };\n\n    // pagination\n    $scope.previousPage = function() {\n        if ($scope.data.pagination.currentPage > 1)\n            $scope.data.pagination.currentPage = $scope.data.pagination.currentPage - 1;\n        else\n            $scope.data.pagination.currentPage = 0;\n\n        $scope.data.op = \"previous\";\n        $scope.data.target = null;\n\n        get();\n    };\n\n    $scope.nextPage = function() {\n        $scope.data.op = \"next\";\n        $scope.data.target = null;\n        $scope.data.pagination.currentPage = $scope.data.pagination.currentPage + 1;\n        get();\n    };\n};",
+            "readonly": false,
+            "hint": "",
+            "name": "client_script",
+            "attributes": {
+                "client_script": "true"
+            },
+            "choice": 0,
+            "value": "api.controller = function($scope, spUtil) {\n    var c = this;\n\n    c.kb_toggle = false;\n    c.item_toggle = false;\n    c.guide_toggle = false;\n    c.task_toggle = false;\n    c.record_toggle = false;\n\n\n    function get() {\n        spUtil.update($scope);\n    }\n\n    $scope.remove = function(event, sysId) {\n        event.stopPropagation();\n        event.preventDefault();\n        $scope.data.removeID = sysId;\n        spUtil.update($scope);\n    };\n\n    // pagination\n    $scope.previousPage = function() {\n        if ($scope.data.pagination.currentPage > 1)\n            $scope.data.pagination.currentPage = $scope.data.pagination.currentPage - 1;\n        else\n            $scope.data.pagination.currentPage = 0;\n\n        $scope.data.op = \"previous\";\n        $scope.data.target = null;\n\n        get();\n    };\n\n    $scope.nextPage = function() {\n        $scope.data.op = \"next\";\n        $scope.data.target = null;\n        $scope.data.pagination.currentPage = $scope.data.pagination.currentPage + 1;\n        get();\n    };\n};",
+            "max_length": 8000,
+            "ed": {
+                "name": "client_script"
+            }
+        },
+        "data_table": {
+            "sys_mandatory": true,
+            "visible": true,
+            "dbType": 12,
+            "default_value": "sp_instance",
+            "label": "Data table",
+            "sys_readonly": false,
+            "type": "table_name",
+            "mandatory": true,
+            "displayValue": "sp_instance",
+            "readonly": false,
+            "hint": "",
+            "name": "data_table",
+            "attributes": {
+                "base_table": "sp_instance",
+                "base_start": "true"
+            },
+            "choice": 0,
+            "choices": [],
+            "value": "sp_instance",
+            "max_length": 80,
+            "ed": {
+                "name": "data_table"
+            }
+        },
+        "name": {
+            "sys_mandatory": true,
+            "visible": true,
+            "dbType": 12,
+            "label": "Name",
+            "sys_readonly": false,
+            "type": "translated_field",
+            "mandatory": true,
+            "displayValue": "Ball Knowledge Bases",
+            "readonly": false,
+            "hint": "",
+            "name": "name",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "Ball Knowledge Bases",
+            "max_length": 40,
+            "ed": {
+                "name": "name"
+            }
+        },
+        "sys_scope": {
+            "sys_mandatory": false,
+            "visible": true,
+            "table_attributes": {
+                "metadata_link_exempt": "true"
+            },
+            "dbType": 12,
+            "label": "Application",
+            "sys_readonly": true,
+            "type": "reference",
+            "mandatory": false,
+            "refTable": "sys_store_app",
+            "reference_type": "table",
+            "displayValue": "Employee Center",
+            "readonly": true,
+            "hint": "Application containing this record",
+            "name": "sys_scope",
+            "attributes": {
+                "encode_utf8": "false",
+                "list_force_default": "true",
+                "readonly_clickthrough": "true",
+                "ignore_filter_on_new": "true"
+            },
+            "reference_key": "sys_id",
+            "readonlyClickthrough": true,
+            "choice": 0,
+            "value": "4249e63a28d54d61bb6fbf61fd86cccb",
+            "max_length": 32,
+            "ed": {
+                "reference": "sys_scope",
+                "searchField": "name",
+                "defaultOperator": "STARTSWITH",
+                "name": "sys_scope"
+            }
+        },
+        "id": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "ID",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "Identifier for $sp.embedWidget()",
+            "name": "id",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 40,
+            "ed": {
+                "name": "id"
+            }
+        },
+        "field_list": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dependentField": "data_table",
+            "dbType": -1,
+            "label": "Fields",
+            "sys_readonly": false,
+            "type": "field_list",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "field_list",
+            "attributes": {
+                "is_multi_text": "false"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 1000,
+            "ed": {
+                "dependent_value": "sp_instance",
+                "name": "field_list"
+            }
+        },
+        "controller_as": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "controllerAs",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "c",
+            "readonly": false,
+            "hint": "Identifier name for a reference to the controller in the directive's scope",
+            "name": "controller_as",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "c",
+            "max_length": 100,
+            "ed": {
+                "name": "controller_as"
+            }
+        }
+    }
+}

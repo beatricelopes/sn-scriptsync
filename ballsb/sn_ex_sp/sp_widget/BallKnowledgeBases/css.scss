@@ -1,0 +1,65 @@
+.panel-title {
+  color: #00A0FF;
+}
+
+.panel-heading {
+  border-bottom: 2px solid #00A0FF;
+}
+
+.panel-subheading {
+  color: #00A0FF;
+  display:grid;
+  grid-template-columns:4fr 1fr;
+}
+
+.text {
+  color: $text-color;
+}
+
+.text-primary {
+  color: #333333;
+  font-size: 14px;
+}
+
+.ta-img, .ta-icon {
+  	width: 5rem;
+    height: 5rem;
+    line-height: 5rem;
+    background-size: contain;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-align: center;
+    margin-right: 0.5rem;
+  	font-size: 2.8rem;
+}
+
+.row-container {
+  display:grid;
+  grid-template-columns:4fr 1fr;
+}
+
+.fa-times-circle-o {
+  color: #FF4118;
+}
+
+.radius-none {
+  border-radius: 0 !important;
+}
+
+.remove {
+  margin: 20px;
+  font-size: 1.6rem;
+}
+
+.favorite-content {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+.m-b-sm {
+  margin-bottom: none;
+}
