@@ -25,7 +25,7 @@
     </div>
     <div class="kb-browse-content self-clear">
       <div class="kb-browse-tiles" ng-class="c.data.result.length > 3 ? 'kb-browse-tiles-more' : c.data.result.length > 2 ? 'kb-browse-tiles-3' : c.data.result.length > 1 ? 'kb-browse-tiles-2' : 'kb-browse-tiles-1'" aria-labelledby="kbBrowseTitle" role="list">
-        <div class="kb-tile-block col-xs-6 col-sm-6 col-md-3" role="group" ng-class="{'kb-tile-block-more':c.data.result.length > 4,'kb-tile-block-4':c.data.result.length == 4,'kb-tile-block-3':c.data.result.length == 3,'kb-tile-block-2':c.data.result.length == 2,'kb-tile-block-1':c.data.result.length == 1,'kb-hidden-tile kb-hide-me':$index > 3}"
+        <div class="kb-tile-block col-xs-6 col-sm-6 col-md-3" role="group" 
              data-ng-repeat="item in c.getOrderedItems() track by item.sys_id" role="listitem">
           <div class="kb-tile panel panel-{{::options.color}}">
             <div class="kb-top kb-tile-link kb-center" >
@@ -92,16 +92,16 @@
       </div>
     </div>
     <div class="kb-show-more self-clear col-xs-12" data-ng-if="c.data.result ? c.data.result.length > 4 : false">
-      <button class="btn btn-link" aria-expanded="{{!c.showMoreLink}}" data-ng-click="c.showMoreLink ? c.toggleKbTiles('more') : c.toggleKbTiles('less')">
+      <!--<button class="btn btn-link" aria-expanded="{{!c.showMoreLink}}" data-ng-click="c.showMoreLink ? c.toggleKbTiles('more') : c.toggleKbTiles('less')">
         <span class="show_more"  data-ng-if="c.showMoreLink">
           <span class="sr-only">${Show All Knowledge Bases}</span>
-          <span aria-hidden="true">${Show All}&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></span>
+          <span aria-hidden="true">${Show All}&nbsp;<i class="fa fa-plus" aria-hidden="false"></i></span>
         </span>
         <span class="show_less"  data-ng-if="!c.showMoreLink">
           <span class="sr-only">${Show Less Knowledge Bases}</span>
-          <span aria-hidden="true">${Show Less}&nbsp;<i class="fa fa-minus" aria-hidden="true"></i></span>
+          <span aria-hidden="true">${Show Less}&nbsp;<i class="fa fa-minus" aria-hidden="false"></i></span>
         </span>
-      </button>
+      </button>-->
     </div>
   </div>
 </div>
