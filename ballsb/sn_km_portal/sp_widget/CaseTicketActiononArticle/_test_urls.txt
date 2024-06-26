@@ -1,0 +1,4 @@
+https://ballsb.service-now.com/$sp.do?id=sp-preview&sys_id=0f74ce2273041010b5c7ed64fbf6a789
+https://ballsb.service-now.com/sp_config?id=case_ticket_action_on_article
+https://ballsb.service-now.com/sp?id=case_ticket_action_on_article
+https://ballsb.service-now.com/esc?id=case_ticket_action_on_article

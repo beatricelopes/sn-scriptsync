@@ -1,0 +1,27 @@
+<div class="kb-facet-filter-block">
+  <div class="facet-detail" ng-cloak ng-class="{'facet-scroll':c.items.length > c.options.min_scroll_count}" ng-if="c.items">
+    <div class ="hidden-xs hidden-sm">
+      <div class="facet-field-padding"  ng-repeat="item in c.items">
+        <div ng-if="item.id" class="checkbox">
+          <label class="checkbox-label">
+            <input type="checkbox" class="chekbox-input" ng-model="item.selected" ng-click="c.updateKbFilterData(item)" value="{{item.id}}" aria-label="{{item.label}}"/>{{item.label}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class = "visible-sm visible-xs">
+      <div class="facet-field-padding"  ng-repeat="item in c.items" ng-click="c.rowClickCheckbox(item)" ng-if="$index+1<=c.showRange">
+        <div ng-if="item.id" class="checkbox">
+          <span class="checkbox-label" id="chkLabel_{{$index}}" ng-class="{'active':item.selected}" >{{item.label}}</span>
+          <span class="float-right">
+            <input type="checkbox" aria-labelledby="chkLabel_{{$index}}" ng-model="item.selected" ng-click="c.updateKbFilterData(item)" value="{{item.id}}"/>
+          </span>
+        </div>
+      </div>
+      <span ng-if="c.items.length >c.options.min_scroll_count">
+        <span class="show-more"  ng-show="c.showRange == c.options.min_scroll_count" ng-click="c.showRange = c.items.length">${Show More}</span>
+        <span class="show-more"  ng-show="c.showRange != c.options.min_scroll_count" ng-click="c.showRange = c.options.min_scroll_count">${Show Less}</span> 
+      </span>
+    </div>
+  </div>
+</div>

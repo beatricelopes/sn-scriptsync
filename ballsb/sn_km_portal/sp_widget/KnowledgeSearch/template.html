@@ -1,0 +1,78 @@
+<div class="kb-search-block" ng-class="$root.showFacet? 'kb-search-display-none':''" ng-cloak>
+  <div class="search-bar col-md-5 col-xs-11 col-sm-7 no-pad">
+
+    <div ng-if="c.showLanguageIcon" class="visible-xs visible-sm lang-icon">
+      <button class="showLangIcon transparent-button" ng-click ="::c.showLanguageFacet()"><i class="fa fa-globe icon-padding" aria-hidden="true"></i></button>
+    </div>
+    <div class="pad-bottom">
+      <div class="input-group input-group-{{::c.options.size}}" role="presentation">
+        <input id="kb_search_input" name="q" type="text" ng-model="c.keyword" aria-label="{{::options.title}}"  placeholder="{{::options.title}}" class="form-control kb-search-padding">
+        <span class="input-group-btn">
+          <button name="search" type="submit" aria-label="search" class="btn btn-{{::c.options.color}}" ng-click="c.keywordChanged('')" data-toggle="tooltip" data-placement="bottom" title="{{::c.data.searchMsg}}">
+            <i ng-if="::c.options.glyph" class="fa fa-{{::c.options.glyph}}"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="filter-icon-padding visible-xs visible-sm col-xs-1 col-sm-1">
+    <span class=" filter-icon" ng-click ="::c.toggleFacets()" ng-class="c.applycolor ? 'selected-filter-color' : 'filter-color'" tabindex="0" aria-label="Show filters"><i class="fa fa-filter filter-size" aria-hidden="true"></i>
+      <span class="check-position" ng-show="c.applycolor"><i class="fa fa-check float-left"  aria-hidden="true"></i></span></span>
+  </div>
+  
+  <!--
+ <div class="visible-xs visible-sm col-xs-1 col-sm-1 no-pad">
+    <div class="col-xs-11 col-sm-11 pad-bottom no-pad">
+-->
+  <div class="col-md-12">
+  <div class="hidden-xs hidden-sm filter-class">
+   <button id="showFilterBtn" 
+           class="btn filter-text"
+           ng-class="{'btn-default':c.showFiltersButton,'btn-primary':!c.showFiltersButton}"
+           aria-expanded="{{!c.showFiltersButton}}"  
+           ng-click="c.showAndHideFilters()">
+    <i class="fa fa-filter" aria-hidden="true"></i>
+    <span>${Filters}</span>
+   </button>
+  </div>
+  </div>
+  
+</div>
+<style>
+
+  @media only screen and (max-width: 991px) {
+    .kb-search-block {
+      padding-top : 0.7rem !important;
+    }
+    .filter-icon-padding {
+      padding-left : 0rem !important;
+      padding-right : 0rem !important;
+      text-align : center;
+    }
+    .kb-search-display-none {
+      display :none !important;
+    }
+    .kb-search-block .lang-icon {
+      font-size : 1.8rem;
+      float :left;
+    }
+    .kb-search-padding{
+      padding-left: 8px!important;
+    }
+  }
+   @media only screen and (min-width:991px) {
+ 		.expand-width {
+    	width :100%;
+    }
+   	.hide-filters {
+    	display :none;
+    }
+    .original-width{
+    	width : 75%;
+    }
+    .show-filters {
+    	display:block;
+    }
+ }
+  
+</style>

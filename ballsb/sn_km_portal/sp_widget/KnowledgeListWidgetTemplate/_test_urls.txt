@@ -1,0 +1,4 @@
+https://ballsb.service-now.com/$sp.do?id=sp-preview&sys_id=1e6b5b3adb20320099f93691f0b8f5a8
+https://ballsb.service-now.com/sp_config?id=knowledge_list_widget_template
+https://ballsb.service-now.com/sp?id=knowledge_list_widget_template
+https://ballsb.service-now.com/esc?id=knowledge_list_widget_template

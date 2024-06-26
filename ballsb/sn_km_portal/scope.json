@@ -1,0 +1,2289 @@
+{
+  "scopeMeta": {
+    "name": "sn_km_portal",
+    "sysId": "bab6dea3db20320099f93691f0b8f590"
+  },
+  "scopeTree": {
+    "other": {
+      "type": "tables",
+      "tables": {
+        "usageanalytics_count_cfg": {
+          "type": "records",
+          "records": {
+            "9244dadadbf8fb4020df9f5faa961941": {
+              "name": "DEFN1001333",
+              "updated": "2019-04-16 08:08:35",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "i13_inbound_integrations": {
+      "type": "tables",
+      "tables": {
+        "sys_ws_operation": {
+          "type": "records",
+          "records": {
+            "0ce9f3aedb01320002533691f0b8f547": {
+              "name": "getAllFacets",
+              "updated": "2020-01-27 09:59:10",
+              "codeFields": {
+                "operation_script": {
+                  "label": "Script",
+                  "type": "script"
+                }
+              }
+            },
+            "62b4d8c8db03220099f93691f0b8f533": {
+              "name": "getAllFacets",
+              "updated": "2020-01-27 09:59:21",
+              "codeFields": {
+                "operation_script": {
+                  "label": "Script",
+                  "type": "script"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "i3_client_development": {
+      "type": "tables",
+      "tables": {
+        "sys_ui_script": {
+          "type": "records",
+          "records": {
+            "9e466496db00320099f93691f0b8f507": {
+              "name": "sn_km_portal.Knowledge Portal Service",
+              "updated": "2021-07-26 07:10:48",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "i5_access_control": {
+      "type": "tables",
+      "tables": {
+        "sys_security_acl": {
+          "type": "records",
+          "records": {
+            "96aab0a5dbb0320099f93691f0b8f50c": {
+              "name": "sys_language.*",
+              "updated": "2017-02-07 08:56:58",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "i2_server_development": {
+      "type": "tables",
+      "tables": {
+        "sys_script_include": {
+          "type": "records",
+          "records": {
+            "6e4e993ffd8e7010f877d787532be907": {
+              "name": "SPSEOHeaderTagsArticleSearch",
+              "updated": "2021-09-07 06:24:44",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            },
+            "843f7c6277111010742fec672b106177": {
+              "name": "SPSEOHeaderTagsArticleViewSNC",
+              "updated": "2023-05-12 15:46:37",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            },
+            "8fdebc2277111010742fec672b10614f": {
+              "name": "SPSEOHeaderTagsArticleView",
+              "updated": "2022-02-27 10:21:23",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            },
+            "a9153825dbb0320099f93691f0b8f5d1": {
+              "name": "KBPortalService",
+              "updated": "2020-10-08 08:49:51",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            },
+            "e62fb33787123010420e5cdac5cb0b4b": {
+              "name": "SPSEOHeaderTagsArticleSearchSNC",
+              "updated": "2021-09-14 09:48:25",
+              "codeFields": {
+                "script": {
+                  "label": "Script",
+                  "type": "script_plain"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "i9_service_portal": {
+      "type": "tables",
+      "tables": {
+        "sp_widget": {
+          "type": "records",
+          "records": {
+            "04ec050ddb53220099f93691f0b8f538": {
+              "name": "knowledge Homepage Search",
+              "updated": "2023-03-02 10:45:30",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "074be90453231300cc376512a2dc34ec": {
+              "name": "Knowledge Language Facet",
+              "updated": "2023-03-09 10:55:27",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "077810090be432004ce28ffe15673adb": {
+              "name": "Knowledge Article Comments",
+              "updated": "2023-04-18 09:44:22",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "0f74ce2273041010b5c7ed64fbf6a789": {
+              "name": "Case Ticket Action on Article",
+              "updated": "2020-04-11 15:07:53",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "15d364db0b20320026eba6c125673abd": {
+              "name": "Knowledge Fixed Facet Header",
+              "updated": "2022-10-19 03:19:40",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "1e6b5b3adb20320099f93691f0b8f5a8": {
+              "name": "Knowledge List Widget Template",
+              "updated": "2023-04-18 09:10:55",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "28c358d2db00320099f93691f0b8f51c": {
+              "name": "Knowledge Resource Facet",
+              "updated": "2021-09-29 07:14:00",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "2d09c11467953200d358bb2d07415a5c": {
+              "name": "Knowledge Notification Entry",
+              "updated": "2022-05-13 06:28:22",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "344806550ba832004ce28ffe15673aeb": {
+              "name": "Knowledge Affected Products",
+              "updated": "2019-06-05 23:22:33",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "405cf5910ba832004ce28ffe15673aff": {
+              "name": "Knowledge Attachments",
+              "updated": "2023-06-08 15:14:22",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "4111d56cdb68320099f93691f0b8f52f": {
+              "name": "Knowledge MostUseful Articles",
+              "updated": "2021-06-12 10:57:14",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "50203e06db26220099f93691f0b8f5ff": {
+              "name": "Knowledge Language Picker",
+              "updated": "2017-04-07 10:36:31",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "54387ab1db12220099f93691f0b8f561": {
+              "name": "Knowledge Selected Filter",
+              "updated": "2022-06-10 12:22:09",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "5f599c490be432004ce28ffe15673a5b": {
+              "name": "Knowledge Article Helpful",
+              "updated": "2023-04-18 04:56:04",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "6cf446150ba832004ce28ffe15673a30": {
+              "name": "Knowledge Attached Tasks",
+              "updated": "2021-02-15 05:47:29",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "6df47e71db12220099f93691f0b8f560": {
+              "name": "Knowledge Search",
+              "updated": "2023-02-10 17:05:54",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "72e1a6cbdb83220099f93691f0b8f549": {
+              "name": "Knowledge Query Facet",
+              "updated": "2022-07-13 08:37:38",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "7cb8fab1db12220099f93691f0b8f535": {
+              "name": "Knowledge Facet Header",
+              "updated": "2018-09-21 09:43:57",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "8493d20c0b01320026eba6c125673a4c": {
+              "name": "Knowledge keyword Suggestion",
+              "updated": "2018-09-10 08:14:19",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "851b8947db20320099f93691f0b8f5ea": {
+              "name": "Knowledge Breadcrumbs",
+              "updated": "2023-05-03 19:20:15",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "93b40601c3870a90fe51effa2b01317e": {
+              "name": "Knowledge Bases Browse Clone",
+              "updated": "2024-06-26 13:57:43",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "a47ea1cb0b9432004ce28ffe15673a5b": {
+              "name": "Knowledge Article Content",
+              "updated": "2023-09-04 13:15:53",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "a8874e5bdb18330076e757a0cf961939": {
+              "name": "Knowledge Related Articles",
+              "updated": "2022-05-12 06:49:56",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "aa0afab1db12220099f93691f0b8f578": {
+              "name": "knowledge Field Facet",
+              "updated": "2022-05-20 14:45:40",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "abe00f1bdb50320099f93691f0b8f57b": {
+              "name": "Knowledge Bases Browse",
+              "updated": "2023-03-15 12:17:50",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "ba8d45ffdb50320099f93691f0b8f51b": {
+              "name": "Knowledge Featured Articles",
+              "updated": "2021-01-29 13:21:44",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "c315f09adb00320099f93691f0b8f538": {
+              "name": "knowledge Tags Facet",
+              "updated": "2022-05-20 14:39:53",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "d4f0d56cdb68320099f93691f0b8f502": {
+              "name": "Knowledge MostViewed Articles",
+              "updated": "2021-01-29 13:18:43",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "e6c77ab1db12220099f93691f0b8f535": {
+              "name": "Knowledge Result Sort",
+              "updated": "2022-02-16 10:57:16",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            },
+            "ff26f2b1db12220099f93691f0b8f5ce": {
+              "name": "Knowledge Result",
+              "updated": "2023-03-17 15:09:40",
+              "codeFields": {
+                "template": {
+                  "label": "Body HTML template",
+                  "type": "html_template"
+                },
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "link": {
+                  "label": "Link",
+                  "type": "script"
+                },
+                "client_script": {
+                  "label": "Client controller",
+                  "type": "script"
+                },
+                "demo_data": {
+                  "label": "Demo data",
+                  "type": "json"
+                },
+                "option_schema": {
+                  "label": "Option schema",
+                  "type": "json"
+                },
+                "script": {
+                  "label": "Server script",
+                  "type": "script"
+                },
+                "_test_urls": {
+                  "label": "Test URLs",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "sp_portal": {
+          "type": "records",
+          "records": {
+            "45d6680fdb52220099f93691f0b8f5ad": {
+              "name": "Knowledge Portal",
+              "updated": "2019-02-13 09:22:29",
+              "codeFields": {
+                "quick_start_config": {
+                  "label": "Quick start config",
+                  "type": "json"
+                }
+              },
+              "referenceFields": {
+                "sp_rectangle_menu": "",
+                "sc_catalog_page": "",
+                "sc_category_page": "",
+                "kb_knowledge_page": "",
+                "notfound_page": "",
+                "homepage": "e1c919e4dbd3220099f93691f0b8f535"
+              }
+            }
+          }
+        },
+        "sp_page": {
+          "type": "records",
+          "records": {
+            "79e23a7ddbd6220099f93691f0b8f53c": {
+              "name": "kb_search",
+              "updated": "2021-09-07 06:08:35",
+              "codeFields": {
+                "css": {
+                  "label": "Page Specific CSS",
+                  "type": "css"
+                }
+              }
+            },
+            "97b44ac1c3870a90fe51effa2b0131ad": {
+              "name": "knowledge_bases_browse_clone",
+              "updated": "2024-06-25 19:49:55",
+              "codeFields": {
+                "css": {
+                  "label": "Page Specific CSS",
+                  "type": "css"
+                }
+              }
+            },
+            "a60dcc050be432004ce28ffe15673a54": {
+              "name": "kb_article_view",
+              "updated": "2020-06-11 03:53:00",
+              "codeFields": {
+                "css": {
+                  "label": "Page Specific CSS",
+                  "type": "css"
+                }
+              }
+            },
+            "e1c919e4dbd3220099f93691f0b8f535": {
+              "name": "kb_home",
+              "updated": "2021-03-26 19:15:57",
+              "codeFields": {
+                "css": {
+                  "label": "Page Specific CSS",
+                  "type": "css"
+                }
+              }
+            }
+          }
+        },
+        "sp_ng_template": {
+          "type": "records",
+          "records": {
+            "0040cf0053631300cc376512a2dc34c2": {
+              "name": "kb_language_multi_select",
+              "updated": "2021-04-28 05:34:45",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "074be90453231300cc376512a2dc34ec"
+              }
+            },
+            "184cdd45db30320099f93691f0b8f5b8": {
+              "name": "kb_facet_query_template",
+              "updated": "2022-03-24 08:37:05",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "72e1a6cbdb83220099f93691f0b8f549"
+              }
+            },
+            "18673ab1db12220099f93691f0b8f522": {
+              "name": "kb_result_pinned_article_summary",
+              "updated": "2023-03-15 12:18:43",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "ff26f2b1db12220099f93691f0b8f5ce"
+              }
+            },
+            "1c873ab1db12220099f93691f0b8f5c1": {
+              "name": "kb_result_article_summary",
+              "updated": "2023-03-23 11:58:11",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "ff26f2b1db12220099f93691f0b8f5ce"
+              }
+            },
+            "1deb9945db30320099f93691f0b8f58e": {
+              "name": "kb_facet_multi_select",
+              "updated": "2021-04-28 10:59:14",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "28de34cc53022300cc376512a2dc346f": {
+              "name": "kb_facet_tree_category_select",
+              "updated": "2023-05-09 17:55:57",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "44dbacf2db40320099f93691f0b8f568": {
+              "name": "kb_facet_dropdown_select",
+              "updated": "2018-04-09 09:26:50",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "4d3bacf2db40320099f93691f0b8f561": {
+              "name": "kb_facet_single_select",
+              "updated": "2019-06-17 10:48:08",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "6f60cf0053631300cc376512a2dc346f": {
+              "name": "kb_language_single_select",
+              "updated": "2021-05-27 09:51:46",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "074be90453231300cc376512a2dc34ec"
+              }
+            },
+            "7e6fb0bedb40320099f93691f0b8f505": {
+              "name": "kb_facet_query_rating_template",
+              "updated": "2022-03-24 08:36:40",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "72e1a6cbdb83220099f93691f0b8f549"
+              }
+            },
+            "b092dada0b4132004ce28ffe15673a35": {
+              "name": "kb-flag-article-modal",
+              "updated": "2021-04-21 12:21:14",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "a47ea1cb0b9432004ce28ffe15673a5b"
+              }
+            },
+            "bfb16f68530323008bd7ddeeff7b126c": {
+              "name": "knowledge-comment-template.html",
+              "updated": "2023-04-18 09:44:06",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "077810090be432004ce28ffe15673adb"
+              }
+            },
+            "ce86caa273041010b5c7ed64fbf6a714": {
+              "name": "close_template.html",
+              "updated": "2020-04-11 14:16:13",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "0f74ce2273041010b5c7ed64fbf6a789"
+              }
+            },
+            "d8160aa273041010b5c7ed64fbf6a729": {
+              "name": "case_info_template.html",
+              "updated": "2020-04-21 03:33:00",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "0f74ce2273041010b5c7ed64fbf6a789"
+              }
+            },
+            "e215143f53330300cc376512a2dc3414": {
+              "name": "kb-feedback-task-modal",
+              "updated": "2022-11-28 07:54:46",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "a47ea1cb0b9432004ce28ffe15673a5b"
+              }
+            },
+            "f79e12a5532023008bd7ddeeff7b12bd": {
+              "name": "knowledge-image-modal.html",
+              "updated": "2021-05-19 06:19:38",
+              "codeFields": {
+                "template": {
+                  "label": "Template",
+                  "type": "html_template"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "a47ea1cb0b9432004ce28ffe15673a5b"
+              }
+            }
+          }
+        },
+        "sp_instance": {
+          "type": "records",
+          "records": {
+            "03c19558cbe8330034921a2df8076da3": {
+              "name": "",
+              "updated": "2019-06-05 18:49:40",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "a8874e5bdb18330076e757a0cf961939"
+              }
+            },
+            "040d60dd0bf0320026eba6c125673a7a": {
+              "name": "",
+              "updated": "2017-03-26 11:25:30",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "6df47e71db12220099f93691f0b8f560"
+              }
+            },
+            "066dd585db30320099f93691f0b8f530": {
+              "name": "Tags",
+              "updated": "2018-07-31 01:54:50",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "c315f09adb00320099f93691f0b8f538"
+              }
+            },
+            "0ab11d6cdb68320099f93691f0b8f56b": {
+              "name": "Most Viewed",
+              "updated": "2024-06-25 19:48:19",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "d4f0d56cdb68320099f93691f0b8f502"
+              }
+            },
+            "0b829ad50ba832004ce28ffe15673af8": {
+              "name": "Attachments",
+              "updated": "2019-06-05 18:49:40",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "405cf5910ba832004ce28ffe15673aff"
+              }
+            },
+            "15625ad50ba832004ce28ffe15673a58": {
+              "name": "",
+              "updated": "2022-04-06 23:27:01",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "a47ea1cb0b9432004ce28ffe15673a5b"
+              }
+            },
+            "1f5e9d85db30320099f93691f0b8f52b": {
+              "name": "Last Modified",
+              "updated": "2019-10-07 05:41:33",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "72e1a6cbdb83220099f93691f0b8f549"
+              }
+            },
+            "299cb0e79f01330088aebde8132e70c0": {
+              "name": "",
+              "updated": "2019-06-05 18:49:40",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              }
+            },
+            "30226109db30320099f93691f0b8f5e7": {
+              "name": "",
+              "updated": "2020-04-30 13:53:37",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "851b8947db20320099f93691f0b8f5ea"
+              }
+            },
+            "317edd85db30320099f93691f0b8f536": {
+              "name": "View Count",
+              "updated": "2018-07-31 01:54:51",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "72e1a6cbdb83220099f93691f0b8f549"
+              }
+            },
+            "38175905db30320099f93691f0b8f5c4": {
+              "name": "",
+              "updated": "2017-02-23 15:04:22",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "e6c77ab1db12220099f93691f0b8f535"
+              }
+            },
+            "3f719b0c3b010300f298870044efc43a": {
+              "name": "Source",
+              "updated": "2017-11-29 07:24:16",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "72e1a6cbdb83220099f93691f0b8f549"
+              }
+            },
+            "420d1585db30320099f93691f0b8f552": {
+              "name": "Resource",
+              "updated": "2018-07-31 01:54:50",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "28c358d2db00320099f93691f0b8f51c"
+              }
+            },
+            "42175905db30320099f93691f0b8f5d1": {
+              "name": "",
+              "updated": "2017-02-23 06:24:19",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "54387ab1db12220099f93691f0b8f561"
+              }
+            },
+            "46b2dad50ba832004ce28ffe15673a0c": {
+              "name": "Affected Products",
+              "updated": "2019-06-05 18:50:08",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "344806550ba832004ce28ffe15673aeb"
+              }
+            },
+            "4eb97155c3838694541d473599013106": {
+              "name": "",
+              "updated": "2024-06-26 13:40:52",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "93b40601c3870a90fe51effa2b01317e"
+              }
+            },
+            "530900450be432004ce28ffe15673a40": {
+              "name": "",
+              "updated": "2017-01-24 06:07:36",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "4111d56cdb68320099f93691f0b8f52f"
+              }
+            },
+            "53b44ac1c3870a90fe51effa2b0131bb": {
+              "name": "",
+              "updated": "2024-06-25 19:49:55",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "93b40601c3870a90fe51effa2b01317e"
+              }
+            },
+            "543786e273041010b5c7ed64fbf6a7d0": {
+              "name": "",
+              "updated": "2020-04-11 11:26:40",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "0f74ce2273041010b5c7ed64fbf6a789"
+              }
+            },
+            "5eb91a13db50320099f93691f0b8f5ae": {
+              "name": "Welcome to Knowledge",
+              "updated": "2024-06-25 19:48:18",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "04ec050ddb53220099f93691f0b8f538"
+              }
+            },
+            "63fefa7a67113200d358bb2d07415a09": {
+              "name": "",
+              "updated": "2024-06-25 19:48:19",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "2d09c11467953200d358bb2d07415a5c"
+              }
+            },
+            "7467d905db30320099f93691f0b8f553": {
+              "name": "Author",
+              "updated": "2018-07-31 01:54:50",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "79fa473a53231300cc376512a2dc346b": {
+              "name": "Language",
+              "updated": "2018-08-22 06:54:07",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "074be90453231300cc376512a2dc34ec"
+              }
+            },
+            "7b8ffa7a67113200d358bb2d07415a27": {
+              "name": "",
+              "updated": "2017-03-08 12:21:23",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "2d09c11467953200d358bb2d07415a5c"
+              }
+            },
+            "7bbfbe7a67113200d358bb2d07415a4b": {
+              "name": "",
+              "updated": "2019-06-05 18:49:41",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "2d09c11467953200d358bb2d07415a5c"
+              }
+            },
+            "86579905db30320099f93691f0b8f5d4": {
+              "name": "Knowledge Bases",
+              "updated": "2018-07-31 01:54:50",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "87a5dbbea3ee1110b64cb7bf36fcdae4": {
+              "name": "",
+              "updated": "2022-10-19 03:08:02",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "15d364db0b20320026eba6c125673abd"
+              }
+            },
+            "8ba11d6cdb68320099f93691f0b8f536": {
+              "name": "Most Useful",
+              "updated": "2024-06-25 19:48:19",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "4111d56cdb68320099f93691f0b8f52f"
+              }
+            },
+            "93de51c5db30320099f93691f0b8f562": {
+              "name": "Rating",
+              "updated": "2018-07-31 01:54:51",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "72e1a6cbdb83220099f93691f0b8f549"
+              }
+            },
+            "9ca29ad50ba832004ce28ffe15673a75": {
+              "name": "Most Recent Tasks",
+              "updated": "2019-06-05 18:50:09",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "6cf446150ba832004ce28ffe15673a30"
+              }
+            },
+            "9d075905db30320099f93691f0b8f56c": {
+              "name": "",
+              "updated": "2018-07-31 01:54:50",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "7cb8fab1db12220099f93691f0b8f535"
+              }
+            },
+            "a9729ad50ba832004ce28ffe15673a6b": {
+              "name": "",
+              "updated": "2023-04-13 16:04:39",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "077810090be432004ce28ffe15673adb"
+              }
+            },
+            "b2629ad50ba832004ce28ffe15673a3f": {
+              "name": "",
+              "updated": "2023-04-13 16:03:07",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "5f599c490be432004ce28ffe15673a5b"
+              }
+            },
+            "cfe21ed50ba832004ce28ffe15673ad5": {
+              "name": "",
+              "updated": "2019-06-05 18:49:40",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "4111d56cdb68320099f93691f0b8f52f"
+              }
+            },
+            "d296450e0b01320026eba6c125673ac3": {
+              "name": "",
+              "updated": "2017-02-23 06:25:25",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "8493d20c0b01320026eba6c125673a4c"
+              }
+            },
+            "d4d36424db68320099f93691f0b8f518": {
+              "name": "Featured",
+              "updated": "2024-06-25 19:48:18",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "ba8d45ffdb50320099f93691f0b8f51b"
+              }
+            },
+            "da67d905db30320099f93691f0b8f59b": {
+              "name": "Category",
+              "updated": "2019-04-23 10:23:12",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "aa0afab1db12220099f93691f0b8f578"
+              }
+            },
+            "e5d6d505db30320099f93691f0b8f57c": {
+              "name": "",
+              "updated": "2020-04-30 13:53:50",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "851b8947db20320099f93691f0b8f5ea"
+              }
+            },
+            "fe379905db30320099f93691f0b8f571": {
+              "name": "",
+              "updated": "2018-05-24 09:57:34",
+              "codeFields": {
+                "css": {
+                  "label": "CSS",
+                  "type": "css"
+                },
+                "widget_parameters": {
+                  "label": "Additional options, JSON format",
+                  "type": "script_server"
+                }
+              },
+              "referenceFields": {
+                "sp_widget": "ff26f2b1db12220099f93691f0b8f5ce"
+              }
+            }
+          }
+        },
+        "sp_angular_provider": {
+          "type": "records",
+          "records": {
+            "0621eb68530323008bd7ddeeff7b1215": {
+              "name": "knowledgeIcons",
+              "updated": "2019-02-07 06:39:44",
+              "codeFields": {
+                "script": {
+                  "label": "Client Script",
+                  "type": "script"
+                }
+              }
+            },
+            "beb7565153630300cc376512a2dc3494": {
+              "name": "kbPagination",
+              "updated": "2019-01-25 08:41:28",
+              "codeFields": {
+                "script": {
+                  "label": "Client Script",
+                  "type": "script"
+                }
+              }
+            },
+            "f9e06b68530323008bd7ddeeff7b12cb": {
+              "name": "kmIcon",
+              "updated": "2019-01-14 03:25:02",
+              "codeFields": {
+                "script": {
+                  "label": "Client Script",
+                  "type": "script"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,428 @@
+{
+    "instance": {
+        "name": "ballsb",
+        "url": "https://ballsb.service-now.com",
+        "g_ck": "2d55f5d1c3438694541d47359901319fc54527a5a6a2bc8107da722e9bdfe94d134a813b"
+    },
+    "action": "saveWidget",
+    "tableName": "sp_widget",
+    "name": "Knowledge Bases Browse Clone",
+    "sys_id": "93b40601c3870a90fe51effa2b01317e",
+    "widget": {
+        "template": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Body HTML template",
+            "sys_readonly": false,
+            "type": "html_template",
+            "mandatory": false,
+            "displayValue": "<div class=\"kb-browse-{{::c.data.instanceid}} kb-browse-block\">\n  <div class=\"kb-browse-section self-clear col-xs-12\">\n    <span aria-live=\"assertive\" class=\"sr-only ng-binding\" role=\"alert\">{{c.notity_subscription}}</span>\n    <div class=\"kb-browse-title\">\n      <div class=\"kb-header-block\">\n        <h2 class=\"kb-header hidden-xs\" ng-class=\"{c.data.canCreateArticle}\" ng-bind=\"::c.options.title\"></h2>\n        <h2 id=\"kbBrowseTitle\" class=\"kb-header hidden-md hidden-lg hidden-sm visible-xs\" ng-class=\"{c.data.canCreateArticle}\" ng-bind=\"::c.options.title\"></h2>\n      </div>\n      <div class=\"kb-action-btns\" ng-if=\"(c.data.canCreateArticle)\">\n        <!--<a class=\"btn btn-default hidden-xs action-btns\" ng-if=\"c.data.sqaUiActive && c.data.canPostQuestion\" href=\"{{::c.options.post_question_url}}\" ng-bind=\"::c.options.post_question_label\"></a>-->\n        <button aria-controls=\"actions_menu\" \n                class=\"btn btn-default dropdown-toggle action-btns\"\n                ng-class=\"{'visibile-xs':c.data.canCreateArticle, 'hidden-lg hidden-md hidden-sm':!c.data.canCreateArticle}\" \n                data-toggle=\"dropdown\"                \n                ng-click=\"c.focusFirstElement($event)\"\n                aria-label=\"{{data.moreActionsAriaLabel}}\">\n          {{data.moreActionsLabel}}\n          <i class=\"fa fa-chevron-down\" aria-hidden=\"true\"></i>\n        </button>\n        <ul class=\"dropdown-menu dropdown-menu-right\" ng-if=\"c.data.canCreateArticle\" id=\"actions_menu\">\n          <li ng-if=\"c.data.canCreateArticle\"><a target=\"_blank\" href=\"{{::options.create_article_url}}\" ng-bind=\"::c.options.create_article_label\"></a></li>\n          <!--<li class=\"hidden-md hidden-lg hidden-sm visible-xs\" ng-if=\"c.data.sqaUiActive && c.data.canPostQuestion\"><a href=\"{{::c.options.post_question_url}}\" ng-bind=\"::c.options.post_question_label\"></a></li>-->\n        </ul>\n      </div>\n    </div>\n    <div class=\"kb-browse-content self-clear\">\n      <div class=\"kb-browse-tiles\" ng-class=\"c.data.result.length > 3 ? 'kb-browse-tiles-more' : c.data.result.length > 2 ? 'kb-browse-tiles-3' : c.data.result.length > 1 ? 'kb-browse-tiles-2' : 'kb-browse-tiles-1'\" aria-labelledby=\"kbBrowseTitle\" role=\"list\">\n        <div class=\"kb-tile-block col-xs-6 col-sm-6 col-md-3\" role=\"group\" ng-class=\"{'kb-tile-block-more':c.data.result.length > 4,'kb-tile-block-4':c.data.result.length == 4,'kb-tile-block-3':c.data.result.length == 3,'kb-tile-block-2':c.data.result.length == 2,'kb-tile-block-1':c.data.result.length == 1,'kb-hidden-tile kb-hide-me':$index > 3}\"\n             data-ng-repeat=\"item in c.getOrderedItems() track by item.sys_id\" role=\"listitem\">\n          <div class=\"kb-tile panel panel-{{::options.color}}\">\n            <div class=\"kb-top kb-tile-link kb-center\" >\n              <a href=\"?id=kb_search&kb_knowledge_base={{::item.sys_id}}\" aria-label=\"${{{::c.getKBLabel(item.title,item.article_count,item.questions_count,item.enable_socialqa)}}}\">\n                <div class=\"link-icon\">\n                  <img alt=\"{{::item.iconAltText}}\" src=\"default_knowledge_base.svg\" aria-hidden=\"true\" data-ng-if=\"!item.icon\"/>\n                  <img alt=\"{{::item.iconAltText}}\" data-ng-src=\"{{::item.icon}}.iix\" aria-hidden=\"true\" data-ng-if=\"item.icon\"/>\n                </div>\n                <div ng-if=\"!c.isFirefox\" class=\"link-text\" title=\"${knowledge base}\">\n                        <h3 id=\"{{'kbTitle'+$index}}\" ng-bind=\"::item.title\"></h3>\n                </div>\n                <div ng-if=\"c.isFirefox\" class=\"link-text\" title=\"${knowledge base}\">\n                        <h3 ng-if=\"item.title.length < 27\" ng-bind=\"::item.title\"></h3>\n                        <h3 ng-if=\"item.title.length > 26\" class=\"big-title\" ng-bind=\"::c.trimTitle(item.title)\"></h3>\n                </div>\n                <div class=\"kb-details\" ng-if=\"item.article_count || item.article_count == 0 || (item.enable_socialqa && (item.questions_count || item.questions_count == 0))\">\n                  <span class=\"kb-summary\">\n                    <i class=\"fa fa-file-text\" aria-hidden=\"true\"></i>\n                    <span class=\"kb-count\" ng-bind=\"::item.article_count\"></span>\n                  </span>\n                  <span title=\"${Social Q&A}\" ng-if=\"item.enable_socialqa && c.data.sqaUiActive\">\n                    <span class=\"kb-summary\">\n                      <i class=\"fa fa-question-circle\" aria-hidden=\"true\"></i>\n                      <span class=\"kb-count\" ng-bind=\"::item.questions_count\"></span>\n                    </span>\n                  </span>\n                </div>\n              </a>                    \n            </div>\n            <div class=\"kb-bottom panel-footer\" ng-class=\"{'kb-top-pad':!c.data.canSuscribe}\">\n              <button ng-if=\"c.data.canSuscribe && !item.subscribed\" \n                      id=\"subscribeButton_{{::item.sys_id}}\"\n                      ng-click=\"::c.updateSubscription(item, $event)\"\n                      class=\"subscribe-link sublink_{{::item.sys_id}} btn btn-link kb-subscribe\"  \n                      ng-focus=\"::c.updateSubText(item,0)\"\n                      ng-blur=\"::c.updateSubText(item,1)\"\n                      >\n                <span class=\"sub-icon\">\n                \t<i class=\"fa fa-circle-o\" aria-hidden=\"true\"></i>\n                  <span class=\"sub-text\" aria-hidden=\"true\">{{c.data.SUBSCRIBE_LABEL}}</span>\n                  <span class=\"sr-only\">{{c.getTranslatedText(c.data.subscribeText, item.title)}}</span>\n                </span>\n              </button>\n                \n              <button ng-if=\"c.data.canSuscribe && item.subscribed\"\n                      id=\"subscribeButton_{{::item.sys_id}}\"\n                      ng-click=\"::c.updateSubscription(item, $event)\"                      \n                      class=\"subscribe-link sublink_{{::item.sys_id}} btn btn-link kb-subscribe\"  \n                      ng-focus=\"::c.updateSubText(item,0)\"\n                      ng-mouseover=\"::c.updateSubText(item,0)\"\n                      ng-blur=\"::c.updateSubText(item,1)\"\n                      ng-mouseleave=\"c.updateSubText(item,1)\">\n                <span class=\"unsub-icon\">\n                  <i class=\"fa fa-check-circle\" aria-hidden=\"true\"></i>\n                  <span data-hover=\"${Unsubscribe}\" class=\"unsub-text unsub_{{::item.sys_id}}\">\n                    <span aria-hidden=\"true\">{{item.subscribedLabel?item.subscribedLabel:c.data.SUBSCRIBED_LABEL}}</span>\n                    <span class=\"sr-only\">{{c.getTranslatedText(c.data.unsubscribeText, item.title)}}</span>\n                  </span>\n                </span>\n              \n              </button>\n            </div>\n         </div>\n      </div>\n    </div>\n    <!--<div class=\"kb-show-more self-clear col-xs-12\" data-ng-if=\"c.data.result ? c.data.result.length > 4 : false\">\n      <button class=\"btn btn-link\" aria-expanded=\"{{!c.showMoreLink}}\" data-ng-click=\"c.showMoreLink ? c.toggleKbTiles('more') : c.toggleKbTiles('less')\">\n        <span class=\"show_more\"  data-ng-if=\"c.showMoreLink\">\n          <span class=\"sr-only\">${Show All Knowledge Bases}</span>\n          <span aria-hidden=\"true\">${Show All}&nbsp;<i class=\"fa fa-plus\" aria-hidden=\"true\"></i></span>\n        </span>\n        <span class=\"show_less\"  data-ng-if=\"!c.showMoreLink\">\n          <span class=\"sr-only\">${Show Less Knowledge Bases}</span>\n          <span aria-hidden=\"true\">${Show Less}&nbsp;<i class=\"fa fa-minus\" aria-hidden=\"true\"></i></span>\n        </span>\n      </button>\n    </div>-->\n  </div>\n</div>\n<style>\n  .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{\n    display: table;\n    margin: 0 auto;\n  }\n  .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-more{\n    display: block;\n    margin: 0 5rem;\n  }\n  /*---------------------------- */\n  .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n    padding: 0 1rem;\n    width:25rem;\n  }\n  .kb-browse-{{::c.data.instanceid}} .kb-tile-block-more {\n    padding: 0 1rem;\n    width:25%;\n  }\n  @media screen and (max-width: 1200px){\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{\n      margin: 0 5rem;\n      display: flex;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-more{\n      display: block;\n      margin: 0 15rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-2{\n      display: table;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-1{\n      display: table;\n      margin: 0 auto;\n    }\n    /*---------------------------- */\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n      padding: 0 1rem;\n      width:50%\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{\n      width:25rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{\n      width:25rem;\n    }\n  }\n  @media screen and (max-width: 798px){\n\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{\n      display: table;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-3{\n      display: block;\n      margin: 0 auto;\n    }\n    /*---------------------------- */\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n      padding: 0 1rem;\n      width:50%;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{\n      width:25rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{\n      width:25rem;\n    }\n  }\n  @media screen and (max-width: 546px){\n\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-3{\n      display: block;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-2{\n      display: flex;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-1{\n      display: table;\n      margin: 0 auto;\n    }\n    /*---------------------------- */\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n      padding: 0 0.4rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{\n      width:50%;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{\n      width:25rem;\n    }\n  }\n\n\n</style>",
+            "readonly": false,
+            "hint": "",
+            "name": "template",
+            "attributes": {},
+            "choice": 0,
+            "value": "<div class=\"kb-browse-{{::c.data.instanceid}} kb-browse-block\">\n  <div class=\"kb-browse-section self-clear col-xs-12\">\n    <span aria-live=\"assertive\" class=\"sr-only ng-binding\" role=\"alert\">{{c.notity_subscription}}</span>\n    <div class=\"kb-browse-title\">\n      <div class=\"kb-header-block\">\n        <h2 class=\"kb-header hidden-xs\" ng-class=\"{c.data.canCreateArticle}\" ng-bind=\"::c.options.title\"></h2>\n        <h2 id=\"kbBrowseTitle\" class=\"kb-header hidden-md hidden-lg hidden-sm visible-xs\" ng-class=\"{c.data.canCreateArticle}\" ng-bind=\"::c.options.title\"></h2>\n      </div>\n      <div class=\"kb-action-btns\" ng-if=\"(c.data.canCreateArticle)\">\n        <!--<a class=\"btn btn-default hidden-xs action-btns\" ng-if=\"c.data.sqaUiActive && c.data.canPostQuestion\" href=\"{{::c.options.post_question_url}}\" ng-bind=\"::c.options.post_question_label\"></a>-->\n        <button aria-controls=\"actions_menu\" \n                class=\"btn btn-default dropdown-toggle action-btns\"\n                ng-class=\"{'visibile-xs':c.data.canCreateArticle, 'hidden-lg hidden-md hidden-sm':!c.data.canCreateArticle}\" \n                data-toggle=\"dropdown\"                \n                ng-click=\"c.focusFirstElement($event)\"\n                aria-label=\"{{data.moreActionsAriaLabel}}\">\n          {{data.moreActionsLabel}}\n          <i class=\"fa fa-chevron-down\" aria-hidden=\"true\"></i>\n        </button>\n        <ul class=\"dropdown-menu dropdown-menu-right\" ng-if=\"c.data.canCreateArticle\" id=\"actions_menu\">\n          <li ng-if=\"c.data.canCreateArticle\"><a target=\"_blank\" href=\"{{::options.create_article_url}}\" ng-bind=\"::c.options.create_article_label\"></a></li>\n          <!--<li class=\"hidden-md hidden-lg hidden-sm visible-xs\" ng-if=\"c.data.sqaUiActive && c.data.canPostQuestion\"><a href=\"{{::c.options.post_question_url}}\" ng-bind=\"::c.options.post_question_label\"></a></li>-->\n        </ul>\n      </div>\n    </div>\n    <div class=\"kb-browse-content self-clear\">\n      <div class=\"kb-browse-tiles\" ng-class=\"c.data.result.length > 3 ? 'kb-browse-tiles-more' : c.data.result.length > 2 ? 'kb-browse-tiles-3' : c.data.result.length > 1 ? 'kb-browse-tiles-2' : 'kb-browse-tiles-1'\" aria-labelledby=\"kbBrowseTitle\" role=\"list\">\n        <div class=\"kb-tile-block col-xs-6 col-sm-6 col-md-3\" role=\"group\" ng-class=\"{'kb-tile-block-more':c.data.result.length > 4,'kb-tile-block-4':c.data.result.length == 4,'kb-tile-block-3':c.data.result.length == 3,'kb-tile-block-2':c.data.result.length == 2,'kb-tile-block-1':c.data.result.length == 1,'kb-hidden-tile kb-hide-me':$index > 3}\"\n             data-ng-repeat=\"item in c.getOrderedItems() track by item.sys_id\" role=\"listitem\">\n          <div class=\"kb-tile panel panel-{{::options.color}}\">\n            <div class=\"kb-top kb-tile-link kb-center\" >\n              <a href=\"?id=kb_search&kb_knowledge_base={{::item.sys_id}}\" aria-label=\"${{{::c.getKBLabel(item.title,item.article_count,item.questions_count,item.enable_socialqa)}}}\">\n                <div class=\"link-icon\">\n                  <img alt=\"{{::item.iconAltText}}\" src=\"default_knowledge_base.svg\" aria-hidden=\"true\" data-ng-if=\"!item.icon\"/>\n                  <img alt=\"{{::item.iconAltText}}\" data-ng-src=\"{{::item.icon}}.iix\" aria-hidden=\"true\" data-ng-if=\"item.icon\"/>\n                </div>\n                <div ng-if=\"!c.isFirefox\" class=\"link-text\" title=\"${knowledge base}\">\n                        <h3 id=\"{{'kbTitle'+$index}}\" ng-bind=\"::item.title\"></h3>\n                </div>\n                <div ng-if=\"c.isFirefox\" class=\"link-text\" title=\"${knowledge base}\">\n                        <h3 ng-if=\"item.title.length < 27\" ng-bind=\"::item.title\"></h3>\n                        <h3 ng-if=\"item.title.length > 26\" class=\"big-title\" ng-bind=\"::c.trimTitle(item.title)\"></h3>\n                </div>\n                <div class=\"kb-details\" ng-if=\"item.article_count || item.article_count == 0 || (item.enable_socialqa && (item.questions_count || item.questions_count == 0))\">\n                  <span class=\"kb-summary\">\n                    <i class=\"fa fa-file-text\" aria-hidden=\"true\"></i>\n                    <span class=\"kb-count\" ng-bind=\"::item.article_count\"></span>\n                  </span>\n                  <span title=\"${Social Q&A}\" ng-if=\"item.enable_socialqa && c.data.sqaUiActive\">\n                    <span class=\"kb-summary\">\n                      <i class=\"fa fa-question-circle\" aria-hidden=\"true\"></i>\n                      <span class=\"kb-count\" ng-bind=\"::item.questions_count\"></span>\n                    </span>\n                  </span>\n                </div>\n              </a>                    \n            </div>\n            <div class=\"kb-bottom panel-footer\" ng-class=\"{'kb-top-pad':!c.data.canSuscribe}\">\n              <button ng-if=\"c.data.canSuscribe && !item.subscribed\" \n                      id=\"subscribeButton_{{::item.sys_id}}\"\n                      ng-click=\"::c.updateSubscription(item, $event)\"\n                      class=\"subscribe-link sublink_{{::item.sys_id}} btn btn-link kb-subscribe\"  \n                      ng-focus=\"::c.updateSubText(item,0)\"\n                      ng-blur=\"::c.updateSubText(item,1)\"\n                      >\n                <span class=\"sub-icon\">\n                \t<i class=\"fa fa-circle-o\" aria-hidden=\"true\"></i>\n                  <span class=\"sub-text\" aria-hidden=\"true\">{{c.data.SUBSCRIBE_LABEL}}</span>\n                  <span class=\"sr-only\">{{c.getTranslatedText(c.data.subscribeText, item.title)}}</span>\n                </span>\n              </button>\n                \n              <button ng-if=\"c.data.canSuscribe && item.subscribed\"\n                      id=\"subscribeButton_{{::item.sys_id}}\"\n                      ng-click=\"::c.updateSubscription(item, $event)\"                      \n                      class=\"subscribe-link sublink_{{::item.sys_id}} btn btn-link kb-subscribe\"  \n                      ng-focus=\"::c.updateSubText(item,0)\"\n                      ng-mouseover=\"::c.updateSubText(item,0)\"\n                      ng-blur=\"::c.updateSubText(item,1)\"\n                      ng-mouseleave=\"c.updateSubText(item,1)\">\n                <span class=\"unsub-icon\">\n                  <i class=\"fa fa-check-circle\" aria-hidden=\"true\"></i>\n                  <span data-hover=\"${Unsubscribe}\" class=\"unsub-text unsub_{{::item.sys_id}}\">\n                    <span aria-hidden=\"true\">{{item.subscribedLabel?item.subscribedLabel:c.data.SUBSCRIBED_LABEL}}</span>\n                    <span class=\"sr-only\">{{c.getTranslatedText(c.data.unsubscribeText, item.title)}}</span>\n                  </span>\n                </span>\n              \n              </button>\n            </div>\n         </div>\n      </div>\n    </div>\n    <!--<div class=\"kb-show-more self-clear col-xs-12\" data-ng-if=\"c.data.result ? c.data.result.length > 4 : false\">\n      <button class=\"btn btn-link\" aria-expanded=\"{{!c.showMoreLink}}\" data-ng-click=\"c.showMoreLink ? c.toggleKbTiles('more') : c.toggleKbTiles('less')\">\n        <span class=\"show_more\"  data-ng-if=\"c.showMoreLink\">\n          <span class=\"sr-only\">${Show All Knowledge Bases}</span>\n          <span aria-hidden=\"true\">${Show All}&nbsp;<i class=\"fa fa-plus\" aria-hidden=\"true\"></i></span>\n        </span>\n        <span class=\"show_less\"  data-ng-if=\"!c.showMoreLink\">\n          <span class=\"sr-only\">${Show Less Knowledge Bases}</span>\n          <span aria-hidden=\"true\">${Show Less}&nbsp;<i class=\"fa fa-minus\" aria-hidden=\"true\"></i></span>\n        </span>\n      </button>\n    </div>-->\n  </div>\n</div>\n<style>\n  .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{\n    display: table;\n    margin: 0 auto;\n  }\n  .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-more{\n    display: block;\n    margin: 0 5rem;\n  }\n  /*---------------------------- */\n  .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n    padding: 0 1rem;\n    width:25rem;\n  }\n  .kb-browse-{{::c.data.instanceid}} .kb-tile-block-more {\n    padding: 0 1rem;\n    width:25%;\n  }\n  @media screen and (max-width: 1200px){\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{\n      margin: 0 5rem;\n      display: flex;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-more{\n      display: block;\n      margin: 0 15rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-2{\n      display: table;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-1{\n      display: table;\n      margin: 0 auto;\n    }\n    /*---------------------------- */\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n      padding: 0 1rem;\n      width:50%\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{\n      width:25rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{\n      width:25rem;\n    }\n  }\n  @media screen and (max-width: 798px){\n\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{\n      display: table;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-3{\n      display: block;\n      margin: 0 auto;\n    }\n    /*---------------------------- */\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n      padding: 0 1rem;\n      width:50%;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{\n      width:25rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{\n      width:25rem;\n    }\n  }\n  @media screen and (max-width: 546px){\n\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-3{\n      display: block;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-2{\n      display: flex;\n      margin: 0 auto;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-1{\n      display: table;\n      margin: 0 auto;\n    }\n    /*---------------------------- */\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {\n      padding: 0 0.4rem;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{\n      width:50%;\n    }\n    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{\n      width:25rem;\n    }\n  }\n\n\n</style>",
+            "max_length": 65000,
+            "ed": {
+                "name": "template"
+            }
+        },
+        "css": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "CSS",
+            "sys_readonly": false,
+            "type": "css",
+            "mandatory": false,
+            "displayValue": ".kb-browse-block{\n  margin: 0 -15px;\n}\n.kb-browse-section{\n\n  text-align: center;\n  margin-left: auto;\n  margin-right: auto;\n  .kb-browse-title{\n    padding-bottom:10px;\n  }\n  .kb-header {\n    font-weight: normal;\n  }\n  .kb-header-block {\n    display: inline-block;\n    h2 {\n      font-size: 23px;\n    }\n  }\n  .vertical-divider {\n    padding-right: 12px;\n    border-right: 1px solid #bdc0c4;\n    line-height: 40px;\n  }\n  .kb-action-btns {\n    top: -3px;\n    display: inline-block;\n    position: relative;\n    margin-left: 2px;\n  }\n  .action-btns {\n    margin-left:10px;\n    height: 34px;\n  }\n  .menu-padding {\n    margin-top: 2px;\n  }\n  .kb-browse-content{\n    margin: 0;\n    .kb-tile-block {\n\n      .kb-tile{\n        .kb-top-pad{\n          padding-top:20px;\n        }\n        .subscribe-link{\n          display:block;\n          width: 100%;\n          padding: 0px;\n          text-decoration: none;\n\n          &:focus{\n            outline: none;\n          }\n          &:focus > .kb-subscribe{\n            outline: 5px auto $brand-primary;\n            outline-offset: -2px;\n          }\n        }\n        .kb-top a{\n          display:block;\n        }\n        .kb-subscribe{\n          padding: 5px 10px;\n          font-size: 16px;\n          color:$brand-primary-darker;\n          \n          .unsub-icon i{\n            padding-right:4px;\n          }\n          .sub-icon i{\n            color: $text-muted;\n            padding-right:7px;\n          }\n          .sub-text{\n            color:$text-muted;\n          }\n          .unsub-text:hover span{\n            display:none;\n          }\n          .unsub-text:hover:after{\n            content:attr(data-hover);\n          }\n        }\n        .kb-tile-link {\n          padding:10px 5px;\n          .link-icon img, .link-icon i{\n            font-size: 50px;\n            height:50px;\n            color:#000000;\n          }\n          .link-text{\n            height: 40px;\n            padding:0 5px;\n            h3 {\n              color:$text-color;\n              font-weight: normal;\n              display:block;\n              display: -webkit-box;\n              font-size: 16px;\n              -webkit-line-clamp: 2;\n              -webkit-box-orient: vertical;\n              overflow: hidden;\n              text-overflow: ellipsis;\n              text-align:center;\n              line-height:1.2em;\n            }\n            .big-title{\n              position:relative;\n              line-height:1.2em;\n              height:2.4em;\n            }\n            .big-title:after {\n              content:\"...\";\n              font-weight:bold;\n              position:relative;\n              bottom:0;\n              right:0;\n              letter-spacing: .10em;\n            }\n          }\n        }\n      }\n    }\n    .kb-hide-me {\n      display: none;\n    }\n  }\n\t.kb-details{\n      .kb-summary{\n        padding:4px;\n        .kb-count{\n          padding:3px;\n          font-size:13px;\n          font-weight:400px;\n        }\n      }\n    }\n  .kb-bottom{\n     padding:0px;\n     button:hover,button:focus{\n         background-color:$thumbnail-border;\n    }\n     .unsub-icon i:hover,.unsub-icon i:focus{\n         color:$brand-primary-darker;\n    }\n  }\n  .kb-show-more{\n    padding-bottom: 15px;\n\n    .btn{\n      text-decoration: none; \n    }\n\n    .show_less i{\n      vertical-align: middle;\n    }\n  }\n}",
+            "readonly": false,
+            "hint": "",
+            "name": "css",
+            "attributes": {},
+            "choice": 0,
+            "value": ".kb-browse-block{\n  margin: 0 -15px;\n}\n.kb-browse-section{\n\n  text-align: center;\n  margin-left: auto;\n  margin-right: auto;\n  .kb-browse-title{\n    padding-bottom:10px;\n  }\n  .kb-header {\n    font-weight: normal;\n  }\n  .kb-header-block {\n    display: inline-block;\n    h2 {\n      font-size: 23px;\n    }\n  }\n  .vertical-divider {\n    padding-right: 12px;\n    border-right: 1px solid #bdc0c4;\n    line-height: 40px;\n  }\n  .kb-action-btns {\n    top: -3px;\n    display: inline-block;\n    position: relative;\n    margin-left: 2px;\n  }\n  .action-btns {\n    margin-left:10px;\n    height: 34px;\n  }\n  .menu-padding {\n    margin-top: 2px;\n  }\n  .kb-browse-content{\n    margin: 0;\n    .kb-tile-block {\n\n      .kb-tile{\n        .kb-top-pad{\n          padding-top:20px;\n        }\n        .subscribe-link{\n          display:block;\n          width: 100%;\n          padding: 0px;\n          text-decoration: none;\n\n          &:focus{\n            outline: none;\n          }\n          &:focus > .kb-subscribe{\n            outline: 5px auto $brand-primary;\n            outline-offset: -2px;\n          }\n        }\n        .kb-top a{\n          display:block;\n        }\n        .kb-subscribe{\n          padding: 5px 10px;\n          font-size: 16px;\n          color:$brand-primary-darker;\n          \n          .unsub-icon i{\n            padding-right:4px;\n          }\n          .sub-icon i{\n            color: $text-muted;\n            padding-right:7px;\n          }\n          .sub-text{\n            color:$text-muted;\n          }\n          .unsub-text:hover span{\n            display:none;\n          }\n          .unsub-text:hover:after{\n            content:attr(data-hover);\n          }\n        }\n        .kb-tile-link {\n          padding:10px 5px;\n          .link-icon img, .link-icon i{\n            font-size: 50px;\n            height:50px;\n            color:#000000;\n          }\n          .link-text{\n            height: 40px;\n            padding:0 5px;\n            h3 {\n              color:$text-color;\n              font-weight: normal;\n              display:block;\n              display: -webkit-box;\n              font-size: 16px;\n              -webkit-line-clamp: 2;\n              -webkit-box-orient: vertical;\n              overflow: hidden;\n              text-overflow: ellipsis;\n              text-align:center;\n              line-height:1.2em;\n            }\n            .big-title{\n              position:relative;\n              line-height:1.2em;\n              height:2.4em;\n            }\n            .big-title:after {\n              content:\"...\";\n              font-weight:bold;\n              position:relative;\n              bottom:0;\n              right:0;\n              letter-spacing: .10em;\n            }\n          }\n        }\n      }\n    }\n    .kb-hide-me {\n      display: none;\n    }\n  }\n\t.kb-details{\n      .kb-summary{\n        padding:4px;\n        .kb-count{\n          padding:3px;\n          font-size:13px;\n          font-weight:400px;\n        }\n      }\n    }\n  .kb-bottom{\n     padding:0px;\n     button:hover,button:focus{\n         background-color:$thumbnail-border;\n    }\n     .unsub-icon i:hover,.unsub-icon i:focus{\n         color:$brand-primary-darker;\n    }\n  }\n  .kb-show-more{\n    padding-bottom: 15px;\n\n    .btn{\n      text-decoration: none; \n    }\n\n    .show_less i{\n      vertical-align: middle;\n    }\n  }\n}",
+            "max_length": 8000,
+            "ed": {
+                "name": "css"
+            }
+        },
+        "roles": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "Roles",
+            "sys_readonly": false,
+            "type": "user_roles",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "roles",
+            "attributes": {
+                "no_truncate": "true",
+                "update_exempt": "true",
+                "record_watcher_blacklist": "true"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 255,
+            "ed": {
+                "name": "roles"
+            }
+        },
+        "link": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Link",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "function(scope,spAriaUtil) {\n\tvar c = scope.c;\n\t$timeout = $injector.get('$timeout');\n\tspAriaUtil = $injector.get('spAriaUtil');\n\tc.toggleKbTiles = function(elm){\n\t\t$('.kb-browse-content .kb-hidden-tile').toggleClass('kb-hide-me');\n\t\tc.showMoreLink = !c.showMoreLink;\n\n\t\tif(elm == \"more\"){\n\t\t\t$('.kb-browse-content .kb-tile-block:nth-child(5) a:first').focus();\n\t\t}\n\t}\n\t\n\tc.updateSubscription = function(item, $event){\n\t\t$event.stopPropagation();\n\t\t$event.preventDefault();\n\n\t\tvar input = {};\n\t\tinput.id = item.sys_id;\n\t\tvar notifySub = \"\";\n\t\tif(item.subscribed){\n\t\t\tinput.action = 'unsubscribe';\n\t\t\tnotifySub = \"${Unsubscribed from knowledge base} \"+ item.title;\n\t\t}else{\n\t\t\tinput.action = 'subscribe';\n\t\t\tnotifySub = \"${Subscribed to knowledge base} \"+ item.title;\n\t\t}\n\n\t\tc.server.get(input).then(function(r) {\n\t\t\titem.subscribed = !item.subscribed\n\t\t\t$timeout(function(){$('#subscribeButton_'+item.sys_id).focus()},0);\n\t\t\t//c.notity_subscription = notifySub;\n\t\t\tspAriaUtil.sendLiveMessage(notifySub);\n\t\t});\n\t};\n\n\tc.getKBLabel = function(kb,articleCount,questionCount,qaEnable){\n\t\tvar kBLabel = '';\n\t\tif(qaEnable && c.data.sqaUiActive){\n\t\t\tkBLabel = c.data.kb_label_qa;\n\t\t\tkBLabel = kBLabel.toString().replace('{0}',kb).replace('{1}',articleCount).replace('{2}',questionCount);\n\t\t}else{\n\t\t\tkBLabel = c.data.kb_label;\n\t\t\tkBLabel = kBLabel.toString().replace('{0}',kb).replace('{1}',articleCount);\n\t\t}\n\n\t\treturn kBLabel;\n\t};\n\n\tc.getTranslatedText = function(text, variable){\n\t\treturn text.toString().replace('{0}',variable);\n\t};\n\n\tc.updateSubText = function(item,focus){\n\n\t\tif(focus){\n\t\t\titem.subscribedLabel=c.data.SUBSCRIBED_LABEL;\n\t\t//\t$('.unsub_'+item.sys_id).html(\"<span>\"+c.subscribedText+\"</span>\");\n\t\t}\n\t\telse{\n\t\t\titem.subscribedLabel=c.data.UNSUBSCRIBE_LABEL;\n\t\t\t//$('.unsub_'+item.sys_id).html(\"<span>\"+c.unSubscribeText+\"</span>\");\n\t\t}\n\n\t};\n\n\tc.trimTitle = function(title){\n\t\treturn title.substring(0,27);\n\t};\n}",
+            "readonly": false,
+            "hint": "",
+            "name": "link",
+            "attributes": {
+                "client_script": "true"
+            },
+            "choice": 0,
+            "value": "function(scope,spAriaUtil) {\n\tvar c = scope.c;\n\t$timeout = $injector.get('$timeout');\n\tspAriaUtil = $injector.get('spAriaUtil');\n\tc.toggleKbTiles = function(elm){\n\t\t$('.kb-browse-content .kb-hidden-tile').toggleClass('kb-hide-me');\n\t\tc.showMoreLink = !c.showMoreLink;\n\n\t\tif(elm == \"more\"){\n\t\t\t$('.kb-browse-content .kb-tile-block:nth-child(5) a:first').focus();\n\t\t}\n\t}\n\t\n\tc.updateSubscription = function(item, $event){\n\t\t$event.stopPropagation();\n\t\t$event.preventDefault();\n\n\t\tvar input = {};\n\t\tinput.id = item.sys_id;\n\t\tvar notifySub = \"\";\n\t\tif(item.subscribed){\n\t\t\tinput.action = 'unsubscribe';\n\t\t\tnotifySub = \"${Unsubscribed from knowledge base} \"+ item.title;\n\t\t}else{\n\t\t\tinput.action = 'subscribe';\n\t\t\tnotifySub = \"${Subscribed to knowledge base} \"+ item.title;\n\t\t}\n\n\t\tc.server.get(input).then(function(r) {\n\t\t\titem.subscribed = !item.subscribed\n\t\t\t$timeout(function(){$('#subscribeButton_'+item.sys_id).focus()},0);\n\t\t\t//c.notity_subscription = notifySub;\n\t\t\tspAriaUtil.sendLiveMessage(notifySub);\n\t\t});\n\t};\n\n\tc.getKBLabel = function(kb,articleCount,questionCount,qaEnable){\n\t\tvar kBLabel = '';\n\t\tif(qaEnable && c.data.sqaUiActive){\n\t\t\tkBLabel = c.data.kb_label_qa;\n\t\t\tkBLabel = kBLabel.toString().replace('{0}',kb).replace('{1}',articleCount).replace('{2}',questionCount);\n\t\t}else{\n\t\t\tkBLabel = c.data.kb_label;\n\t\t\tkBLabel = kBLabel.toString().replace('{0}',kb).replace('{1}',articleCount);\n\t\t}\n\n\t\treturn kBLabel;\n\t};\n\n\tc.getTranslatedText = function(text, variable){\n\t\treturn text.toString().replace('{0}',variable);\n\t};\n\n\tc.updateSubText = function(item,focus){\n\n\t\tif(focus){\n\t\t\titem.subscribedLabel=c.data.SUBSCRIBED_LABEL;\n\t\t//\t$('.unsub_'+item.sys_id).html(\"<span>\"+c.subscribedText+\"</span>\");\n\t\t}\n\t\telse{\n\t\t\titem.subscribedLabel=c.data.UNSUBSCRIBE_LABEL;\n\t\t\t//$('.unsub_'+item.sys_id).html(\"<span>\"+c.unSubscribeText+\"</span>\");\n\t\t}\n\n\t};\n\n\tc.trimTitle = function(title){\n\t\treturn title.substring(0,27);\n\t};\n}",
+            "max_length": 65000,
+            "ed": {
+                "name": "link"
+            }
+        },
+        "description": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Description",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "Defines what the widget does",
+            "name": "description",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 300,
+            "ed": {
+                "name": "description"
+            }
+        },
+        "demo_data": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Demo data",
+            "sys_readonly": false,
+            "type": "json",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "demo_data",
+            "attributes": {},
+            "choice": 0,
+            "value": "",
+            "max_length": 8000,
+            "ed": {
+                "name": "demo_data"
+            }
+        },
+        "option_schema": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Option schema",
+            "sys_readonly": false,
+            "type": "json",
+            "mandatory": false,
+            "displayValue": "[{\"hint\":\"Field to order Knowledge bases tiles\",\"name\":\"order_by\",\"default_value\":\"title\",\"label\":\"Order By\",\"type\":\"string\"},{\"hint\":\"Reverse the selected order\",\"name\":\"order_reverse\",\"default_value\":\"false\",\"label\":\"Reverse Order\",\"type\":\"boolean\"},{\"hint\":\"Label for Post Question\",\"name\":\"post_question_label\",\"default_value\":\"\",\"label\":\"Post Question Label\",\"type\":\"string\"},{\"hint\":\"Label for Create Article\",\"name\":\"create_article_label\",\"default_value\":\"\",\"label\":\"Create Article Label\",\"type\":\"string\"},{\"hint\":\"Url for Post Question\",\"name\":\"post_question_url\",\"default_value\":\"?id=sqanda_new_question\",\"label\":\"Post Question Url\",\"type\":\"string\"},{\"hint\":\"Url for Create Article\",\"name\":\"create_article_url\",\"default_value\":\"knowledge_create.do?sys_id=-1&sysparm_stack=kb\",\"label\":\"Create Article Url\",\"type\":\"string\"}]",
+            "readonly": false,
+            "hint": "",
+            "name": "option_schema",
+            "attributes": {},
+            "choice": 0,
+            "value": "[{\"hint\":\"Field to order Knowledge bases tiles\",\"name\":\"order_by\",\"default_value\":\"title\",\"label\":\"Order By\",\"type\":\"string\"},{\"hint\":\"Reverse the selected order\",\"name\":\"order_reverse\",\"default_value\":\"false\",\"label\":\"Reverse Order\",\"type\":\"boolean\"},{\"hint\":\"Label for Post Question\",\"name\":\"post_question_label\",\"default_value\":\"\",\"label\":\"Post Question Label\",\"type\":\"string\"},{\"hint\":\"Label for Create Article\",\"name\":\"create_article_label\",\"default_value\":\"\",\"label\":\"Create Article Label\",\"type\":\"string\"},{\"hint\":\"Url for Post Question\",\"name\":\"post_question_url\",\"default_value\":\"?id=sqanda_new_question\",\"label\":\"Post Question Url\",\"type\":\"string\"},{\"hint\":\"Url for Create Article\",\"name\":\"create_article_url\",\"default_value\":\"knowledge_create.do?sys_id=-1&sysparm_stack=kb\",\"label\":\"Create Article Url\",\"type\":\"string\"}]",
+            "max_length": 8000,
+            "ed": {
+                "name": "option_schema"
+            }
+        },
+        "script": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Server script",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "(function() {\n\tif(input){\n\t\tvar status = \"failed\";\n        if(input.id && input.action){\n\t\t\tif(input.action == \"subscribe\"){\n\t\t\t\tsubscribeKB(input.id);\n\t\t\t\tstatus =\"success\";\n\t\t\t}else if(input.action == \"unsubscribe\"){\n\t\t\t\tunSubscribeKB(input.id);\n\t\t\t\tstatus =\"success\";\n\t\t\t}\n\t\t}\n\t\tdata.status = status;\n\t}else{\n\t\tdata.sqaUiActive = GlidePluginManager.isActive('com.snc.knowledge.social_qa.ui');\n\t\toptions.order_by = options.order_by ? options.order_by : \"title\";\n\t\toptions.order_reverse = options.order_reverse ? options.order_reverse == 'true': false;\n\t\tdata.instanceid = $sp.getDisplayValue(\"sys_id\");\n\t\tdata.kb_label = gs.getMessage('{0} -{1} knowledge base articles');\n\t\tdata.kb_label_qa = gs.getMessage('{0} - {1} knowledge base articles and {2} questions');\n\t\tdata.SUBSCRIBED_LABEL= gs.getMessage('Subscribed');\n\t\tdata.UNSUBSCRIBE_LABEL = gs.getMessage('Unsubscribe');\n\t\tdata.SUBSCRIBE_LABEL= gs.getMessage('Subscribe');\n\n\t\tvar kbService = new KBPortalService();\n\t\toptions.knowledge_bases = options.knowledge_bases || String(kbService.getServicePortalKnowledgeBases($sp.getPortalRecord().url_suffix)) || \"\";\n\t\tdata.isMobile = kbService.isMobile();\n\t\tdata.result = kbService.getMyKnowledgeBases(options.order_by,options.knowledge_bases);\n\t\tfor(var i = 0; i < data.result.length; i++)\n\t\t\tdata.result[i].iconAltText = data.result[i].icon ? gs.getMessage(\"{0} Knowledge base icon\", data.result[i].title) :  gs.getMessage(\"Knowledge base icon\");\n    var kbCount = data.result.length;\n\t\tvar articleCount = 0;\n\t\tvar socailqaCount = 0;\n\n\t\tdata.result.forEach(function(key){\n\t\t\tarticleCount = articleCount + parseInt(key.article_count,10);\n\t\t\tif (data.sqaUiActive)\n\t\t\t\tsocailqaCount = socailqaCount + parseInt(key.questions_count,10);\n\n\t\t});\n\n\t\tvar canSuscribe = false;\n\t\tvar canCreateArticle = false;\n\t\tvar canPostQuestion = false;\n\t\tvar kbService2 = new KBPortalService();\n\t\tcanSuscribe = kbService2.canSubscribe();\n\t\tcanCreateArticle = kbService2.canCreateArticle(options.knowledge_bases);\n\t\tcanPostQuestion = kbService2.canPostQuestion(options.knowledge_bases);\n\n\t\tdata.total_kb_count = kbCount;\n\t\tdata.total_articles_count = articleCount;\n\t\tif (data.sqaUiActive)\n\t\t\tdata.total_socialqa_count = socailqaCount;\n\t\tdata.canSuscribe = canSuscribe;\n\t\tdata.canCreateArticle = canCreateArticle;\n\t\tdata.canPostQuestion = canPostQuestion;\n\t\tdata.subscribeText = gs.getMessage(\"Subscribe to knowledge base {0}\")\n\t\tdata.unsubscribeText = gs.getMessage(\"Unsubscribe from knowledge base {0}\");\n\t\tdata.moreActionsLabel = gs.getMessage(\"Actions\");\n\t\tdata.moreActionsAriaLabel = gs.getMessage(\"More actions\");\n\t}\n\n\tfunction subscribeKB(kbID){\n\t\tvar context = global.ActivitySubscriptionContext.getContext();\n\t\tcontext.getSubscriptionService().subscribe(\"722d67c367003200d358bb2d07415a9c\",kbID);\n\t}\n\n\tfunction unSubscribeKB(kbID){\n\t\tvar context = global.ActivitySubscriptionContext.getContext();\n\t\tcontext.getSubscriptionService().unsubscribe(kbID);\n\t}\n\n})();",
+            "readonly": false,
+            "hint": "",
+            "name": "script",
+            "attributes": {},
+            "choice": 0,
+            "value": "(function() {\n\tif(input){\n\t\tvar status = \"failed\";\n        if(input.id && input.action){\n\t\t\tif(input.action == \"subscribe\"){\n\t\t\t\tsubscribeKB(input.id);\n\t\t\t\tstatus =\"success\";\n\t\t\t}else if(input.action == \"unsubscribe\"){\n\t\t\t\tunSubscribeKB(input.id);\n\t\t\t\tstatus =\"success\";\n\t\t\t}\n\t\t}\n\t\tdata.status = status;\n\t}else{\n\t\tdata.sqaUiActive = GlidePluginManager.isActive('com.snc.knowledge.social_qa.ui');\n\t\toptions.order_by = options.order_by ? options.order_by : \"title\";\n\t\toptions.order_reverse = options.order_reverse ? options.order_reverse == 'true': false;\n\t\tdata.instanceid = $sp.getDisplayValue(\"sys_id\");\n\t\tdata.kb_label = gs.getMessage('{0} -{1} knowledge base articles');\n\t\tdata.kb_label_qa = gs.getMessage('{0} - {1} knowledge base articles and {2} questions');\n\t\tdata.SUBSCRIBED_LABEL= gs.getMessage('Subscribed');\n\t\tdata.UNSUBSCRIBE_LABEL = gs.getMessage('Unsubscribe');\n\t\tdata.SUBSCRIBE_LABEL= gs.getMessage('Subscribe');\n\n\t\tvar kbService = new KBPortalService();\n\t\toptions.knowledge_bases = options.knowledge_bases || String(kbService.getServicePortalKnowledgeBases($sp.getPortalRecord().url_suffix)) || \"\";\n\t\tdata.isMobile = kbService.isMobile();\n\t\tdata.result = kbService.getMyKnowledgeBases(options.order_by,options.knowledge_bases);\n\t\tfor(var i = 0; i < data.result.length; i++)\n\t\t\tdata.result[i].iconAltText = data.result[i].icon ? gs.getMessage(\"{0} Knowledge base icon\", data.result[i].title) :  gs.getMessage(\"Knowledge base icon\");\n    var kbCount = data.result.length;\n\t\tvar articleCount = 0;\n\t\tvar socailqaCount = 0;\n\n\t\tdata.result.forEach(function(key){\n\t\t\tarticleCount = articleCount + parseInt(key.article_count,10);\n\t\t\tif (data.sqaUiActive)\n\t\t\t\tsocailqaCount = socailqaCount + parseInt(key.questions_count,10);\n\n\t\t});\n\n\t\tvar canSuscribe = false;\n\t\tvar canCreateArticle = false;\n\t\tvar canPostQuestion = false;\n\t\tvar kbService2 = new KBPortalService();\n\t\tcanSuscribe = kbService2.canSubscribe();\n\t\tcanCreateArticle = kbService2.canCreateArticle(options.knowledge_bases);\n\t\tcanPostQuestion = kbService2.canPostQuestion(options.knowledge_bases);\n\n\t\tdata.total_kb_count = kbCount;\n\t\tdata.total_articles_count = articleCount;\n\t\tif (data.sqaUiActive)\n\t\t\tdata.total_socialqa_count = socailqaCount;\n\t\tdata.canSuscribe = canSuscribe;\n\t\tdata.canCreateArticle = canCreateArticle;\n\t\tdata.canPostQuestion = canPostQuestion;\n\t\tdata.subscribeText = gs.getMessage(\"Subscribe to knowledge base {0}\")\n\t\tdata.unsubscribeText = gs.getMessage(\"Unsubscribe from knowledge base {0}\");\n\t\tdata.moreActionsLabel = gs.getMessage(\"Actions\");\n\t\tdata.moreActionsAriaLabel = gs.getMessage(\"More actions\");\n\t}\n\n\tfunction subscribeKB(kbID){\n\t\tvar context = global.ActivitySubscriptionContext.getContext();\n\t\tcontext.getSubscriptionService().subscribe(\"722d67c367003200d358bb2d07415a9c\",kbID);\n\t}\n\n\tfunction unSubscribeKB(kbID){\n\t\tvar context = global.ActivitySubscriptionContext.getContext();\n\t\tcontext.getSubscriptionService().unsubscribe(kbID);\n\t}\n\n})();",
+            "max_length": 65000,
+            "ed": {
+                "name": "script"
+            }
+        },
+        "has_preview": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -7,
+            "label": "Has preview",
+            "sys_readonly": false,
+            "type": "boolean",
+            "mandatory": false,
+            "displayValue": "false",
+            "readonly": false,
+            "hint": "Defines whether preview data is available",
+            "name": "has_preview",
+            "attributes": {},
+            "choice": 0,
+            "value": "false",
+            "max_length": 40,
+            "ed": {
+                "name": "has_preview"
+            }
+        },
+        "public": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -7,
+            "label": "Public",
+            "sys_readonly": false,
+            "type": "boolean",
+            "mandatory": false,
+            "displayValue": "true",
+            "readonly": false,
+            "hint": "Widget publicly available to unauthenticated users",
+            "name": "public",
+            "attributes": {
+                "update_exempt": "true"
+            },
+            "choice": 0,
+            "value": "true",
+            "max_length": 40,
+            "ed": {
+                "name": "public"
+            }
+        },
+        "docs": {
+            "sys_mandatory": false,
+            "visible": true,
+            "table_attributes": {
+                "update_synch": "true",
+                "synch_attachments": "true"
+            },
+            "dbType": 12,
+            "label": "Docs",
+            "sys_readonly": false,
+            "type": "reference",
+            "mandatory": false,
+            "refTable": "sp_documentation",
+            "reference_type": "table",
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "docs",
+            "attributes": {
+                "encode_utf8": "false"
+            },
+            "reference_key": "sys_id",
+            "readonlyClickthrough": true,
+            "choice": 0,
+            "value": "",
+            "max_length": 32,
+            "ed": {
+                "reference": "sp_documentation",
+                "searchField": "title",
+                "defaultOperator": "STARTSWITH",
+                "name": "docs"
+            }
+        },
+        "client_script": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Client controller",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "function($http,$rootScope, $filter,$timeout,spAriaUtil) {\n\tvar c = this;\n\tc.options.title = c.options.title || \"${Explore our Knowledge Bases}\";\n\t//c.options.post_question_label = c.options.post_question_label || \"${Ask a Question}\";\n\tc.options.create_article_label = c.options.create_article_label || \"${Create Article}\";\n\tc.isFirefox = false;\n\tc.showMoreLink = true;\n\tc.subscribedText = \"${Subscribed}\";\n\tc.unSubscribeText = \"${Unsubscribe}\";\n\n\tif(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){\n\t\tc.isFirefox = true;\n\t}\n\t$rootScope.kb_count = c.data.total_kb_count;\n\t$rootScope.articles_count = c.data.total_articles_count;\n\tif (c.data.sqaUiActive)\n\t\t$rootScope.socialqa_count = c.data.total_socialqa_count;\n\t$rootScope.isMobile = c.data.isMobile;\n\n\tc.getOrderedItems = function() {\n\t\treturn $filter('orderBy')(c.data.result, c.options.order_by, c.options.order_reverse);\n\t}\n\tc.focusFirstElement= function(e){\n\t\t$timeout(function(){$('div.kb-action-btns').children('ul').children('li:first-child').children('a').focus();})\n\t}\n}",
+            "readonly": false,
+            "hint": "",
+            "name": "client_script",
+            "attributes": {
+                "client_script": "true"
+            },
+            "choice": 0,
+            "value": "function($http,$rootScope, $filter,$timeout,spAriaUtil) {\n\tvar c = this;\n\tc.options.title = c.options.title || \"${Explore our Knowledge Bases}\";\n\t//c.options.post_question_label = c.options.post_question_label || \"${Ask a Question}\";\n\tc.options.create_article_label = c.options.create_article_label || \"${Create Article}\";\n\tc.isFirefox = false;\n\tc.showMoreLink = true;\n\tc.subscribedText = \"${Subscribed}\";\n\tc.unSubscribeText = \"${Unsubscribe}\";\n\n\tif(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){\n\t\tc.isFirefox = true;\n\t}\n\t$rootScope.kb_count = c.data.total_kb_count;\n\t$rootScope.articles_count = c.data.total_articles_count;\n\tif (c.data.sqaUiActive)\n\t\t$rootScope.socialqa_count = c.data.total_socialqa_count;\n\t$rootScope.isMobile = c.data.isMobile;\n\n\tc.getOrderedItems = function() {\n\t\treturn $filter('orderBy')(c.data.result, c.options.order_by, c.options.order_reverse);\n\t}\n\tc.focusFirstElement= function(e){\n\t\t$timeout(function(){$('div.kb-action-btns').children('ul').children('li:first-child').children('a').focus();})\n\t}\n}",
+            "max_length": 8000,
+            "ed": {
+                "name": "client_script"
+            }
+        },
+        "data_table": {
+            "sys_mandatory": true,
+            "visible": true,
+            "dbType": 12,
+            "default_value": "sp_instance",
+            "label": "Data table",
+            "sys_readonly": false,
+            "type": "table_name",
+            "mandatory": true,
+            "displayValue": "sp_instance",
+            "readonly": false,
+            "hint": "",
+            "name": "data_table",
+            "attributes": {
+                "base_table": "sp_instance",
+                "base_start": "true"
+            },
+            "choice": 0,
+            "choices": [],
+            "value": "sp_instance",
+            "max_length": 80,
+            "ed": {
+                "name": "data_table"
+            }
+        },
+        "name": {
+            "sys_mandatory": true,
+            "visible": true,
+            "dbType": 12,
+            "label": "Name",
+            "sys_readonly": false,
+            "type": "translated_field",
+            "mandatory": true,
+            "displayValue": "Knowledge Bases Browse Clone",
+            "readonly": false,
+            "hint": "",
+            "name": "name",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "Knowledge Bases Browse Clone",
+            "max_length": 40,
+            "ed": {
+                "name": "name"
+            }
+        },
+        "sys_scope": {
+            "sys_mandatory": false,
+            "visible": true,
+            "table_attributes": {
+                "metadata_link_exempt": "true"
+            },
+            "dbType": 12,
+            "label": "Application",
+            "sys_readonly": true,
+            "type": "reference",
+            "mandatory": false,
+            "refTable": "sys_store_app",
+            "reference_type": "table",
+            "displayValue": "Knowledge Management - Service Portal",
+            "readonly": true,
+            "hint": "Application containing this record",
+            "name": "sys_scope",
+            "attributes": {
+                "encode_utf8": "false",
+                "list_force_default": "true",
+                "readonly_clickthrough": "true",
+                "ignore_filter_on_new": "true"
+            },
+            "reference_key": "sys_id",
+            "readonlyClickthrough": true,
+            "choice": 0,
+            "value": "bab6dea3db20320099f93691f0b8f590",
+            "max_length": 32,
+            "ed": {
+                "reference": "sys_scope",
+                "searchField": "name",
+                "defaultOperator": "STARTSWITH",
+                "name": "sys_scope"
+            }
+        },
+        "id": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "ID",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "knowledge_bases_browse_clone",
+            "readonly": false,
+            "hint": "Identifier for $sp.embedWidget()",
+            "name": "id",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "knowledge_bases_browse_clone",
+            "max_length": 40,
+            "ed": {
+                "name": "id"
+            }
+        },
+        "field_list": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dependentField": "data_table",
+            "dbType": -1,
+            "label": "Fields",
+            "sys_readonly": false,
+            "type": "field_list",
+            "mandatory": false,
+            "displayValue": "title,color,css",
+            "readonly": false,
+            "hint": "",
+            "name": "field_list",
+            "attributes": {
+                "is_multi_text": "false"
+            },
+            "choice": 0,
+            "value": "title,color,css",
+            "max_length": 1000,
+            "ed": {
+                "dependent_value": "sp_instance",
+                "name": "field_list"
+            }
+        },
+        "controller_as": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "controllerAs",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "c",
+            "readonly": false,
+            "hint": "Identifier name for a reference to the controller in the directive's scope",
+            "name": "controller_as",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "c",
+            "max_length": 100,
+            "ed": {
+                "name": "controller_as"
+            }
+        }
+    }
+}

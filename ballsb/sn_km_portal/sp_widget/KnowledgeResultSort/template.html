@@ -1,0 +1,117 @@
+<div class="kb-sort-block" ng-show="c.showWidget" ng-class="$root.showFacet? 'kb-display-none':''" ng-cloak>
+  <div ng-class="::{'hidden-xs' : options.hide_xs}">
+    <div class="panel panel-{{::c.options.color}}">
+      <div class="panel-heading"> 
+        <div class="row content_block no-margin">
+          <div class="count text kb-text-res-padding" ng-class="(c.title.length > 45) ? 'col-md-12 col-xs-12 col-sm-12' : 'col-md-5 col-xs-5 col-sm-5'">
+            <h2>{{c.title}}</h2>
+          </div>
+          <div class="hidden-sm hidden-xs" ng-class="(c.title.length > 45) ? 'col-md-12 col-xs-12 col-sm-12' : 'col-md-7 col-sm-7 col-xs-7'">
+            <div class="sorting">
+              <span class="inline">
+                <span class="text sort-label">${Sort By}</span>
+              </span>
+              <span class="pipe inline">
+                |
+              </span>
+              <span class="sort-list inline">
+                <ul class="list-inline">
+                  <li ng-show="!c.hide_relevancy && c.showRelevancy">
+                    <button class="transparent-button link-color" ng-class="{'active':c.selected_order == 'relevancy'}" aria-label="${Sort by} ${relevance}" ng-click="c.updateResultOrder(data.relevency_data)">${Relevance}</button>
+                  </li>
+                  <li ng-repeat="item in c.sort_items track by item.id">
+                    <button class="transparent-button link-color" ng-class="{'active':c.selected_order == item.id}" aria-label="{{c.getSortLabel(item)}}" ng-click="c.updateResultOrder(item)">{{::item.label}}</button>
+                    <span class="order-icons" ng-show="c.selected_order == item.id">
+                      <span ng-hide="item.order_desc"><i class="fa fa-caret-up" aria-hidden="true"></i>
+                      </span>
+                      <span  ng-show="item.order_desc"><i class="fa fa-caret-down" aria-hidden="true"></i>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+              </span>
+            </div>
+          </div>
+          <div class="visible-sm visible-xs" ng-class="(c.title.length > 45) ? 'col-md-12 col-xs-12 col-sm-12' : 'col-md-7 col-xs-7 col-sm-7'">
+            <div class="sorting">
+              <span class="inline">
+                <span class="text sort-label">${Sort By}</span>
+              </span>
+              <span class="pipe inline">
+                |
+              </span>
+              <span class="sort-list inline">
+                <ul class="list-inline">
+                  <li >
+                    <button class="transparent-button link-color active sort-label" ng-click="c.doneClick()">{{c.sortLabel}}</button>
+                    <span class="order-icons" ng-hide="!c.hide_relevancy && c.showRelevancy">
+                      <span ng-hide="c.order_desc"><i class="fa fa-caret-up" aria-hidden="true"></i>
+                      </span>
+                      <span  ng-show="c.order_desc"><i class="fa fa-caret-down" aria-hidden="true"></i>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-sort" ng-show="c.sortOverlay" id="overlaySort">
+    <div class="overlay-content" ng-keydown="c.onOverlayKeyDown($event)">
+      <div class="panel panel-{{::c.options.color}}">
+        <div class="panel-heading overlay-header-bottom"> 
+          <div class="row content_block center-align">
+            <span class="panel-title">${Sort by}</span>
+            <span class="sort-done">
+              <button class="link-color transparent-button" ng-click="c.doneClick()">${Done}</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <ul class="res-ul-class">
+        <li class="res-li-class" ng-show="!c.hide_relevancy && c.showRelevancy">
+          <button class="transparent-button link-color" ng-class="{'active res-bold':c.selected_order == 'relevancy'}" ng-click="c.updateResultOrder(data.relevency_data)">${Relevance}</button>
+          <span class="res-check-icons" ng-show="c.selected_order == 'relevancy'"><i class="fa fa-check" aria-hidden="true"></i></span>
+        </li>
+        <li class="res-li-class" ng-repeat="item in c.sort_items track by item.id" ng-click="c.updateResultOrder(item)" role="presentation">
+          <button class="transparent-button link-color" ng-class="{'active res-bold':c.selected_order == item.id}" ng-click="c.updateResultOrder(data.relevency_data)">${{{::item.label}}}</button>
+          <span class="order-icons res-order-icons " ng-show="c.selected_order == item.id">
+            <span ng-hide="item.order_desc"><i class="fa  fa-caret-up updown-icon-size" aria-hidden="true"></i>
+            </span>
+            <span  ng-show="item.order_desc"><i class="fa  fa-caret-down updown-icon-size" aria-hidden="true"></i>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+  @media only screen and (max-width :991px){
+    .kb-text-res-padding {
+      padding-left :0.6rem !important;
+    }
+    .sorting {
+    	margin-top: 0.1rem !important;
+    }
+    .res-order-icons {
+      float : right;
+      padding-right: 1.5rem;
+    }
+    .sort-label{
+  		font-size: 1.4rem !important;
+		}
+    .kb-display-none {
+      display : none !important;
+    }
+    .no-margin {
+      margin-left : 0rem !important;
+    }
+    .count{
+  		font-size: 1.5rem;
+		}
+  }
+</style>

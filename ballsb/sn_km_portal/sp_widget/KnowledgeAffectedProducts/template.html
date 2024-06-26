@@ -1,0 +1,9 @@
+<sp-panel ng-if="(c.options.always_show || c.affectedProducts.length) && ($root.properties.showAffectedProducts === 'true' || $root.properties.showAffectedProducts === true)">
+  <div class="list-group-item" ng-repeat="product in ::c.affectedProducts track by product.sysId">
+    <a ng-if="product.canRead" href="{{::product.className}}.do?sys_id={{::product.sysId}}&sysparm_stack={{::$root.stackUrl}}" ng-bind="::product.name"></a>        
+    <span ng-if="!product.canRead" ng-bind="::product.name"></span> 
+  </div>
+
+  <div class="list-group-item" ng-if="!c.affectedProducts.length > 0" ng-bind="::$root.messages.NO_PRODUCTS"></div>
+
+</sp-panel> 

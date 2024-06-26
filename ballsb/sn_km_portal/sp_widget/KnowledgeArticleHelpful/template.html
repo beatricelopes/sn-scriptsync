@@ -1,0 +1,167 @@
+<div class="kb-help-wrapper" ng-if="$root.properties.showKBRatingOptions && !$root.hideFeedbackOptions && $root.isValid && !c.hide && (c.show_helpful ||c.showRatings)" ng-class="{'mesp-ui' : c.data.isMESP, 'kb-mobile' : c.isMobile ,'kb-desktop' : !c.isMobile}">
+  <hr class="kb-line visible-xs" aria-hidden="true"/>
+  <div class="row">
+    <div class="col-sm-6 help-section">
+      <div ng-if="c.show_helpful" class="help-content">
+        <div class="kb-inline">
+          <span class="kb-help-label" ng-bind="::c.helpfulPrompt"></span>
+        </div>
+        <div class="kb-inline help-use-button">
+          <div>
+            <div class="help-buttons" ng-if="::!c.isMobile" role="group" aria-label="{{data.messages.HELPFUL_GROUP}}">
+              <button type="button" 
+                      name="useful_yes"
+                      class="btn btn-default btn-question kb-button"
+                      ng-class="{'btn-primary':c.submitted_yes}"
+                      ng-click="c.action('useful_yes')"
+                      aria-pressed="{{c.data.state == 'useful_yes'}}"
+                      aria-label="{{data.messages.HELPFUL_YES}}">${Yes}</button>
+              <button type="button" 
+                      name="useful_no"
+                      id="useful_no"
+                      class="btn btn-default btn-question kb-button"
+                      ng-class="{'btn-primary':c.submitted_no}"
+                      ng-click="c.action('useful_no')"
+                      aria-pressed="{{c.data.state == 'useful_no'}}"
+                      aria-label="{{data.messages.HELPFUL_NO}}">${No}</button>
+            </div>
+            <div class="help-buttons" ng-if="::c.isMobile" role="group" aria-label="{{data.messages.HELPFUL_GROUP}}">
+              <button class="help-icon transparent-button" 
+                 ng-class="{'is_selected':c.data.state == 'useful_yes'}" 
+                 name="useful_yes" 
+                 ng-click="c.action('useful_yes')" 
+                 aria-label="{{data.messages.HELPFUL_YES}}" 
+                 aria-pressed="{{c.data.state == 'useful_yes'}}">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+              <button class="help-icon transparent-button"
+                 role="button" 
+                 ng-class="{'is_selected':c.data.state == 'useful_no'}" n
+                 ame="useful_no" ng-click="c.action('useful_no')" 
+                 aria-label="{{data.messages.HELPFUL_NO}}" 
+                 aria-pressed="{{c.data.state == 'useful_no'}}">
+                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="help-use-text">
+              <span ng-if="c.options.show_percent_helpful != 'false' && c.showPercentHelpful()" class="sp-helpful-percent" ng-bind="$root.helpfulContent"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="kb-line visible-xs" aria-hidden="true"/>
+    <div class="col-sm-6 rating-section">
+      <div ng-if="$root.isValid" class="kb-inline">
+        <div ng-if="c.showRatings" ng-class="c.ratingClass">
+          <div class="kb-rate-article"> 
+          <span ng-if="!c.isMobile" class="kb-inline" aria-hidden="true">${Rate this article}</span>
+          <span ng-if="c.isMobile" class="kb-inline">${Rate this article}</span>
+          </div>
+          <div class="kb-rate-star" ng-class="{'r-pad-top' : c.KBRatingStyle}"><span class="kb-inline">
+            <span ng-keydown="c.rate_a11y()" ng-click="c.submitFeedback()" class="kb-rating-stars" ng-if="::c.KBRatingStyle" role="presentation">
+             <uib-rating sp-rating  aria-label="${Rate this article}" ng-model="c.data.rating" max="5"></uib-rating>
+            </span>
+            <span ng-keydown="c.rate_a11y()" ng-click="c.submitFeedback()" class="sp-stars" ng-if="!c.KBRatingStyle" role="presentation">
+              <span uib-rating sp-rating ng-model="c.data.rating" aria-label="${Rate this article}" max="5" state-on="'fa fa-star kb-star-on'" state-off="'fa fa-star kb-star-off'" />
+            </span>
+            </span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <!--<div role="alert" ng-if="::!c.isMobile && data.response" ng-class="{'alert-success':data.success, 'alert-danger': !data.success}" class="alert" ng-bind="::data.response"></div>-->
+  </div>
+  <hr class="kb-line kb-no-bottom" aria-hidden="true"/>
+</div>
+<style>
+  .kb-help-wrapper .rating-section{
+    text-align:end;
+  }
+  .kb-help-wrapper .kb-help-label {
+    display: inline;
+    position: relative;
+    left: 0rem;
+    top: 0.3rem;
+  }
+  .kb-help-wrapper .kb-rate-article{
+    padding-right : 1rem;
+    display: inline;
+  }
+  .kb-help-wrapper .sp-helpful-percent{
+    padding-left: 1rem;
+    display: inline-block;
+    font-size:1rem;
+  }
+  @media only screen and (min-width :1200px){
+    .kb-help-wrapper.kb-desktop .help-content .help-use-text{
+      display:inline;
+    }
+  }
+  @media only screen and (max-width :992px){
+    .kb-help-wrapper.kb-desktop .help-section{
+      text-align:center;
+    }
+    .kb-help-wrapper.kb-desktop .sp-helpful-percent{
+      padding-left: 0rem;
+      display: block;
+    }
+    .kb-help-wrapper.kb-desktop .rating-section{
+      text-align:center;
+    }
+    .kb-help-wrapper.kb-desktop .kb-help-label {
+      margin:0rem;
+      font-size: 2rem;
+      display: block;
+      position: inherit;
+    }
+    .kb-help-wrapper .kb-line{
+      border-color: #ccc;
+    }
+    .kb-help-wrapper >  .kb-line{
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+    } 
+    .kb-help-wrapper.mesp-ui >  .kb-line{
+      margin-left: -1.6rem;
+      margin-right: -1.5rem;
+    } 
+    .kb-help-wrapper.mesp-ui .row .kb-line{
+      margin-left: -0.8rem;
+      margin-right: -0.7rem;
+    }
+    .kb-help-wrapper.kb-desktop .help-content{
+      padding: 1rem;
+    }
+    .kb-help-wrapper.kb-desktop .help-buttons .btn{
+      margin: 1.5rem;
+    }
+    .kb-help-wrapper.kb-desktop .rating-section{
+      margin: 1rem 0 1.5rem 0;
+    }
+    .kb-help-wrapper .rating-section .kb-rate-article{
+      padding-bottom: 0.8rem;
+      display: block;
+    }
+    .kb-help-wrapper.kb-desktop .rating-section .kb-rate-star .kb-inline{
+      font-size: 2.5rem !important;
+    }
+    .kb-help-wrapper .rating-section .kb-rate-star .kb-inline .glyphicon{
+      padding:0.6rem;
+    }
+  }
+
+  @media only screen and (min-width:768px) and (max-width: 992px) {
+    .kb-help-wrapper .kb-no-bottom, .kb-help-wrapper .kb-line{
+      margin-left: 0rem;
+      margin-right: 0rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .kb-help-wrapper .rating-section .kb-rate-article{
+      padding-bottom: 1.5rem;
+      display: block;
+    }
+  }
+</style>

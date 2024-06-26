@@ -1,0 +1,205 @@
+<div class="kb-browse-{{::c.data.instanceid}} kb-browse-block">
+  <div class="kb-browse-section self-clear col-xs-12">
+    <span aria-live="assertive" class="sr-only ng-binding" role="alert">{{c.notity_subscription}}</span>
+    <div class="kb-browse-title">
+      <div class="kb-header-block">
+        <h2 class="kb-header hidden-xs" ng-class="{'vertical-divider': c.data.canCreateArticle || c.data.canPostQuestion}" ng-bind="::c.options.title"></h2>
+        <h2 id="kbBrowseTitle" class="kb-header hidden-md hidden-lg hidden-sm visible-xs" ng-class="{'vertical-divider': c.data.canCreateArticle || c.data.canPostQuestion}" ng-bind="::c.options.title"></h2>
+      </div>
+      <div class="kb-action-btns" ng-if="(c.data.canCreateArticle || c.data.canPostQuestion)">
+        <a class="btn btn-default hidden-xs action-btns" ng-if="c.data.sqaUiActive && c.data.canPostQuestion" href="{{::c.options.post_question_url}}" ng-bind="::c.options.post_question_label"></a>
+        <button aria-controls="actions_menu" 
+                class="btn btn-default dropdown-toggle action-btns"
+                ng-class="{'visibile-xs':c.data.canCreateArticle || c.data.canPostQuestion, 'hidden-lg hidden-md hidden-sm':!c.data.canCreateArticle}" 
+                data-toggle="dropdown"                
+                ng-click="c.focusFirstElement($event)"
+                aria-label="{{data.moreActionsAriaLabel}}">
+          {{data.moreActionsLabel}}
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" ng-if="c.data.canCreateArticle || c.data.canPostQuestion" id="actions_menu">
+          <li ng-if="c.data.canCreateArticle"><a target="_blank" href="{{::options.create_article_url}}" ng-bind="::c.options.create_article_label"></a></li>
+          <li class="hidden-md hidden-lg hidden-sm visible-xs" ng-if="c.data.sqaUiActive && c.data.canPostQuestion"><a href="{{::c.options.post_question_url}}" ng-bind="::c.options.post_question_label"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="kb-browse-content self-clear">
+      <div class="kb-browse-tiles" ng-class="c.data.result.length > 3 ? 'kb-browse-tiles-more' : c.data.result.length > 2 ? 'kb-browse-tiles-3' : c.data.result.length > 1 ? 'kb-browse-tiles-2' : 'kb-browse-tiles-1'" aria-labelledby="kbBrowseTitle" role="list">
+        <div class="kb-tile-block col-xs-6 col-sm-6 col-md-3" role="group" ng-class="{'kb-tile-block-more':c.data.result.length > 4,'kb-tile-block-4':c.data.result.length == 4,'kb-tile-block-3':c.data.result.length == 3,'kb-tile-block-2':c.data.result.length == 2,'kb-tile-block-1':c.data.result.length == 1,'kb-hidden-tile kb-hide-me':$index > 3}"
+             data-ng-repeat="item in c.getOrderedItems() track by item.sys_id" role="listitem">
+          <div class="kb-tile panel panel-{{::options.color}}">
+            <div class="kb-top kb-tile-link kb-center" >
+              <a href="?id=kb_search&kb_knowledge_base={{::item.sys_id}}" aria-label="${{{::c.getKBLabel(item.title,item.article_count,item.questions_count,item.enable_socialqa)}}}">
+                <div class="link-icon">
+                  <img alt="{{::item.iconAltText}}" src="default_knowledge_base.svg" aria-hidden="true" data-ng-if="!item.icon"/>
+                  <img alt="{{::item.iconAltText}}" data-ng-src="{{::item.icon}}.iix" aria-hidden="true" data-ng-if="item.icon"/>
+                </div>
+                <div ng-if="!c.isFirefox" class="link-text" title="${knowledge base}">
+                        <h3 id="{{'kbTitle'+$index}}" ng-bind="::item.title"></h3>
+                </div>
+                <div ng-if="c.isFirefox" class="link-text" title="${knowledge base}">
+                        <h3 ng-if="item.title.length < 27" ng-bind="::item.title"></h3>
+                        <h3 ng-if="item.title.length > 26" class="big-title" ng-bind="::c.trimTitle(item.title)"></h3>
+                </div>
+                <div class="kb-details" ng-if="item.article_count || item.article_count == 0 || (item.enable_socialqa && (item.questions_count || item.questions_count == 0))">
+                  <span class="kb-summary">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span class="kb-count" ng-bind="::item.article_count"></span>
+                  </span>
+                  <span title="${Social Q&A}" ng-if="item.enable_socialqa && c.data.sqaUiActive">
+                    <span class="kb-summary">
+                      <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      <span class="kb-count" ng-bind="::item.questions_count"></span>
+                    </span>
+                  </span>
+                </div>
+              </a>                    
+            </div>
+            <div class="kb-bottom panel-footer" ng-class="{'kb-top-pad':!c.data.canSuscribe}">
+              <button ng-if="c.data.canSuscribe && !item.subscribed" 
+                      id="subscribeButton_{{::item.sys_id}}"
+                      ng-click="::c.updateSubscription(item, $event)"
+                      class="subscribe-link sublink_{{::item.sys_id}} btn btn-link kb-subscribe"  
+                      ng-focus="::c.updateSubText(item,0)"
+                      ng-blur="::c.updateSubText(item,1)"
+                      >
+                <span class="sub-icon">
+                	<i class="fa fa-circle-o" aria-hidden="true"></i>
+                  <span class="sub-text" aria-hidden="true">{{c.data.SUBSCRIBE_LABEL}}</span>
+                  <span class="sr-only">{{c.getTranslatedText(c.data.subscribeText, item.title)}}</span>
+                </span>
+              </button>
+                
+              <button ng-if="c.data.canSuscribe && item.subscribed"
+                      id="subscribeButton_{{::item.sys_id}}"
+                      ng-click="::c.updateSubscription(item, $event)"                      
+                      class="subscribe-link sublink_{{::item.sys_id}} btn btn-link kb-subscribe"  
+                      ng-focus="::c.updateSubText(item,0)"
+                      ng-mouseover="::c.updateSubText(item,0)"
+                      ng-blur="::c.updateSubText(item,1)"
+                      ng-mouseleave="c.updateSubText(item,1)">
+                <span class="unsub-icon">
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                  <span data-hover="${Unsubscribe}" class="unsub-text unsub_{{::item.sys_id}}">
+                    <span aria-hidden="true">{{item.subscribedLabel?item.subscribedLabel:c.data.SUBSCRIBED_LABEL}}</span>
+                    <span class="sr-only">{{c.getTranslatedText(c.data.unsubscribeText, item.title)}}</span>
+                  </span>
+                </span>
+              
+              </button>
+            </div>
+         </div>
+      </div>
+    </div>
+    <div class="kb-show-more self-clear col-xs-12" data-ng-if="c.data.result ? c.data.result.length > 4 : false">
+      <button class="btn btn-link" aria-expanded="{{!c.showMoreLink}}" data-ng-click="c.showMoreLink ? c.toggleKbTiles('more') : c.toggleKbTiles('less')">
+        <span class="show_more"  data-ng-if="c.showMoreLink">
+          <span class="sr-only">${Show All Knowledge Bases}</span>
+          <span aria-hidden="true">${Show All}&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></span>
+        </span>
+        <span class="show_less"  data-ng-if="!c.showMoreLink">
+          <span class="sr-only">${Show Less Knowledge Bases}</span>
+          <span aria-hidden="true">${Show Less}&nbsp;<i class="fa fa-minus" aria-hidden="true"></i></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+<style>
+  .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{
+    display: table;
+    margin: 0 auto;
+  }
+  .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-more{
+    display: block;
+    margin: 0 5rem;
+  }
+  /*---------------------------- */
+  .kb-browse-{{::c.data.instanceid}} .kb-tile-block {
+    padding: 0 1rem;
+    width:25rem;
+  }
+  .kb-browse-{{::c.data.instanceid}} .kb-tile-block-more {
+    padding: 0 1rem;
+    width:25%;
+  }
+  @media screen and (max-width: 1200px){
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{
+      margin: 0 5rem;
+      display: flex;
+      margin: 0 auto;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-more{
+      display: block;
+      margin: 0 15rem;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-2{
+      display: table;
+      margin: 0 auto;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-1{
+      display: table;
+      margin: 0 auto;
+    }
+    /*---------------------------- */
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {
+      padding: 0 1rem;
+      width:50%
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{
+      width:25rem;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{
+      width:25rem;
+    }
+  }
+  @media screen and (max-width: 798px){
+
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles{
+      display: table;
+      margin: 0 auto;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-3{
+      display: block;
+      margin: 0 auto;
+    }
+    /*---------------------------- */
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {
+      padding: 0 1rem;
+      width:50%;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{
+      width:25rem;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{
+      width:25rem;
+    }
+  }
+  @media screen and (max-width: 546px){
+
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-3{
+      display: block;
+      margin: 0 auto;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-2{
+      display: flex;
+      margin: 0 auto;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-browse-tiles-1{
+      display: table;
+      margin: 0 auto;
+    }
+    /*---------------------------- */
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block {
+      padding: 0 0.4rem;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-2{
+      width:50%;
+    }
+    .kb-browse-{{::c.data.instanceid}} .kb-tile-block-1{
+      width:25rem;
+    }
+  }
+
+
+</style>

@@ -1,0 +1,43 @@
+.question {
+  text-align: left;
+}
+
+.spacer {
+  display:inline-block;
+  width:5%;
+}
+
+.project-btn{
+  width: 96px;
+}
+
+.case-info{
+  padding-bottom:4px;
+}
+
+.case-action{
+  padding: 5px 0px 5px 0px;
+  text-align:center;
+}
+
+.case-short-decscripton{
+  width: 52%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.case-product-info{
+  width: 76%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.view-case{
+  cursor: pointer;
+}

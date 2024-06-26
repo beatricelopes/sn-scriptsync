@@ -1,0 +1,28 @@
+<div class="kb-fixed-facet-block hidden-xs hidden-sm hidden-md hidden-lg" ng-if="$root.facetSubscribed" ng-class="$root.showFacet ? 'show-FixedFacet' : '' " ng-keypress="c.onFixedFacetKeyPress($event)">
+  <div class="panel panel-{{::options.color}} fixed-facet-data-container">
+    <div class="panel-heading" ng-class="{'remove-bottom-border':!c.isLoading}">
+      <span class="clear-all">
+        <button class="clear-enable transparent-button" ng-if="$root.showFacet && !$root.showLanguageFacet" ng-show="c.clearAllEnable" ng-click="::c.clearAllFiters()">${Clear All}</button>
+        <button class="clear-disable transparent-button"ng-if="$root.showFacet && !$root.showLanguageFacet" ng-hide="c.clearAllEnable">${Clear All}</button>
+      </span>
+      <span class="panel-title articleCount" ng-class="$root.showLanguageFacet ? 'width-82' : '' ">
+        <span ng-click="::c.doneClick()" ng-bind="c.articleCount"></span>
+      </span>	
+      <!--kb-fixed-facet-done is used in giving focus in overlay window-->
+      <span class="doneCls">
+      	<button class="transparent-button kb-fixed-facet-done"  ng-click="::c.doneClick()">${Done}</button>
+      </span>
+    </div>
+  </div>
+</div>
+<style>
+  @media only screen and (max-width: 991px) {
+    .show-FixedFacet{
+      display : block !important;
+    }
+    .kb-fixed-facet-column {
+      padding-left : 0rem !important;
+      padding-right : 0rem !important;
+    }
+  }
+</style>

@@ -1,0 +1,18 @@
+<div class="kb-facet-filter-block">
+  <div class="facet-search" ng-if="items.length >c.options.min_result_count"><input name="facet-search" aria-label="${Filter} {{c.options.title}}" ng-model="c.query" type="text" class="form-control" placeholder="${Filter}" aria-invalid="false"></div>
+  <div class="facet-detail" ng-class="{'facet-scroll':c.items.length > c.options.min_scroll_count}" ng-if="c.items">
+    <div  class="facet-query-padding" ng-repeat="item in c.items | orderBy:'order':true">
+      <span ng-if="item.id">
+        <span class="hidden-xs hidden-sm">
+          <a href="javascript:void(0);" id={{item.id}} ng-click="c.rowClick(item)" ng-class="{'active':item.selected}">{{item.label}}</a>
+        </span>
+        <span class="visible-xs visible-sm" ng-click="c.rowClick(item)" >
+          <a href="javascript:void(0);" id={{item.id+'sm'}} ng-class="{'active':item.selected}">{{item.label}}</a>
+          <span class="check-icon" ng-show="item.selected">
+            <i class="fa fa-check float-left"  aria-hidden="true"></i>
+          </span>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>

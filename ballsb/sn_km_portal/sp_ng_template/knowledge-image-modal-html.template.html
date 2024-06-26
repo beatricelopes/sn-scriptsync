@@ -1,0 +1,90 @@
+<div id="knowledgeImageModal" class="knowledge-image-modal"
+     role="dialog"
+     aria-labelledby="modalImage"
+     aria-modal="true">
+   <div class="knowledge-modal-dialog">    
+    <button type="button" id="modal-close" class="close" ng-click="c.imgModalClose()" aria-label="${Close}" autofocus>
+      <i class="fa fa-close" aria-hidden="true"></i>
+     </button>
+     <img class="modal-content-img" id="modalImage"/>
+   </div>
+ </div>
+<style>
+   .modal-content{
+     background-color:transparent;
+
+    border: 0px solid rgba(0, 0, 0, 0);
+    box-shadow: none;
+   }
+   
+   
+    
+   .modal-dialog {
+     width: 80%;
+     max-width: 80%;
+     min-width: 18.5rem;
+     min-height: 10rem;
+     margin: auto;
+   }
+   .modal-content-img {
+     margin: auto;
+     display: block;
+     //max-height: 48rem;
+     max-width: 100%;
+     max-height: 100%;
+     //max-width: 70rem;
+     background-color: transparent;
+     box-shadow: 0;
+ 
+   }
+   .knowledge-image-modal{
+     background-color: transparent;
+     padding-top: 1rem;
+   }
+ 
+   .modal-content, #caption { 
+     animation-name: fadeIn;
+     animation-duration: 0.1s;
+   }
+ 
+   .close {
+     color: #fff;
+     font-size: 2.5rem;
+     transition: 0.3s;
+     opacity: unset;
+     margin-bottom:0.5rem;
+   }
+   .close:focus{
+     color: #fff;
+     font-size: 2.5rem;
+     transition: 0.3s;
+     opacity: unset;
+     outline: thin dotted;
+     outline: 0.4rem auto -webkit-focus-ring-color !important;
+     outline-offset: -0.2rem !important;
+   }
+ 
+   .close:hover {
+     color: #bbb;
+     text-decoration: none;
+     cursor: pointer;
+   }
+   
+   .knowledge-modal-dialog{
+     min-height:10rem;
+     min-width:18.5rem;
+   }
+ 
+   @media only screen and (max-width: 760px){
+     .modal-content {
+       width: 100%;
+     }
+   }
+ 
+   @keyframes zoom {
+     from {transform:scale(0)} 
+     to {transform:scale(1)}
+   }
+   
+   
+ </style>

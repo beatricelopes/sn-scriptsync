@@ -1,0 +1,8 @@
+<sp-panel ng-if="(c.options.always_show || $root.attachedIncidents.length) && ($root.properties.showAttachedTasks === 'true' || $root.properties.showAttachedTasks === true)">
+  <div role="list"  aria-label="{{c.options.title}}">
+    <div class="list-group-item row" ng-repeat="incident in ::$root.attachedIncidents" role="listitem">
+    	<a  href="{{::incident.URL}}&sysparm_stack={{::$root.stackUrl}}"><span><img src="images/icons/kb_task.gifx" alt="{{::incident.text}}" aria-hidden="true"/></span><span ng-bind="::incident.text"></span></a>
+    </div>
+  </div>
+  <div class="list-group-item" ng-if="!$root.attachedIncidents.length > 0" ng-bind="::$root.messages.NO_INCIDENTS"></div>
+</sp-panel>

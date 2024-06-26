@@ -1,0 +1,342 @@
+<div class="kb-article-wrapper">
+  <div ng-if="data.versionWarningMessage && c.options.show_version_info != 'false'" class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div ng-bind-html="data.versionWarningMessage">
+    </div>
+  </div>
+	<div ng-if="c.data.replacementArticleId" class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div ng-bind-html="c.data.replacementAlert">
+    </div>
+  </div>
+  <div ng-if="::data.isValid" ng-class="{'kb-mobile' : c.isMobile, 'panel panel-default kb-desktop' : !c.isMobile, 'mesp-ui' : c.data.isMESP}">
+    <div class="kb-panel-heading" ng-class="{'panel-heading' : !c.isMobile}">
+      <span ng-class="{'panel-title' : !c.isMobile}">
+        <div class="row">
+          <span class="col-md-5 kb-panel-title-header">
+            <div class="kb-number-info">
+              <span>{{data.number}}</span>
+              <span ng-if="!c.isMobile && !data.showHistory && data.workflowState">{{data.workflowState}}</span>
+              <span ng-if="data.isKBAdmin && data.isArticleExpired">${(Expired)}</span>
+              <span ng-if="!c.isMobile && data.showHistory && c.options.show_version_info != 'false'"> - 
+                <div class="dropdown inline" role="list">
+                  <button id="kbVersionButton" aria-expanded="{{!c.showVersions}}" class="btn btn-default kb-version dropdown-toggle kb-dropdown-button transparent-button" data-toggle="dropdown" ng-click="c.toggleVersions()" aria-label="{{data.versionInfoLabel}}"> {{data.versionInfo}}
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                  </button>
+              <span ng-if="!c.isMobile && data.workflowState">{{data.workflowState}}</span>
+                  
+                  <ul id="kbVersionMenuList" class="dropdown-menu dropdown-menu-left version-menu-list">
+                    <li class="kb-version" ng-repeat="version in data.versionList">
+                      <a ng-if="!version.isCurrent && data.viewAsUser.length == 0" href="?id=kb_article_view&sys_kb_id={{version.sysId}}" 
+                         aria-label="${{{version.versionLabel}} - {{version.versionText}}}">{{version.versionNumber}} - {{version.versionText}}</a>
+                      <a ng-if="!version.isCurrent && data.viewAsUser.length > 0" href="?id=kb_article_view&sys_kb_id={{version.sysId}}&view_as_user={{data.viewAsUser}}" 
+                         aria-label="${{{version.versionLabel}} - {{version.versionText}}}">{{version.versionNumber}} - {{version.versionText}}</a>
+                      <span ng-if="version.isCurrent"><b>{{version.versionNumber}} - {{version.versionText}}</b></span>
+                    </li>
+                  </ul>
+                </div>
+			  </span>
+            </div>
+          </span>
+          <div ng-if="!c.isMobile && !$root.hideFeedbackOptions && c.options.hide_all_actions != 'true'" class="col-md-7 kb-end-buttons">
+            <div class="dropdown kb-end-buttons">
+              <span class="pull-left">
+                <sp-widget widget="data.favoriteWidget"></sp-widget>
+              </span>
+              <span class="hidden-sm hidden-xs" ng-if="!data.externalArticle">
+                <button ng-mouseover="c.handleSubscribeButtonFocus()"
+                   ng-if="data.properties.isSubscriptionEnabled"
+                   ng-mouseleave="c.handleSubscribeButtonBlur()"
+                   ng-focus="c.handleSubscribeButtonFocus()"
+                   ng-blur="c.handleSubscribeButtonBlur()"
+                   class="btn btn-default kb-subscribe kb-sub-icon apply-brand-color" ng-click="c.handleSubscription()">
+                    {{data.subscribeLabel}}
+                </button>
+              </span>
+              <button ng-if="c.showAttachArticle()" class="btn btn-default" type="button" ng-click="c.attachToTask()" aria-label="{{::data.messages.ATTACH_TO_TASK_LABEL}}">{{::data.messages.ATTACH_TO_TASK_LABEL}}</button>
+              <button id="actionMenuLabel" ng-if="c.showActionMenu() && !$root.readOnly" 
+                      class="btn btn-default dropdown-toggle kb-dropdown-button more-actions-menu apply-brand-color" type="button" data-toggle="dropdown" aria-label="{{::data.messages.ACTION_MENU}}">
+                {{::data.messages.ACTION_MENU_LABEL}}
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+              </button>
+              <ul id="kbActionMenuList" class="dropdown-menu dropdown-menu-right moreActionsMenuList">
+                <li class="kb-menu-entry hidden-md hidden-lg visible-sm visible-xs" ng-if="data.properties.isSubscriptionEnabled && !data.externalArticle">
+                  <a ng-mouseover="c.handleSubscribeButtonFocus()"
+                     ng-if="data.properties.isSubscriptionEnabled && c.options.hide_subscription != 'true'"
+                     ng-mouseleave="c.handleSubscribeButtonBlur()"
+                     ng-focus="c.handleSubscribeButtonFocus()"
+                     ng-blur="c.handleSubscribeButtonBlur()"
+                     href="javascript:void(6)"
+                     ng-click="c.handleSubscription()">
+                    <span  class="kb-sub-icon" aria-label="{{data.subscribeLabel}}">
+                      {{data.subscribeLabel}}
+                    </span>
+                  </a>
+                </li>
+                <li class="kb-menu-entry" ng-if="c.showFlagArticle"><a id="flagArticleButton" href="javascript:void(1)" data-toggle="modal" ng-click="c.launchFlagModal($event)">{{data.messages.FLAG_ARTICLE}}</a></li>
+                <li class="kb-menu-entry" ng-if="c.showCreateIncident"><a target="_blank" href="{{c.createIncidentURL}}">{{c.createIncidentLabel}}</a></li>
+                <li class="kb-menu-entry" ng-if="data.properties.isEditable" ><a target="_blank" href="{{c.editUrl}}">{{data.messages.EDIT}}</a></li>
+								<li class="kb-menu-entry" ng-if="data.kbDocSysId"><a target="_blank" href="sys_attachment.do?sys_id={{data.kbDocSysId}}">{{data.messages.DOWNLOAD_DOCUMENT}}</a></li>
+              </ul>
+            </div>
+            <!-- Flag article modal -->
+          </div>
+        </div>
+      </span>
+    </div>
+    <div class="kb-wrapper" ng-class="c.isMobile ? 'kb-mobile' : 'panel-body kb-desktop'">
+      <h1 lang="{{c.selectedLanguage.language}}" class="widget-header kb-title-header">{{::data.shortDesc}}</h1>
+      <div class="kb-language-block pad-right text-nowrap" ng-if="data.langList.length > 1" ng-cloak>
+        <div class="kb-language">
+          <div class="dropdown">
+            <button class="dropdown-toggle transparent-button trim-padding-right kb-lang-dropdown-btn" aria-label="${Language: {{c.selectedLanguage.label}}}. Select to choose other available languages to view this article." aria-haspopup="true" data-toggle="dropdown">
+              <span class="lang-icon" aria-hidden="true"><i class="fa fa-globe"></i></span>
+              <span lang="{{c.selectedLanguage.language}}" class="lang-data" ng-class="{'hidden-xs':!c.isMobile}">${{{c.selectedLanguage.label}}}</span>
+            </button>
+            <ul class="dropdown-menu dd-right-menu" role="list">
+              <li ng-repeat="item in data.langList" role="listitem">
+                 <a lang="{{c.selectedLanguage.language}}" ng-click="c.selectLanguage($index)" href="javascript:void(1)" role="menuitem">${{{item.label}}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="title-secondary-data">
+        <span ng-if="!c.isMobile" class="sr-only">${Article metadata.}</span>
+        <span ng-if="data.revisionString" class="author pad-right text-nowrap">
+          <span ng-if="!c.isMobile && data.langList.length > 1" class="pad-right" aria-hidden="true">&#8226;</span>
+          <i class="fa fa-user pad-right" aria-hidden="true"/>
+          {{data.revisionString}}
+        </span>
+        <span ng-if="!c.isMobile && data.externalArticle" class="pad-right text-nowrap">
+          {{data.messages.EXTERNAL_CONTENT}}
+        </span>
+        <br class="visible-xs" aria-hidden="true"/>
+        <div class="published published-date pad-right text-nowrap">
+          <span class="sr-only">${This article was updated}</span>
+          <span class="pad-right hidden-xs" ng-if="!c.isMobile" aria-hidden="true">&#8226;</span> <i class="fa fa-calendar pad-right" aria-hidden="true"/>
+          <sn-time-ago timestamp="data.sys_updated_on"/>
+        </div>
+        <span ng-if="data.viewCount == 1" class="views pad-right text-nowrap">
+          <span class="sr-only">${This article has {{::data.viewCount}} view.}</span>
+          <span class="pad-right" aria-hidden="true">&#8226;</span> <i class="fa fa-eye pad-right" aria-hidden="true"/>
+          <span aria-hidden="true">${{{::data.viewCount}} View}</span>
+        </span>
+        <span ng-if="data.viewCount > 1" class="views pad-right text-nowrap">
+          <span class="sr-only">${This article has {{::data.viewCount}} views.}</span>
+          <span class="pad-right" aria-hidden="true">&#8226;</span> <i class="fa fa-eye pad-right" aria-hidden="true"/>
+          <span aria-hidden="true">${{{::data.viewCount}} Views}</span>
+        </span>
+        <span class="text-nowrap str-rating" ng-if="data.properties.showKBStarRating && data.properties.showKBRatingOptions && data.avgRating >= 0">
+          <span class="sr-only">${This article has average rating: {{::data.avgRating}} out of 5 stars}</span>
+          <span class="pad-right" aria-hidden="true">&#8226;</span> 
+          <span class="kb-rating-stars" ng-if="::c.KBRatingStyle" aria-hidden="true">
+            <uib-rating sp-rating ng-model="::data.avgRating" max="5" aria-label="{{::data.messages.ARTICLE_RATING}}" readonly="true"/>
+          </span>
+          <span class="sp-stars" ng-if="!c.KBRatingStyle" aria-hidden="true">
+            <span uib-rating sp-rating ng-model="::data.avgRating" max="5" readonly="true" aria-label="{{::data.messages.ARTICLE_RATING}}" state-on="'fa fa-star kb-star-on'" state-off="'fa fa-star kb-star-off'" />
+        </span>
+      </span>
+      </div>
+      <div class="row community-attribution" ng-if="!c.isMobile && data.hInfo">
+        <div class="contributor pad-right" ng-if="data.hInfo.contributor && data.hInfo.contributor.userId">
+          <i class="fa fa-globe" aria-hidden="true"></i>
+          <span class="pad-lr pad-right" ng-bind-html="data.hInfo.profileMessage"></span>
+          <span class="discussion-published pad-right pre-bullet-icon text-nowrap" ng-if="data.hInfo.postedOn">
+            ${Posted}<sn-day-ago date="data.hInfo.postedOn"/>
+          </span>
+          <span class="discussion-link pad-right pre-bullet-icon text-nowrap" ng-if="data.hInfo.title">
+            <a href="?id=community_question&sys_id={{data.hInfo.sourceRoot}}" target="_blank_cm1">${Link to Discussion}</a>
+          </span>
+        </div>
+      </div>
+      <div ng-if="c.isMobile && !c.isAgentApp && c.options.hide_all_actions != 'true'" class="kb-favorite" ng-click="toggleFavorite($event)">
+              <sp-widget widget="data.favoriteWidget"></sp-widget>
+              <span ng-if = "showFavorite">
+                <span class="favorite-text" ng-if="isFavorite === true">${Favorited}</span>
+                <span class="favorite-text" ng-if="isFavorite === false">${Favorite}</span>
+        	  </span>
+      </div>
+      <hr class="kb-header-line" aria-hidden="true"/>
+      <article lang="{{c.selectedLanguage.language}}" class="kb-article-content" ng-if="::data.articleType != 'wiki'">
+        <section ng-if="::!c.data.kbContentData.isTemplate" ng-bind-html="::c.data.kbContentData.data" ng-class="{'word-addin-mobile' : c.data.wordOnlineUrl && c.data.wordOnlineUrl.length>0}"/>
+        <section ng-if="::c.data.kbContentData.isTemplate" ng-repeat="field in c.data.kbContentData.data track by $index" ng-attr-style="{{field.field_style}}">
+          <h3 ng-if="::!field.collapsible" ng-attr-style="{{field.heading_style}}">{{field.label}}</h3>
+          <header class="collapsible-title" ng-if="::field.collapsible">
+            <h3 ng-attr-style="{{::field.heading_style}}">
+              <button aria-expanded="{{!field.collapsed}}"
+                      aria-controls="{{::field.column}}"
+                      class="transparent-button accordion-trigger"
+                      ng-click="c.toggleSection(field)">    
+                        {{field.label}}
+                        <i class="fa fa-chevron-up rotate" ng-class="{'down': field.collapsed}" aria-hidden="true"/>
+              </button> 
+             </h3>
+          </header>
+          <p id="{{::field.column}}" ng-if="::field.type != 'html' && field.collapsed" style="display:none;">{{field.content}}</p>
+          <p id="{{::field.column}}" ng-if="::field.type != 'html' && !field.collapsed">{{field.content}}</p>
+          <section id="{{::field.column}}" ng-if="::field.type == 'html' && field.collapsed" style="display:none;" ng-bind-html="::field.content"/>
+          <section id="{{::field.column}}" ng-if="::field.type == 'html' && !field.collapsed" ng-bind-html="::field.content"/>
+        </section>
+      </article>
+      <article lang="{{c.selectedLanguage.language}}" class="kb-article-content" ng-if="::data.articleType == 'wiki'" ng-bind-html="::data.kbWiki"></article>
+      <hr class="kb-permalink-separator" ng-if="::!c.isMobile" aria-hidden="true"/>
+      <p class="pull-right kb-permalink" ng-if="::!c.isMobile">
+        <button class="transparent-button" ng-click="c.copyPermalink()">{{::data.messages.COPY_PERMALINK}}</button>
+      </p>
+    </div>
+  </div>
+  <div ng-if="!data.isValid && !data.knowledgeExists" class="col-sm-12 panel-danger panel-message-position">
+    <div class="panel-heading">{{data.messages.RECORD_NOT_FOUND}}</div>
+  </div>
+  <div ng-if="!data.isValid && data.knowledgeExists && !data.isArticleExpired" class="col-sm-12 panel-warning panel-message-position">
+    <div class="panel-heading kb-font-color-black">{{data.messages.INSUFFICIENT_PREVILEGES}}</div>
+  </div>
+  <div ng-if="!data.isKBAdmin && data.isArticleExpired" class="col-sm-12 panel-warning panel-message-position">
+    <div class="panel-heading kb-font-color-black">{{data.messages.ARTICLE_EXPIRED}}</div>
+  </div>
+</div>
+<style>
+  #uiNotificationContainer{
+    top : 10px;
+  }
+  .kb-article-wrapper .kb-desktop .kb-panel-title-header{
+    padding-left: 25px;
+  }
+  .kb-article-wrapper .app-modal-window .modal-dialog {
+    margin-top: 110px;
+  }
+  .kb-article-wrapper .kb-mobile{
+    letter-spacing: .6px;
+  }
+  .kb-article-wrapper .kb-mobile .title-secondary-data{
+    word-spacing:1px;
+  }
+  .kb-article-wrapper .kb-mobile .author{
+    margin-bottom: 17px;
+  }
+  .kb-article-content dl {
+    margin-top: .2em;
+    margin-bottom: .5em;
+  }
+  .kb-article-content dd { 
+    line-height: 1.5em;
+    margin-left: 2em;
+    margin-bottom: .1em;
+  }
+  @media only screen and (max-width :992px){
+    .kb-article-wrapper .kb-desktop{
+      margin-top:15px;
+    }
+    .kb-article-wrapper .kb-wrapper{
+      padding : 10px !important;
+    }
+    .kb-article-wrapper .kb-menu-entry{
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+    .kb-article-wrapper .kb-version-info{
+      margin-top : 5px !important;
+    }
+    .kb-article-wrapper .kb-desktop .kb-number-info{
+      margin-top : 6px !important;
+      padding-left: 10px;
+    }
+    .kb-article-wrapper .kb-mobile .kb-panel-title-header{
+      padding-left: 16px;
+    }
+    .kb-article-wrapper .kb-desktop .kb-panel-title-header{
+      padding-left: 0px;
+    }
+  }
+  @media only screen and (max-width :768px){
+    .kb-article-wrapper .right-col-padding{
+      padding-left : 25px !important;
+    }
+  }
+  @media only screen and (max-width: 750px) {
+    .kb-article-wrapper .kb-mobile .author{
+      margin-bottom: 0px;
+    }
+  }
+  @media only screen and (min-width: 992px) {
+    .kb-article-wrapper .app-modal-window .modal-dialog {
+      width: 750px;
+    }
+    .kb-article-wrapper .control-label{
+      float :right;
+    }
+    .kb-article-wrapper .left-col-padding{
+      padding-right : 30px !important;
+    }
+    .kb-article-wrapper .right-col-padding{
+      padding-left : 5px !important;
+    }
+  }
+  @media only screen and (min-width:768px) and (max-width: 992px) {
+    .kb-article-wrapper .app-modal-window .modal-dialog {
+      width: 600px;
+    }
+    .kb-article-wrapper .control-label{
+      float :right;
+    }
+    .kb-article-wrapper .left-col-padding{
+      padding-right : 5px !important;
+    }
+    .kb-article-wrapper .right-col-padding{
+      padding-left : 5px !important;
+    }  
+    .panel-message-position
+    {
+	  float: none; 
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    .pad-right{
+      padding-right:0px !important;
+    }
+  }
+
+  @media only screen and (max-width: 376px) {
+    .kb-article-wrapper .kb-mobile{
+      letter-spacing: 0px;
+    }
+    .kb-article-wrapper .kb-mobile .title-secondary-data{
+      word-spacing:0px;
+    }
+    .kb-article-wrapper .kb-mobile .title-secondary-data .str-rating{
+      margin-top: 17px;
+      display: block;
+    }
+    .kb-article-wrapper .kb-mobile .title-secondary-data .str-rating .pad-right{
+      display: none;
+    }
+  }
+  /*Versions dropdown screen width adjustment*/
+  @media only screen and (min-width: 500px) {
+     .version-menu-list li,.version-menu-list{
+         font-size: 14px !important;
+         margin: auto;
+         min-width: 410px !important;
+    }
+     .version-menu-list li a,.version-menu-list li span{
+         display:block;
+         padding: 3px 10px !important;
+         white-space: normal !important;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+     .version-menu-list li,.version-menu-list{
+         font-size: 14px !important;
+         margin: auto;
+         min-width: 200px !important;
+         width:100% !important;
+    }
+     .version-menu-list li a, .version-menu-list li span{
+         display:block;
+         padding: 3px 10px !important;
+         white-space: normal !important;
+    }
+  }
+}
+</style>

@@ -1,0 +1,33 @@
+section.page{
+  padding-top: 0;
+}main.body {
+  padding-top: 0;
+}
+.kb-home-explorer-continer{
+ background-color:#ffffff;
+  margin-bottom:20px;
+}
+.banner-container {
+    height: 230px;
+  	width: 100%;
+}
+.v-h-center {
+    display: table-cell;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+.search-container{
+  padding-top: 3.7rem;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 992px) {
+  .banner-container {
+    height: 85px;
+  }
+  .search-container{
+    padding-top: 0.1rem;
+  }
+}

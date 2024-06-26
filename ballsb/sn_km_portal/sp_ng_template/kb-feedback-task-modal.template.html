@@ -1,0 +1,119 @@
+<div class="feedback-modal" ng-class="c.isMobile ? 'kb-mobile' : 'panel panel-default kb-desktop'" role="dialog" aria-label="${Feedback}" aria-modal="true" aria-describedby="feedbackDesc">
+  <div class="modal-header">
+    <h2 id="flagTitle" class="modal-title h4">{{data.messages.THANKYOU_FEEDBACK}}</h2>
+    <button type="button" class="close" data-dismiss="modal" ng-click="c.closeTaskPopup($event)" aria-label="{{data.messages.CLOSE}}" ><i class="fa fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="row row-div row-bottom-padding">
+      <span id="feedbackDesc">{{data.messages.ADDTIONAL_DETAILS}}</span>
+    </div>
+    <div class="row row-div">
+      <div class="type-multiple_choice">
+        <fieldset class="radio ng-scope" id="radioBtnGrp" role="radiogroup">
+          <legend  aria-label="Please select your reason">{{data.messages.REASON}}</legend>
+          <label ng-repeat="res in c.reasons" for="kb_reason_{{$index}}" class="modal-radio" ng-keydown="c.selectReason($event, this)">
+            <div class="inline">
+              <input type="radio" aria-checked="{{res.reason_id == c.data.reason}}" name="reason" ng-model="::data.reason" id="kb_reason_{{$index}}" value="{{res.reason_id}}" />
+              <span></span>
+            </div>
+            <div class="inline reason-label">
+              {{res.reason_desc}}
+            </div>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row row-div">
+      <label for="detailsComment">{{data.messages.DETAILS}}</label>
+      <textarea placeholder="{{data.messages.Details}}" ng-model="::data.details" class="form-control resize" rows="3" id="detailsComment"></textarea>
+    </div>
+    <div role="alert" aria-live="assertive" class="alert-danger" ng-shown="!c.flagMessage">{{c.flagMessage}}</div>
+    <div class="row button-div">
+      <button type="button" class="btn btn-default btn-pad" data-dismiss="modal" ng-click="c.closePopup()" aria-label="{{data.messages.NO_THANKS}}">{{data.messages.NO_THANKS}}</button>
+      <button type="button" ng-disabled="!data.reason" class="btn btn-primary " aria-label="{{data.messages.SUBMIT}}" id="feedbackTask_submitBtn" data-dismiss="modal" ng-click="c.submitFeedbackTask()">{{data.messages.SUBMIT}}</button>
+    </div>
+  </div>
+</div>
+<style>
+  .feedback-modal .modal-radio {
+    display: block;
+    padding-bottom : 0.5rem;
+  }
+  .feedback-modal .modal-radio .reason-label{
+    margin-top: 0.4rem;
+  }
+  .feedback-modal .row-bottom-padding{
+    padding-bottom :0.8rem;
+  }
+  .feedback-modal .resize{
+    resize: vertical;
+  }
+  .modal-header h2{
+    display: inline;
+  }
+  /*Mobile related*/
+  .feedback-modal.kb-mobile.modal-header {
+    padding:1.25rem 1.69rem !important;
+  }
+  .feedback-modal.kb-mobile .row-div{
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .feedback-modal.kb-mobile .button-div{
+    padding:1.25rem;
+  }
+  
+  .feedback-modal.kb-mobile .button-div .btn{
+    width:49%;
+  }
+  
+  .feedback-modal.kb-mobile .type-multiple_choice input[type="radio"]{
+    margin-top: -0.66rem !important; 
+  }
+  .feedback-modal.kb-mobile .type-multiple_choice .modal-radio{
+    margin-bottom: 0.31px !important; 
+  }
+  .feedback-modal.kb-mobile .type-multiple_choice span{
+    position: relative !important;
+    padding-top: 0px !important;
+  }
+  .feedback-modal.kb-mobile .type-multiple_choice span:after{
+    top:0.6875rem !important;
+    left:-1.32rem !important;
+  }
+  /*Desktop*/
+  .feedback-modal.kb-desktop .button-div .btn-pad{
+    margin-right: 0.6rem;
+  }
+  .feedback-modal.kb-desktop .button-div .btn{
+    width:auto;
+  }
+  .feedback-modal.kb-desktop .row-div{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .feedback-modal.kb-desktop .type-multiple_choice input[type="radio"]{
+    margin-top: -1.05rem !important; 
+  }
+  .feedback-modal.kb-desktop .type-multiple_choice .modal-radio{
+    margin-bottom: 0.5rem !important; 
+  }
+  .feedback-modal.kb-desktop .type-multiple_choice span{
+    position: relative !important;
+    padding-top: 0px !important;
+  }
+  .feedback-modal.kb-desktop .type-multiple_choice span:after{
+    top:1rem !important;
+    left:-2.1rem !important;
+  }
+  .feedback-modal.kb-desktop .button-div{
+    padding-top: 1.5rem;
+    padding-right: 2rem;
+    text-align:right;
+  }
+  @media screen and (max-width: 760px){
+    .modal-dialog {
+      margin-top: 0px !important;
+    }
+  }
+</style>

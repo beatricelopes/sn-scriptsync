@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title">${Warning}</h4>
+</div>
+<div class="modal-body">
+  <div class="warn-msg">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <div class="msg-text"><span ng-bind-html="c.modalMessage" /></div>
+  </div>
+  <div class="btn-container">
+    <div class="action-btn pull-right">
+      <button type="button" class="btn btn-default" data-ng-click="c.cancel()">${Cancel}</button>
+      <button type="submit" class="btn btn-danger" 
+              data-ng-click="c.action(c.data.table, c.data.sys_id, '3', 'close')">${Close Case}</button>
+    </div>
+  </div>
+</div>
+<style>
+ .modal-body, .modal-header {
+    padding: 20px;
+  }
+  .modal-header .modal-title {
+    line-height: 21px;
+    font-weight: normal;
+  }
+  .modal-body .warn-msg .fa {
+    font-size: 40px;
+    margin-right: 20px;
+    margin-top: 5px;
+    float: left;
+  }
+  .modal-body .warn-msg .msg-text {
+    display: inline-block;
+    width: calc(100% - 60px);
+    line-height: 23px;
+  }
+  .modal-body .btn-container{
+    overflow: hidden;
+    padding-top: 15px;
+  }
+  .modal-body .btn-container button:not(:last-of-type){
+    margin-right: 10px;
+  }
+</style>

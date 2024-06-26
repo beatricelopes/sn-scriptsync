@@ -1,0 +1,799 @@
+<div class="kb-comment-wrapper" ng-if="!$root.hideFeedbackOptions && $root.isValid && !$root.readOnly" ng-class="{'grey-back' : c.isMESP, 'kb-mobile' : c.isMobile ,'kb-desktop' : !c.isMobile}" role="region" aria-label="{{$root.messages.COMMENTS}}">
+
+  <div class="show-comments" ng-if="c.showComments">
+    <div class="create-comment" ng-class="{'create-comment-mobile-not-mesp': !c.isMESP && c.isMobile}">
+      <span ng-show = "!c.showMainCommentBox" class="image50px">
+        <span class="inline">
+          <a ng-if="c.isLoggedInUser" ng-href="/{{::c.suffix}}?id=user_profile&sys_id={{::c.user.sys_id}}" title="{{::c.user.name}}" aria-label="${{{::c.user.name}} profile}">
+            <sn-avatar ng-show = "!c.showMainCommentBox" primary="c.user" show-presence="false"></sn-avatar>
+          </a>
+        </span>
+        <span ng-if="!c.isLoggedInUser" class="inline">
+          <sn-avatar primary="c.user" show-presence="false"></sn-avatar>
+        </span>
+        <span class="inline">
+          <button class="comment-text comments-button" role="button" ng-click="c.showMainCommentBoxFn()">${Post a comment}...</button>
+        </span>
+      </span>
+      <div ng-if = "c.showMainCommentBox && c.showMobCommentBox" ng-class="c.isLoggedInUser ? 'login-user' : 'public-user'">
+        <div class="comment-info"><h2 ng-if="c.isMESP" class="comment-count">{{$root.messages.COMMENTS}}</h2></div>
+        <sp-tinymce-editor auto-focus="true" ng-if="!c.isMESP" attachment-guid = "-1" field="c.commentsField"  record-table-name="'kb_feedback_tmce'" aria-label="{{c.commentsPrompt}}" ng-model-options="{}" ng-model="c.commentText" class="kb-comment-input" id="comment"></sp-tinymce-editor>
+        <textarea ng-if="c.isMESP" tabindex="0" aria-label="{{c.commentsPrompt}}" ng-model="c.commentText" ng-keyup="c.updateCommentFromInput($event)" class="form-control kb-comment-input textarea" id="comment" rows="3"></textarea>
+        <div class="cm-btns clearfix global">
+          <hr class="kb-line visible-xs" ng-if="!c.isMobile" aria-hidden="true"/>
+          <div class="kb-attachment-btn" ng-if="!c.isMobile">
+            <button ng-if="!c.isMobile && c.maxFiles>0 && c.isLoggedInUser" 
+                    ng-click="c.openAttachmentsModal()"
+                    class="cm-attachments comments-button green" id="attachments_button">
+              <i class="fa fa-paperclip fa-rotate-90 " aria-hidden="true"></i>
+              <span ng-if="c.selectedFiles.length == 0"> {{::c.messages.ADD_ATTACHMENTS}}</span>
+              <span ng-if="c.selectedFiles.length  > 0"> {{::c.messages.ATTACHMENTS}} ({{c.selectedFiles.length}})</span>
+            </button>
+          </div>
+          <hr class="kb-line show-for-mobile" ng-if="!c.isMobile" aria-hidden="true"/>
+          <div class="kb-input-button no-pad">
+            <div class="comment-buttons">
+              <div class="kb-inline cancel-no-margin pad-right cancel" ng-class="{'cancel kb-cancel-button':c.isMobile}">
+                <button id="cancel" ng-click="c.closeAllEditors('comment')" ng-disabled="c.isMESP && !c.hasCommentText()" class="btn btn-default comments-submit kb-end-button" ng-bind="::$root.messages.CANCEL"></button>
+              </div>
+              <div class="kb-inline submit">
+                <button id="submit" ng-click="c.submitComment()" ng-disabled="c.isMESP && !c.hasCommentText()" class="btn btn-primary comments-submit kb-end-button" ng-bind="::$root.messages.SUBMIT"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-comments-header" ng-if="!(c.isMobile && c.isMESP) && c.comments.length > 0">
+      <span class="kb-head"><h2 id="commentsRegion" role="heading" aria-level="2" >{{$root.messages.COMMENTS}}</h2>
+        <span style="font-size:1.4rem" class="hidden-xs" ng-show="c.latestComment">
+          (${Latest comment}
+          <span class="text-muted" ng-if="!c.latestComment.created_on || c.justNow" ng-bind="::$root.messages.JUST_NOW"></span>
+          <sn-time-ago class="text-muted" ng-if="c.latestComment.created_on && !c.justNow" timestamp = "c.latestComment.created_on"></sn-time-ago> ${by}
+          <a  ng-if="c.isLoggedInUser "  ng-href="/{{c.suffix}}?id=user_profile&sys_id={{c.latestComment.user.sys_id}}" title="{{c.latestComment.user.name}}">
+            {{c.latestComment.user.name}})
+          </a >
+          <span class="green" ng-if="!c.isLoggedInUser">{{c.latestComment.user.name}})</span>
+        </span>
+      </span>
+
+      <button ng-if="c.hasChildren()"
+        class="btn show-all-btn pull-right ng-scope all-replies"
+        ng-class="{'btn-default':!c.showAllComments,'btn-primary':c.showAllComments}"
+        aria-expanded="{{c.showAllComments}}"
+        ng-click="c.toggleAllComments()">
+        <span >${All Replies}
+        	<i ng-if="!c.showAllComments" class="fa fa-chevron-down" aria-hidden="true"></i>
+         	<i ng-if="c.showAllComments" class="fa fa-chevron-up" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+
+    <div ng-if="c.comments" role="list" aria-label="${comments}">
+        <div class="parent" ng-repeat="feedback in c.comments | limitTo: c.commentsToDisplay" data-ng-include='"knowledge-comment-template.html"' role="listitem" aria-label="${{{feedback.user.name}} comment}"></div>
+    </div>    
+    <div class="show-more-btn" id="showmore" ng-if="c.comments.length > c.commentsToDisplay" >
+      <button class="btn btn-default ng-scope" ng-click="c.showMoreComments()" ng-keypress="c.showMoreComments()">
+        ${Show More}
+      </button>
+    </div>
+  </div>
+  <knowledge-icons></knowledge-icons>
+
+</div>
+
+
+<script type="text/ng-template" id="kmImageModal">
+  <div id="knowledgeImageModal" class="knowledge-image-modal" role="dialog" aria-labelledby="modalImage" aria-modal="true"> 
+    <div class="knowledge-modal-dialog">
+      <button type="button" id="modal-close" class="close" ng-click="c.closeModal()" aria-label="${Close}" autofocus="true">
+        <i class="fa fa-close" aria-hidden="true"></i>
+  </button>
+      <img class="modal-content-img" id="modalImage" aria-label = "${image}" alt="${image}"/>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="kmLikesModal">
+<div class="km-likes-modal" role="dialog" aria-labelledby="diagtitle" aria-modal="true">
+  <div class="feedback-modal">
+    <div class="modal-header">
+       <h4 class="modal-title" id="diagtitle">
+        ${Liked By} ({{c.likes.length}})
+       </h4>
+      <button class="pull-right comments-button" ng-click="c.closeModal()" aria-label="${Close}" autofocus="true">
+          <i class="fa fa-times close"></i>
+        </button>
+  	</div>
+    <div class="modal-body">
+      <div data-ng-repeat="member in c.likes" class="member">
+        <div class="image50px float-left">
+          <a ng-if="::c.isLoggedInUser" ng-href="/{{::c.suffix}}?id=user_profile&sys_id={{::member.user.sys_id}}">
+
+            <sn-avatar primary="member.user" show-presence="false" aria-hidden="true"></sn-avatar>
+            <span class="user-info">{{member.user.name}} <span class="sr-only">${profile}</span></span>
+  				</a>
+          <span ng-if="!c.isLoggedInUser">
+            <sn-avatar primary="member.user" show-presence="false" aria-hidden="true"></sn-avatar>
+           	<span class="user-info green" >{{member.user.name}}<span class="sr-only">${profile}</span>
+  				</span>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+ </div>
+</script>
+
+
+<script type="text/ng-template" id="kmDeleteModal">
+<div class="km-delete-modal" role="dialog" aria-labelledby="warnTitle" aria-modal="true" aria-describedby="msgText">
+  <div class="modal-header">
+    <h4 class="modal-title" id="warnTitle">${Warning}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="warn-msg">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+      <div class="msg-text" id="msgText">{{c.modalMessage}}</div>
+  </div>
+
+    <div class="btn-container">
+      <div class="action-btn pull-right">
+        <button type="cancel" class="btn btn-default" data-ng-click="c.closeModal()" autofocus="true">${Cancel}</button>
+        <button type="submit" class="btn btn-danger" data-ng-click="c.deleteComment(c.currentComment)">${Delete}</button>
+  </div>
+  </div>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="kmAttachmentsList">
+<div class="attachment-list-modal" role="dialog" aria-labelledby="attachTitle" aria-modal="true">
+  <div class="modal-header attachment-modal-header" >
+   <h4 class="modal-title" id="attachTitle">
+      {{::$root.messages.ATTACHMENTS}}
+  </h4>
+   <button class="pull-right comments-button" ng-click="c.closeModal()" autofocus="true" aria-label="${Close}"> 
+        <i class="btn fa fa-times close"></i>
+   </button>
+    
+  </div>
+  <div class="modal-body attachment-modal-body" style="padding:0rem" id="attachment_body">
+    <div ng-repeat="file in c.attachmentsList" class="att-main-content">
+      <span class="att-main" style="opacity: .6;" ng-if="file.state == 'not_available'">
+        <div class="att-body-div">
+          <km-icon class="file-icon" fname="file.err"></km-icon>
+          <div class="att-body">
+            <span class="att-content">{{file.file_name}} </span>
+            <span class="att-content text-muted">${File unavailable}</span>
+          </div>
+        </div>
+      </span>
+      <span class="att-main"  ng-if="file.state != 'not_available' && !c.isMobile">
+				<div class="att-body-div">
+					<km-icon class="file-icon" fname="{{file.file_name}}" aria-hidden="true"></km-icon>
+						<div class="att-body" aria-hidden="true">
+							<span class="att-content">{{file.file_name}} </span>
+							<span class="att-content text-muted">{{file.size/1024 | number:2}}K</span>
+  					</div>
+  			</div>
+				<a class="btn btn-default action-btn" target="_blank" ng-href="sys_attachment.do?sys_id={{file.sys_id}}" aria-label="${Download attachment}  {{file.file_name}} ">${Download}</a>
+			</span>	
+			<span class="att-main"  ng-if="file.state != 'not_available' && c.isMobile">
+      		<div class="att-body-div">
+					<a class="att-body-div" target="_blank" ng-href="sys_attachment.do?sys_id={{file.sys_id}}">
+          	<km-icon class="file-icon" fname="{{file.file_name}}" aria-hidden="true"></km-icon>
+            	<div class="att-body">
+              	<span class="att-content">{{file.file_name}} </span>
+                <span class="att-content text-muted">{{file.size/1024 | number:2}}K</span>
+  						</div>
+  				</a>
+       		</div>
+       	</span>
+  	</div>
+  </div>
+  <div class="modal-footer attachment-modal-footer" ng-if="!c.isMobile">
+    <div class="pull-right">
+      <button class="btn btn-primary action-btn" data-ng-click="c.downloadAll(c.attachmentsList)" id="downloadAll">${Download All}</button>
+  </div>
+</div>
+
+</div>
+</script>
+
+<script type="text/ng-template" id="kmAttachmentsEditor">
+<div class="attachment-edit-modal" role="dialog" aria-labelledby="attachTitle" aria-modal="true">
+  <div class="modal-header attachment-modal-header" >
+     <h4 class="modal-title" id="attachTitle">
+        {{::$root.messages.ATTACHMENTS}}
+     </h4>
+     <button class="pull-right comments-button" ng-click="c.cancelAttachments()" autofocus="true" aria-label="${Close button}">
+	     <i class="btn fa fa-times close"></i>
+     </button>   
+  </div>
+  <div class="modal-body attachment-modal-body" style="padding:0rem">
+     <div class="alert alert-danger alert-{{c.messageType}} km-alert-inform clearfix err-msg}" data-ng-if="c.showErrorMsg">
+        <div class="alert-icon pull-left" aria-hidden="true">
+           <i class="fa {{c.messageType == 'info'? 'fa-info-circle' : 'fa-exclamation-circle'}}"></i>
+        </div>
+        <div class="alert-text pull-left" id="error_msg" role="status" aria-live="polite">
+           <span>{{c.errorMessage}}</span>
+        </div>
+        <span class="alert-close pull-right">
+        <i class="fa fa-times pull-right" data-ng-click="c.closeErrorMessage()" aria-label="${Close message}" id="error_close" tabindex="0"></i>
+        </span>
+     </div>
+     <a href="javascript:void(0)" ng-disabled="!c.moreFilesAllowed()" data-ng-click="c.openSelector($event)" data-drop-enabled="c.moreFilesAllowed()" 
+        class="files-drop text-muted " ng-file-drop="c.filesSelected($files)" ng-disabled="!c.moreFilesAllowed()" ng-multiple="true"  ondragover="this.classList = ['files-drop files-drop-dragover']"  
+        ondrop="this.classList = ['files-drop']" ondragleave="this.classList = ['files-drop']" aria-describedby="fileInstructions">
+       <i class="fa fa-paperclip fa-rotate-270 paper-icon"></i>
+       <span class="drop-text" ng-if="c.moreFilesAllowed()">${Drag File(s) Here or Click to Upload}</span>
+       <span class="drop-text" ng-if="!c.moreFilesAllowed()">{{::c.messages.MAX_FILES_ALLOWED}}</span>
+     </a>
+     <input ng-disabled="!c.moreFilesAllowed()" id="fileinput"  type="file" multiple="true" aria-hidden="true" aria-label="${Upload Files}" class="fileInput" ng-file-select="c.filesSelected($files)"/>
+     <div class="att-msg" id="fileInstructions">{{::c.messages.ATTACHMENT_MESSAGE}}</div>
+      <div ng-if="c.tempSelectedFiles.length > 0" class="att-main-content" ng-repeat="file in c.tempSelectedFiles">
+        <span class = "att-main">
+           <div class="att-body-div">
+              <km-icon class="file-icon" fname="{{file.name}}" aria-hidden="true"></km-icon>
+              <div class="att-body">
+                 <span class="att-content">{{file.name}} </span>
+                 <span class="att-content text-muted">{{file.size/1024 | number:2}}K</span>
+              </div>
+           </div>
+           <i class="btn fa fa-times close pull-right" ng-click="c.removeTempFile($index)" tabindex="0" aria-label="{{::c.messages.REMOVE_ATTACHMENT}} {{file.name}}"></i>
+        </span>
+     </div>
+     <div ng-if="c.selectedFiles.length > 0" class="att-main-content" ng-repeat="file in c.selectedFiles">
+        <span class = "att-main">
+           <div class="att-body-div">
+              <km-icon class="file-icon" fname="{{file.name}}" aria-hidden="true"></km-icon>
+              <div class="att-body">
+                 <span class="att-content">{{file.name}} </span>
+                 <span class="att-content text-muted">{{file.size/1024 | number:2}}K</span>
+              </div>
+           </div>
+           <i class="btn fa fa-times close pull-right" ng-click="c.removeFile($index)" tabindex="0" aria-label="{{::c.messages.REMOVE_ATTACHMENT}} {{file.name}}"></i>
+        </span>
+     </div>
+  </div>
+  <div class="modal-footer attachment-modal-footer">
+     <div class="pull-right">
+        <button class="btn btn-default action-btn" data-ng-click="c.cancelAttachments()"  id="attDialogCancel" >${Cancel}</button>
+        <button type="submit"  class="btn btn-primary action-btn btn-post" data-ng-click="c.saveFiles()" id="attDialogAdd" >${Save}</button>
+     </div>
+  </div>
+</div>
+</script>
+
+<script type="text/ng-template" id="kmAttachmentsProgress">
+ <div class="attachment-progress-modal" role="dialog">
+   <div class="modal-body attachment-modal-body">
+     <div class="attachments-uploading">
+       <div class="progress-indicator">
+         <div class="content-main">
+           <div class="content-help-text">${Posting Comment}</div>
+           <p class="upload-spinner">
+             <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+  </p>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</script>
+
+
+
+<style>
+  /*
+  * For rem conversion, considered base html font size: 10px.  <=> 1 rem
+  */
+  /*Comments button */
+.comments-button {
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  outline:none;
+}
+  @media only screen and (max-width :1200px){
+    .kb-comment-wrapper .pad-even-left{
+      margin-left: 1.1rem;
+    }
+  }
+  @media only screen and (max-width :992px){
+    .kb-comment-wrapper .attachments-title{
+      padding: 0.5rem 0rem 0rem 0rem;
+    }
+    .kb-comment-wrapper .attachment-more .att-body{
+      position: relative;
+      top: -0.8rem;
+    }
+    .kb-comment-wrapper .attachment-more .icon{
+      position: relative;
+      top: -2rem;
+    }
+  }
+  /*Adjust the text content for mobile and reflow screens*/
+  @media only screen and (min-width :767px){
+    .feedback-content{
+      padding-inline-start:62px;
+    }
+    .content{
+      padding-left:0px;
+    }
+  }  
+  @media only screen and (min-width :992px) {
+	  .attachments-title {
+		  border-right: 0.1rem solid #ddd;
+	  }
+  }
+  
+  @media only screen and (max-width :760px){
+	.content{
+      padding-left:0px;
+    }
+    .kb-comment-wrapper .kb-container-column{
+      padding-left : 0rem;
+      padding-right: 0rem;
+      padding-top : 0rem;
+    }
+    .kb-comment-wrapper .kb-line-temp, .kb-comment-wrapper .kb-line{
+      border-color: #ccc;
+      margin-left: -2rem;
+      margin-right: -2rem;
+      margin-top:0rem;
+      margin-bottom:0rem;
+    }
+    .kb-comment-wrapper .kb-line{
+      margin-bottom: 1.5rem;
+    }
+    .kb-comment-wrapper .kb-line-temp-bottom{
+      margin-bottom: 1rem;
+      margin-left: -1rem;
+    }
+    .kb-comment-wrapper.kb-mobile .kb-line-temp-top{
+      margin-left: -1rem;
+      margin-top: 1rem;
+    }
+    .kb-comment-wrapper .image50px .avatar-container {
+      height: 3.5rem !important;
+      width: 3.5rem !important;
+      cursor: default;
+    }
+    .kb-comment-wrapper .content .image50px .avatar-container {
+      position:absolute;
+    }
+    .kb-comment-wrapper .commentor-info{
+      padding-left:5rem;
+      position: relative;
+      top: 0.1rem;
+    }
+    .kb-comment-wrapper .comment-conatiner{
+      width: 100%;
+      display:inline-block;
+      margin-left:0rem;
+    }
+    .kb-comment-wrapper .published{
+      font-size: 1rem;
+      font-weight: 400;
+      padding-left:5rem;
+      display:block;
+    }
+    .kb-comment-wrapper .pad-even-left{
+      margin-left: 0rem;
+    }
+  }
+  @media only screen and (min-width :760px){
+    .kb-comment-wrapper .attachment-box{
+      width:49%;
+    }
+  }
+  @media only screen and (min-width :550px){
+    .kb-comment-wrapper.kb-mobile .cm-btns.local .kb-input-button{
+      margin-top: 2rem;  
+    }
+  }
+  @media only screen and (max-width :550px){
+    .no-pad{
+      padding:0rem;
+    }
+    .no-pad-left{
+      padding-left:0rem !important;
+    }
+    .no-pad-right{
+      padding-right:0rem !important;
+    }
+    .kb-comment-wrapper .comment-buttons{
+      float:none;
+      width:100%
+    }
+    .kb-comment-wrapper .comment-buttons .kb-end-button{
+      width: 100%;
+      height: 4rem;
+      text-align: center;
+    }
+    .kb-comment-wrapper .kb-input-button .cancel{
+      float:left;
+      width:50%;
+      background:none;
+    }
+    .kb-comment-wrapper .kb-input-button .submit{
+      float:right;
+      width:50%;
+    }
+    .kb-comment-wrapper.kb-mobile{
+      margin: 0rem -1.5rem;
+    }
+    .kb-comment-wrapper.kb-mobile.grey-back{
+      margin: -2rem -1.5rem 0rem -1.5rem;
+    }
+    .kb-comment-wrapper.kb-desktop .kb-attachment-btn{
+      float:none;
+      text-align:center;
+    }
+    .kb-comment-wrapper .show-for-mobile{
+      display:block;
+    }
+    .kb-comment-wrapper  .outer-att-display{
+      display:block;
+    }
+  }
+  @media only screen and (max-width: 760px){
+    .image-modal-dialog .modal-content {
+      width: 100%;
+    }
+  }
+
+  @keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+  }
+
+  /*css for likes modal */
+
+  .km-likes-modal .member{
+    display: flex;
+    padding: 1rem 0.5rem;
+  }
+  .km-likes-modal .modal-header{
+    margin-top:0.5rem;
+  }
+  .km-likes-modal .close{
+    margin: 0.2rem 0.5rem 0.5rem 0.5rem !important;
+    padding:0.1rem;
+  }
+  .km-likes-modal .user-info{
+    padding-top: 0.5rem;
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  .km-likes-modal .link{
+    font-weight: 500;
+  }
+
+  .km-likes-modal .modal-body{
+    max-height: 35rem;
+    overflow-y: auto;
+    padding: 1rem !important;
+  }
+  .km-likes-modal .fa-close{
+    width: 1.5rem;
+    height: 2.3rem;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+  }
+  .km-likes-modal .image50px .avatar-container {
+    height: 5rem !important;
+    width: 5rem !important;
+  }
+  .km-likes-modal .sub-avatar{
+    justify-content: center;
+    align-items: center;
+    display: inline-flex !important;
+  }
+  .km-likes-modal .sub-avatar span {
+    font-size:1.6rem;
+  }
+  .km-likes-modal .float-left{
+    float: left;
+  }
+/* css for km image modal */
+
+.image-modal-dialog .knowledge-image-modal{
+    background-color: transparent;
+    padding-top: 1rem;
+  }
+
+  .image-modal-dialog .modal-content{
+    background-color:transparent;
+    border: 0rem solid rgba(0, 0, 0, 0);
+    box-shadow: none;
+    animation-name: fadeIn;
+    animation-duration: 0.1s;
+  }
+  .image-modal-dialog .modal-dialog {
+    width: 80%;
+    max-width: 80%;
+    min-width: 18.5rem;
+    min-height: 10rem;
+    margin: auto;
+  }
+  .image-modal-dialog .modal-content-img {
+    margin: auto;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: transparent;
+    box-shadow: 0;
+  }
+
+  .image-modal-dialog .close {
+    color: #fff;
+    font-size: 2.5rem;
+    transition: 0.3s;
+    opacity: unset;
+    margin-bottom:0.5rem;
+  }
+  .image-modal-dialog .close:focus{
+    color: #fff;
+    font-size: 2.5rem;
+    transition: 0.3s;
+    opacity: unset;
+    outline: thin dotted;
+    outline: 0.4rem auto -webkit-focus-ring-color !important;
+    outline-offset: -0.2rem !important;
+  }
+
+  .image-modal-dialog .close:hover {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .image-modal-dialog .knowledge-modal-dialog{
+    min-height:10rem;
+    min-width:18.5rem;
+  }
+
+
+
+  /*css for delete modal */
+
+  .km-delete-modal .modal-body, .modal-header {
+    padding: 2rem !important;
+  }
+  .km-delete-modal .modal-header .modal-title {
+    line-height: 2.1rem;
+    font-weight: normal;
+  }
+  .km-delete-modal .modal-body .warn-msg .fa {
+    font-size: 4rem;
+    margin-right: 2rem;
+    margin-top: 0.5rem;
+    float: left;
+  }
+  .km-delete-modal .modal-body .warn-msg .msg-text {
+    display: inline-block;
+    width: calc(100% - 6rem);
+    line-height: 2.3rem;
+  }
+  .km-delete-modal .modal-body .btn-container{
+    overflow: hidden;
+    padding-top: 1.5rem;
+  }
+  .km-delete-modal .modal-body .btn-container button:not(:last-of-type){
+    margin-right: 1rem;
+  }
+
+
+
+    /*style for attachments list modal*/
+
+  .attachment-list-modal .modal-header{
+    margin-top:0.5rem;
+  }
+  .modal-header h4{
+    display:inline;
+  }
+  .attachment-list-modal .att-body{
+    padding-left: 0.5rem;
+    width: calc(100% - 5rem);
+    line-height: 2rem;
+    max-width: 100%;
+  }
+  .attachment-list-modal .att-main{
+    margin-left : 1.5rem;
+    height: 100%;
+    display: flex;
+    padding: 1rem 1.5rem 1rem 0rem;
+    align-items:center;
+  }
+  .attachment-list-modal .att-content{
+    display:block;
+    overflow:hidden;
+    white-space: nowrap;
+    color:#2e2e2e;
+    text-overflow:ellipsis;
+  }
+  .attachments-list-modal-dialog.kb-desktop .modal-dialog{
+    max-height: 60rem;
+    max-width: 45rem;
+    width: calc(100% - 2rem);
+    margin: 3rem auto;
+  }
+  .attachment-list-modal .att-main-content{
+    border-bottom: 0.1rem solid #ddd;
+  }
+  .attachment-list-modal .text-muted {
+    color: #666666 !important;
+  }
+  .attachment-list-modal .close{
+    width: 3.5rem;
+    font-size: 2rem;
+    margin: 0.2rem 0.5rem 0.5rem 0.5rem !important;
+    padding:0.1rem;
+  }
+  .attachment-list-modal .file-icon{
+    width:4rem;
+    height:4rem;
+  }
+  .attachment-list-modal .att-body-div{
+    width: 80%;
+    display:flex;
+  }
+  .attachment-list-modal .modal-footer{
+    border-top:none;
+  }
+
+  @media (max-width: 992px){
+    .attachment-list-modal .att-body-div{
+      width: 100%;
+    }
+  }
+
+  /*css for attachments editor modal */
+  .attachment-edit-modal .files-drop{
+    display: block;
+    padding: 2rem 0rem 1.5rem 0rem;
+    margin:1.5rem;
+    border: 0.2rem dashed #ccc;
+    text-align: center;
+    background: #fff;
+  }
+
+  .attachment-edit-modal .modal-header{
+    margin-top:0.5rem;
+  }
+  .attachment-edit-modal .paper-icon{
+    color: #666666;
+    font-size: 5rem;
+  }
+  .attachment-edit-modal .drop-text{
+    font-size: 1.6rem;
+    display: block;
+    padding-top: 1.5rem;
+  }
+  .attachment-edit-modal .att-msg{
+    font-size: 1.2rem;
+    margin: 1rem 1.5rem;
+  }
+  .attachments-modal-dialog .modal-dialog{
+    max-height: 60rem;
+    max-width: 45rem;
+    width: calc(100% - 2rem);
+    margin: 3rem auto;
+  }
+  .attachment-edit-modal .att-body{
+    padding-left: 0.5rem;
+    width: calc(100% - 5rem);
+    line-height: 2rem;
+    max-width: 100%;
+  }
+  .attachment-edit-modal .close{
+    width: 3.5rem;
+    font-size: 2rem;
+    margin: 0.2rem 0.5rem 0.5rem 0.5rem !important;
+    padding:0.1rem;
+  }
+  .attachment-edit-modal .att-main{
+    margin-left : 1.5rem;
+    height: 100%;
+    display: flex;
+    padding: 1rem 1.5rem 1rem 0rem;
+  }
+
+  .attachment-edit-modal .att-content{
+    display:block;
+    overflow:hidden;
+    white-space: nowrap;
+    color:#2e2e2e;
+    text-overflow:ellipsis;
+  }
+  .attachment-edit-modal .att-main-content{
+    border-top: 0.1rem solid #ddd;
+  }
+  .attachment-edit-modal .text-muted {
+    color: #666666 !important;
+  }
+  .attachment-edit-modal .alert-icon {
+    margin-right: 1rem;
+  }
+  .attachment-edit-modal .files-drop:hover, .files-drop-dragover {
+    border: 0.2rem dashed #0f3f39;
+  }
+  .attachment-edit-modal .files-drop[disabled]{
+    cursor:not-allowed;
+  }
+  .attachment-edit-modal .files-drop[disabled]:hover, .files-drop-dragover[disabled] {
+    border: 0.2rem dashed #ccc;
+  }
+  .attachment-edit-modal .file-icon{
+    width:4rem;
+    height:4rem;
+  }
+  .attachment-edit-modal .km-alert-inform{
+    margin:1.5rem;
+  }
+  .attachment-edit-modal .att-body-div{
+    width: calc(100% - 5rem);
+    display:flex;
+  }
+  .attachment-edit-modal .fileInput{
+    visibility: hidden;
+    height: 0rem;
+  }
+
+  /* knowledge-attachments-progress template CSS */
+
+  .attachments-progress-dialog {
+    display: flex !important;
+    align-items: center;
+    color: #fff;
+    font-style: italic;
+    box-shadow: none !important;
+  }
+
+  .attachments-progress-dialog .attachment-progress-modal .modal-header {
+    padding: 2rem;
+  }
+
+  .attachments-progress-dialog .attachment-progress-modal .modal-header h4 {
+    font-weight: normal;
+  }
+
+  .attachments-progress-dialog .modal-dialog .modal-content {
+    background-color: #2e2e2e !important;
+    opacity: 0.9 !important;
+  }
+
+  .attachments-progress-dialog .modal-dialog {
+    max-height: 15rem !important;
+    max-width: 20rem !important;
+    width: calc(100% - 2rem);
+    margin: 0rem auto;
+  }
+
+  .attachments-progress-dialog .upload-spinner {
+    justify-content: center;
+    display: flex;
+  }
+
+  .attachments-uploading .progress-indicator,
+  .attachments-uploading .progress-info {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .attachments-uploading .progress-info {
+    margin-top: 1.5rem;
+  }
+
+  .attachments-progress-dialog .content-help-text {
+    margin: 0rem 0rem 1.5rem 0rem;
+  }
+
+</style>

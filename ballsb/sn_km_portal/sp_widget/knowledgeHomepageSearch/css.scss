@@ -1,0 +1,63 @@
+.cm-main-search {
+  color: $sp-tagline-color;
+
+  .cm-welcome-msg {
+    h2 {
+      font-size: 36px;
+      font-weight: 300;
+      text-align: center;
+      margin-top: 0px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .cm-search-box {  
+    .input-group {
+      max-width: 578px;
+      margin: 0 auto;
+    }
+    .input-group input[name="query"] {
+      height: 42px;
+      border: 1.2px solid $input-border;
+      border-radius: 4.8px 0 0 4.8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+    .input-group input[name="query"]:focus {
+      outline: 5px auto $input-border-focus;
+    }
+    ::placeholder {
+      font-size: 16px;
+      line-height: 25px;
+    }
+    :-ms-input-placeholder {
+      font-size: 16px;
+      line-height: 25px;
+    }
+    .input-group .input-group-btn > button {
+      height: 42px;
+      min-width: 48px;
+      border: 1.2px solid $input-border;
+      border-radius: 0 4.8px 4.8px 0;
+      padding: 0;
+    }
+  }
+
+  .cm-community-summary {
+    text-align: center;
+
+    ul{
+      padding:0px;
+    }
+    .summary {
+      font-size: 18px;
+      display: inline-block;
+      text-align: center;
+      padding: 20px 30px 0px;
+      margin-top: 4px;
+      margin-bottom: 0px;
+    }
+  }
+}

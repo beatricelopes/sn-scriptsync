@@ -1,0 +1,41 @@
+<div class="kb-filter-block hidden-xs hidden-sm" ng-show="$root.facetSubscribed && c.visible" ng-cloak>
+  <div ng-class="::{'hidden-xs' : options.hide_xs}">
+    <div class="panel panel-{{::c.options.color}}">
+      <div class="panel-heading">
+        <div class="kb-breadcrumb row">
+          <div class="bd-title">
+            <span ng-if="c.items.length == 0" class="panel-title">
+              ${Showing All Results}
+            </span>
+            <span ng-if="c.items.length > 0" class="panel-title">
+              ${Applied Filters}
+            </span>
+          </div>
+          <div class="bd-items" ng-show="c.items.length > 0">
+            <span class="kb-breadcrumb-item" ng-repeat="item in c.items track by item.id">
+              <button aria-label="{{c.generateClearMessage(item.label)}}" ng-click="c.removeSelection(item,$index)">
+                ${{{item.label == 'kb_clear_url_filter' ? 'URL Filters Applied' : item.label}}} 
+                <i class="fa fa-close cross-tag-fa fa-sm" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+          
+
+          <span ng-show="c.items.length > 0" class="clear-all">
+            <button class="transparent-button" aria-label="${Clear all filters}" ng-click="c.clearAllFiters()">${Clear All}</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@media only screen and (max-width: 991px) {
+  .no-padding-important {
+    padding-left : 0px !important;
+    padding-right : 0px !important;
+  }
+  
+}
+</style>

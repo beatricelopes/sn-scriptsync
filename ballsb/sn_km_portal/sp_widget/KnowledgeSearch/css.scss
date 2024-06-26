@@ -1,0 +1,76 @@
+.kb-search-block{
+  padding : 8px 0px 10px 0px;
+}
+input[type='text']{
+  height: 2.4em;
+}
+button{
+  height: inherit;
+  font-size: 14px; 
+}
+.filter-icon{
+    display: inline-flex;
+    padding-top: 9px;
+  	padding-left:5px;
+}
+.filter-size{
+	font-size: 18px;
+}
+.selected-filter-color{
+	color :$link-color;
+}
+.filter-color{
+	color: $text-color;
+}
+.check-position {
+	  font-size: 10px;
+    padding-top: 6px;
+    margin-left: -5px;
+}
+.no-pad {
+	padding-left :0px !important;
+  padding-right : 0px !important;
+}
+.pad-bottom {
+	padding-bottom : 10px;
+}
+.icon-padding {
+ padding-top : 9px;
+ padding-right : 5px;
+}
+.filter-class{
+  padding-bottom: 15px;
+  padding-top: 5px;
+  font-size : 16px;
+  margin-left:-15px;
+}
+.filter-text{
+  font-size : 16px;
+  span{
+  	padding-left :7px;
+  }
+}
+.filter-text:focus{
+  box-shadow:none;
+  -webkit-box-shadow:none;
+  border:none;
+ }
+.transparent-button{
+  color:$text-color;
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: ellipsis;
+  outline:none;
+}
+.kb-search-padding{
+  padding-left:12px;
+}
+.showLangIcon{
+  padding-right:0px;
+}
+.tooltip-inner {
+  white-space:nowrap;
+  max-width:none;
+}

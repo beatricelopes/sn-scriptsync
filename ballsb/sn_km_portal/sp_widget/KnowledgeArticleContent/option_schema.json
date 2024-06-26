@@ -1,0 +1,56 @@
+[
+  {
+    "hint": "Hide all article actions (Subscribe, Edit, Create Incident, Flag Article)",
+    "name": "hide_all_actions",
+    "default_value": "false",
+    "section": "other",
+    "label": "Hide All Actions",
+    "type": "boolean"
+  },
+  {
+    "hint": "Show Article Versioning Information",
+    "name": "show_version_info",
+    "default_value": "true",
+    "section": "other",
+    "label": "Show Version Information",
+    "type": "boolean"
+  },
+  {
+    "hint": "Show the Create Incident action",
+    "name": "show_create_incident_action",
+    "default_value": "false",
+    "section": "other",
+    "label": "Show Create Incident Action",
+    "type": "boolean"
+  },
+  {
+    "hint": "Label for the Create Incident action",
+    "name": "create_task_prompt",
+    "section": "other",
+    "label": "Create Incident Action Label",
+    "type": "string"
+  },
+  {
+    "hint": "Change the url for the create incident action to any custom task form (default url is populated based on glide.knowman.create_incident_link system property)",
+    "name": "create_task_url",
+    "section": "other",
+    "label": "Create Incident Action URL",
+    "type": "string"
+  },
+  {
+    "hint": "If there's a new version of the article available, it will redirect to the latest version. You must have Show Article Versioning disabled",
+    "name": "redirect_latest",
+    "section": "other",
+    "default_value": "false",
+    "label": "Redirect to the latest article",
+    "type": "boolean"
+  },
+  {
+    "hint": "If the instance option is set to true, the page title is set dynamically from the widget. It will also override any existing title set on the page.",
+    "name": "set_page_title",
+    "section": "other",
+    "default_value": "true",
+    "label": "Set the page title",
+    "type": "boolean"
+  }
+]

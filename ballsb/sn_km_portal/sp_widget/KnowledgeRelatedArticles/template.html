@@ -1,0 +1,5 @@
+<div class="kb-article-list" ng-if="c.options.always_show || c.data.result.length" ng-class="{'row':options.use_full_width === 'false','mesp-ui' : c.data.isMESP}">
+  <div ng-class="{true:'col-lg-9 col-md-9 col-sm-12'}[options.use_full_width === 'false']">
+    <sp-widget widget="::c.data.template"></sp-widget>
+  </div>
+</div>

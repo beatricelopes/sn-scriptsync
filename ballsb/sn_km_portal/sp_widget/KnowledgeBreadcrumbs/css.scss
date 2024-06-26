@@ -1,0 +1,25 @@
+.nav-pills i {
+	margin-top: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-bottom: 15px;
+}
+
+.disabled{
+  text-decoration:none;
+  cursor:default;
+  color:$text-color;
+}
+
+.breadcrumbs {
+	padding-left: 5px; 
+	padding-top: 15px;
+}
+
+.nav-pills li a {
+	padding: 0px;
+}
+
+.typeahead-search {
+	padding-right: 0px; 
+}

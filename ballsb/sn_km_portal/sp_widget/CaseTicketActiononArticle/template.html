@@ -1,0 +1,29 @@
+<div ng-if="c.data && c.data.isLoginUserCustomer && c.data.state == '1' || c.data.state == '10'" class="panel panel-primary b">
+  <div class="panel-heading">
+  	<h4 class="panel-title">${Do you want to close the case?}</h4>
+  </div>
+  <div class="panel-body" >
+    <form ng-submit="$event.preventDefault()" class="form-horizontal" >
+      <div class="question">
+        <div data-ng-include='"case_info_template.html"'/>
+        <div class="case-action">
+          <button type="button" name="close" class="btn btn-primary btn-question" ng-click="c.close()" aria-label="{{data.messages.CLOSE_CASE}}">${Close Case}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div ng-if="c.data && c.data.isLoginUserCustomer && !(c.data.state == '1' || c.data.state == '10')" class="panel panel-default b">
+  <div class="panel-heading">
+    <h4 class="panel-title" ng-if="!(data.state == '1' || data.state == '10')">${Related Case}</h4>
+  </div>
+  <div class="panel-body" >
+    <form ng-submit="$event.preventDefault()" class="form-horizontal" >
+      <div class="question">
+        <div data-ng-include='"case_info_template.html"'/>
+        <div class="case-action">
+          <button type="button" name="viewCase" class="btn btn-default btn-question project-btn" ng-click="c.viewCase()" aria-label="{{data.messages.VIEW_CASE}}">${View Case}</button>
+        </div>
+    </form>
+  </div>  
+</div>

@@ -1,0 +1,12 @@
+[{
+	"tagline": {
+		"table" : "sp_instance",
+		"sys_id" : "5eb91a13db50320099f93691f0b8f5ae",
+		"field" : "title"
+	},
+	"hero_background": {
+		"table" : "sp_container",
+		"sys_id" : "87f999e4dbd3220099f93691f0b8f57d",
+		"field" : "background_image"
+	}
+}]

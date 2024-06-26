@@ -1,0 +1,94 @@
+<div class="kb-list-block" ng-if="c.options.always_show || c.options.result.length" ng-class="{'has-icon' : c.options.glyph, 'kb-mobile' : c.isNative, 'kb-desktop' : !c.isNative}">
+  <div ng-class="c.isNative ? 'kb-mobile-panel' : 'panel panel-{{::c.options.color}} b'">
+    <div class="panel-heading" ng-class="{'b-b': !c.options.color}"> 
+      <h2 ng-if="c.data.isKBView" class="panel-title" ng-bind="::options.title" aria-label="{{options.aria_label_title}}">
+      <fa ng-if="::options.glyph" name="{{::options.glyph}}" class="m-r-sm" /></h2>
+      <h3 ng-if="!c.data.isKBView" class="panel-title" ng-bind="::options.title" aria-label="{{options.aria_label_title}}">
+      <fa ng-if="::options.glyph" name="{{::options.glyph}}" class="m-r-sm" /></h3>
+    </div>
+    <div ng-if="c.options.result.length > 0" class="list-group hide-x-overflow" style="max-height: {{::c.options.panel_body_height || 'none'}}; overflow-y: auto;" role="list" aria-label="{{options.aria_label_title}}">
+      <div role="group" ng-repeat="item in c.getOrderedItems() track by item.id" class="list-group-item kb-list-item" ng-class="{'kb-item-block':c.isNative}" role="listitem">
+        <div class="kb-list-row">
+          <div class="kb-list-col-icon" ng-if="::c.options.glyph">
+            <i class="fa fa-{{::c.options.glyph}}" aria-hidden="true"></i>
+          </div>
+          <div class="kb-list-col-content">
+            <div class="main_text" >
+              <a tabindex="0" ng-attr-target="{{((item.direct === true && c.data.useDocumentViewer == true) || item.external_link) ? item.id : ''}}" ng-href="{{((item.direct === true && c.data.useDocumentViewer == true) || item.external_link) ? (item.external_link || (item.link + '&view=true')) : item.link}}">
+                <div ng-switch on="::item.display_field.type" ng-class="{'l-h-40': !item.secondary_fields.length}">
+                  <span class="translated-html" ng-switch-when="translated_html" ng-bind-html="::item.display_field"></span>
+                  <div ng-switch-default ng-bind="::item.display_field"></div>
+                </div>
+              </a>
+            </div>
+            <small>
+              <div class="secondary-info" ng-if="c.options.show_secondary_information">
+                <span class="about-outer-span">
+                  <span class="sr-only">${Article Metadata}</span>
+                  <span ng-repeat="f in item.secondary_fields track by $index">                 
+                    <span ng-if="f.value || f.name == 'rating'">
+                      <span ng-switch="f.name" class="art-label">
+                        <span ng-switch-when="rating">
+                          <span ng-if="!$first" class="dot" aria-hidden="true"> • </span>
+                          <span class="no-wrap" disabled="true" ng-init="ratingVal =c.roundOff(f.value)">
+                            <span class="kb-rating-stars" ng-if="::c.KBRatingStyle">
+                              <span class="sr-only">${Article has rating - {{c.roundOff(f.value)}} out of 5 stars}</span>
+                              <uib-rating ng-model="ratingVal" max="5" readonly="true" tabindex="-1" aria-hidden="true"/>
+                            </span>
+                            <span class="sp-stars" ng-if="!c.KBRatingStyle">
+                              <span class="sr-only">${Article has rating - {{c.roundOff(f.value)}} out of 5 stars}</span>
+                              <span uib-rating sp-rating ng-model="::ratingVal" max="5" readonly="true" aria-hidden="true" state-on="'fa fa-star kb-star-on'" state-off="'fa fa-star kb-star-off'" tabindex="-1"/>
+                            </span>
+                          </span>
+                        </span>
+                        <span ng-switch-when="sys_view_count">
+                          <span ng-if="!$first" class="dot" aria-hidden="true"> • </span>
+                          <span ng-if ="::f.value == '1' " class="no-warp">
+                            <span aria-hidden="true">{{::f.value}} ${View}</span>
+                            <span class="no-warp sr-only">${Article has {{::f.value}} view}</span>
+                          </span>
+                          <span ng-if ="::f.value != '1' " class="no-warp">
+                            <span aria-hidden="true">{{::f.value}} ${Views}</span>
+                          	<span class="sr-only">${Article has {{::f.value}} views}</span>
+                          </span>
+                        </span>
+                        <span ng-switch-when="workflow_state">                        
+                          <span ng-if="!$first" class="dot" aria-hidden="true"> • </span><span class="no-warp" aria-hidden="true"><span ng-bind="::f.display_value"></span> ${State}</span>
+                          <span class="sr-only">${Article is in {{::f.display_value}} state}</span>
+                        </span>
+                        <span ng-switch-when="external">                        
+                          <span ng-if="f.value == 'true'">
+                            <span ng-if="!$first" class="dot" aria-hidden="true"> • </span><span ng-bind="::c.data.externalContentLabel"></span>
+                          </span>
+                        </span>
+                        <span ng-switch-default="" ng-switch="f.type">
+                          <span ng-if="!$first" class="dot" aria-hidden="true"> • </span>
+                          <span class="no-warp">
+                            <span class="secondary-label" ng-if="c.options.show_secondary_fields_label">{{::f.label}}: </span>
+                            <span ng-switch-when="glide_date">
+                              <span class="sr-only">${Updated}</span>
+                              <sn-time-ago timestamp="::f.value"/>
+                            </span>
+                            <span ng-switch-when="glide_date_time">
+                              <span class="sr-only">${Updated}</span>
+                              <sn-time-ago timestamp="::f.value" />
+                            </span>
+                            <span ng-switch-default="" ng-bind="::f.display_value" aria-hidden="{{f.label == 'Author'}}"></span>
+                            <span class="sr-only" ng-if="f.label == 'Author' && f.display_value">${Authored by {{::f.display_value}}}</span>
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </small>
+          </div>
+        </div>
+      </div>       
+    </div>
+    <div ng-if="!c.options.result.length" class="list-group-item" style="border:none">
+      ${No content to display}
+    </div>
+  </div>
+</div>

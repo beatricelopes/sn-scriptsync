@@ -1,0 +1,100 @@
+<sp-panel ng-if="$root.displayAttachments === 'true' && !c.isMobile" class="kb-panel-attach">
+	<sp-attachment-manager table="$root.tableName" sys-id="$root.article_sys_id" omit-edit="true"></sp-attachment-manager>
+	<div class="list-group-item" ng-if="!$root.attachments.length > 0">{{::$root.messages.NO_ATTACHMENTS}}</div>
+</sp-panel>
+
+<div ng-if="c.isMobile && $root.displayAttachments === 'true'" style="display: flex; flex-flow: column;" aria-labelledby="attachmentHeader">
+  <h2 class="attachment-header" ng-bind="::options.title" aria-label="{{options.aria_label_title}}"/>
+	<div class="kb-attachment-wrapper col-sm-12">
+		<div class="outer-att-display attachment-less" ng-repeat="file in attachments" ng-if="attachments.length <= 2">
+			<div class="attachment-box col-sm-6 col-xs-12" ng-class-even="'pad-even-left'">
+				<div class='attachments-title' ng-class="c.isMobile ? 'col-xs-12' : 'col-xs-10'" style="opacity: .6;" ng-if="file.state == 'not_available'">
+					<km-icon class="file-icon" fname="file.err"></km-icon>
+					<div class="att-body">
+						<span class="att-content text-muted">{{file.file_name }} </span>
+						<span class="att-content text-muted">${File unavailable}</span>
+					</div>
+				</div>
+				<a target="_blank" ng-href="sys_attachment.do?sys_id={{file.sys_id}}" aria-label="{{file.file_name}} of size {{file.size/1024 | number:2}}K, Attachment {{$index+1}} of {{attachments.length}}">
+					<div class='attachments-title' ng-class="c.isMobile ? 'col-xs-12' : 'col-xs-10'" ng-if="file.state != 'not_available'">
+						<km-icon class="file-icon" fname="{{file.file_name}}" aria-hidden="true"></km-icon>
+						<div class="att-body">
+							<span class="att-content" aria-hidden="true">{{file.file_name}} </span>
+							<span class="att-content text-muted" aria-hidden="true">{{file.size/1024 | number:2}}K</span>
+						</div>
+					</div>
+					<div class="attach-down-icon col-xs-2" ng-if="!c.isMobile">
+						<i class="fa fa-cloud-download" aria-hidden="true"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="outer-att-display attachment-more" ng-if="attachments.length > 2">
+			<div class="attachment-box col-sm-6 col-xs-12" ng-click="c.openAttachmentsList(attachments)">
+				<div class='attachments-title' ng-class="c.isMobile ? 'col-xs-12' : 'col-xs-10'">
+					<span class="icon">
+						<i class="fa fa-paperclip fa-rotate-270 file-icon" aria-hidden="true"></i>
+					</span>
+					<div class="att-body" tabindex="0">
+						<span class="att-content">{{attachments.length}} Attachments</span>
+					</div>
+				</div>
+				<div class="attach-down-icon col-xs-2" ng-if="!c.isMobile">
+					<i class="fa fa-cloud-download" aria-hidden="true"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+	<script type="text/ng-template" id="kmAttachmentsWidgetList">
+		<div class="attachment-list-modal" role="dialog" aria-label="{{::$root.messages.ATTACHMENTS}}" >
+			<div class="modal-header attachment-modal-header" >
+				<h4 class="modal-title">
+                   {{::$root.messages.ATTACHMENTS}}
+      			   <i class="btn fa fa-times close pull-right" ng-click="c.closeModal()" tabindex="0" aria-label="${Close}"></i>
+				</h4>
+			</div>
+			<div class="modal-body attachment-modal-body" style="padding:0px">
+				<div ng-repeat="file in c.attachmentsList" class="att-main-content">
+					<span class="att-main" style="opacity: .6;" ng-if="file.state == 'not_available'">
+						<div class="att-body-div">
+							<km-icon class="file-icon" fname="file.err" aria-hidden="true"></km-icon>
+							<div class="att-body">
+								<span class="att-content">{{file.file_name}} </span>
+								<span class="att-content text-muted" aria-hidden="true">${File unavailable}</span>
+							</div>
+						</div>
+					</span>
+					<span class="att-main"  ng-if="file.state != 'not_available' && !c.isMobile">
+						<div class="att-body-div">
+							<km-icon class="file-icon" fname="{{file.file_name}}"></km-icon>
+							<div class="att-body">
+								<span class="att-content" aria-hidden="true">{{file.file_name}} </span>
+								<span class="att-content text-muted" aria-hidden="true">{{file.size/1024 | number:2}}K</span>
+							</div>
+						</div>
+						<a class="btn btn-default action-btn" target="_blank" ng-href="sys_attachment.do?sys_id={{file.sys_id}}">${Download}</a>
+					</span>
+					<span class="att-main"  ng-if="file.state != 'not_available' && c.isMobile">
+              <div class="att-body-div">
+				<a class="att-body-div" target="_blank" ng-href="sys_attachment.do?sys_id={{file.sys_id}}" aria-label="{{file.file_name}} of size {{file.size/1024 | number:2}}K, Attachment {{$index+1}} of {{attachments.length}}">
+                  <km-icon class="file-icon" fname="{{file.file_name}}" aria-hidden="true"></km-icon>
+                  <div class="att-body">
+                    <span class="att-content">{{file.file_name}} </span>
+                    <span class="att-content text-muted">{{file.size/1024 | number:2}}K</span>
+                  </div>
+                </a>
+             </div>
+					</span>
+				</div>
+			</div>
+			<div class="modal-footer attachment-modal-footer" ng-if="!c.isMobile">
+				<div class="pull-right">
+					<button class="btn btn-primary action-btn" data-ng-click="c.downloadAll(c.attachmentsList)" id="downloadAll">${Download All}</button>
+				</div>
+			</div>
+		</div>
+	</script>
+  
+	<hr class="kb-line" />
+</div>

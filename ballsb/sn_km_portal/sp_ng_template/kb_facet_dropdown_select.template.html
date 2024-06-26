@@ -1,0 +1,8 @@
+<div class="kb-facet-filter-block">
+  <div class="facet-detail facet-dropdown" ng-if="c.items">
+	<select id="select_filter_{{data.instanceid}}" class="kb-filter-select" ng-model="c.selected" aria-hidden="true" ng-change="c.updateKbFilterData(c.selected)">
+      <option></option>
+      <option ng-repeat="item in c.items | orderBy:c.orderby" ng-if="item.label" value="{{item.id}}">{{item.label}}</option>
+    </select>
+  </div>
+</div>

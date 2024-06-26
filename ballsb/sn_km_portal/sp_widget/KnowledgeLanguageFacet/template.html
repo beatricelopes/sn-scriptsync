@@ -1,0 +1,93 @@
+<div ng-show="c.visible">
+  <div class="kb-facet-block_{{::options.instanceid}} hidden-xs hidden-sm" ng-class="$root.showFacet && $root.showLanguageFacet ? 'show-this' : 'show-not'"  ng-cloak>
+    <span aria-live="assertive" class="sr-only ng-binding" role="alert">{{c.notity_noresults}}</span>
+    <div class="panel panel-{{::options.color}} removeMarginTop"  id="panel_{{::data.instanceid}}" ng-class="{'remove-bottom-border':c.collapse}">
+      <div class="panel-heading panel-center" data-toggle="collapse" data-target="#collapse_{{::data.instanceid}}" aria-controls="collapse_{{::data.instanceid}}">   
+        <span class="panel-title">
+          <button class="transparent-button" id="f_header_{{::data.instanceid}}" data-toggle="collapse" data-target="#collapse_{{::data.instanceid}}" aria-controls="collapse_{{::data.instanceid}}" aria-label="${{{::options.title}} {{c.data.messages.FILTER_OPTIONS_LABEL}}}">
+            <span ng-if="::options.glyph"><fa name="{{::options.glyph}}" />
+            </span><span ng-bind="::options.title"></span>
+          </button>
+        </span>
+        <span  class="hidden-xs hidden-sm float-left">
+         <!-- <a href="javascript:void(0);" ng-if="c.options.facet_type =='multi_select'" class="clear-all" ng-show="c.clear" ng-click="c.clearSelections($event)">${Clear}</a>
+          <a href="javascript:void(0);" ng-if="c.options.facet_type !='multi_select'" class="clear-all"  ng-click="c.reset($event)">${Reset}</a> -->
+          <span class="toggle-icon">
+            <i class="fa" id="collapse_icon_{{::data.instanceid}}" ng-class="{'fa-minus-square-o':!c.collapse,'fa-plus-square-o':c.collapse}" aria-hidden="true"></i>
+          </span>
+        </span>
+      </div>
+      <div class="hidden-xs hidden-sm collapse" ng-class="::{'in' : !$root.isMobile}" id="collapse_{{::data.instanceid}}">
+        <div class="facet-template" ng-cloak ng-if="c.data.template">
+          <div ng-include="c.data.template" />
+        </div>
+        <div ng-if="!c.valid_field" class="invalid-field">${Error} : {{c.error_text}}</div>
+      </div>
+      <div class="visible-xs visible-sm">
+        <div class="facet-template" ng-cloak ng-if="c.data.template">
+          <div ng-include="c.data.template" />
+        </div>
+        <div ng-if="!c.valid_field" class="invalid-field">${Error} : {{c.error_text}}</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<style>
+  /*
+  For REM conversion, took base font-size:10px.
+  rem = selector-font-size/html-font-size
+  */
+  @media only screen and (max-width: 991px) {
+    .kb-facet-block_{{::options.instanceid}}  .facet-field-padding {
+      padding: 0.9rem 0 0 1.5rem;
+      border-bottom : 0.1rem solid #DDDDDD;
+      min-height : 4rem;
+    }
+  }
+  @media only screen and (max-width: 991px) {
+    .kb-facet-block_{{::options.instanceid}}  .check-icon {
+      float : right;
+      font-size: 1.8rem;
+      display: inline-flex;
+      padding-right : 1.5rem;
+      padding-top : 0.2rem;
+      display:block;
+    }
+    .kb-facet-block_{{::options.instanceid}}  .panel {
+      border-top: 0rem;
+    }
+    .kb-facet-block_{{::options.instanceid}} .clear-all{
+      z-index:100;
+      right: 4.5rem;
+    }
+   .kb-facet-block_{{::options.instanceid}} .panel-center{
+      text-align: center;
+    }
+    .kb-facet-block_{{::options.instanceid}} .float-left{
+      float:right;
+      width : 18%;
+      text-align :right;
+      padding-right :1.5rem;
+    }
+  }
+  @media only screen and (min-width: 991px) { 
+    .kb-facet-block_{{::options.instanceid}}  .facet-detail{
+      max-height: 21.5rem; 
+      padding-top : 0.5rem;
+      padding-bottom : 0.5rem;
+    }
+    .kb-facet-block_{{::options.instanceid}} {
+      margin-bottom : 1.7rem;
+    }
+   .kb-facet-block_{{::options.instanceid}} .clear-all{
+      z-index:100;
+      position: absolute;
+      padding-right: 1rem;
+      right: 4.5rem;
+    }
+    .kb-facet-block_{{::options.instanceid}} .float-left{
+      float:right;
+    }
+  }
+</style>

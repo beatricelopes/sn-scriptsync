@@ -1,0 +1,67 @@
+.panel{
+  border-radius: 5px 5px 0 0;
+  border: 1px solid #DDDDDD;
+  margin-bottom:0px;
+}
+.panel-heading{
+  padding: 10px 15px;
+  margin-bottom:0px;
+  height :40px;
+  display:block;
+  text-align: center;
+}
+.panel-title{
+  color: #3A3F51;
+  font-size:16px;
+  padding-left:16px;
+}
+.loading-icon{
+  text-align: center;
+  padding: 10px;
+}
+.remove-bottom-border{
+  border-bottom:0px;
+}
+.float-left{
+  float:right;
+}
+.clear-all{
+  float: left;
+  font-size :15px;
+}	
+.articleCount{
+  display:inline;
+}
+.width-82{
+ width :82% !important;
+  padding-left : 18%;
+}
+.doneCls{
+  color: $text-color;
+  float: right;
+  font-size : 15px !important;
+  text-align: right;
+}
+.facet-data{
+  text-align: center;
+  height: 40px;
+  padding-top: 11px;
+  color: #428bca;
+}
+.clear-enable{
+  color: $text-color;
+}	
+.clear-disable {
+  color : #979797;
+}
+.transparent-button{
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: ellipsis;
+  outline:none;
+}
+.fixed-facet-data-container{
+  margin-bottom : 5px;
+}

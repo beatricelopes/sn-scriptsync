@@ -1,0 +1,19 @@
+<div class="case-info">${Case number}: <a href="javascript:void(0)" ng-click="c.viewCase()" class="view-case" aria-label="{{data.messages.VIEW_CASE}}">{{c.data.number}}</a></div>
+<div class="case-info">
+  <span>${Short Description}:</span> 
+  <div class="case-short-decscripton">
+    {{c.data.short_description}}
+   </div>
+</div>
+<div class="case-info">${Priority}: {{c.data.priorityLabel}}</div>
+<div class="case-info" ng-if="c.data.product.length > 0"><span>${Product}:</span>
+  <div class="case-product-info">
+    {{c.data.product}}
+  </div> 
+</div>
+<div class="case-info" ng-if="c.data.order.length > 0"><span>${Order}:</span>
+  <div class="case-product-info">
+    {{c.data.order}}
+  </div> 
+</div>
+<div class="case-info">${Status}: {{c.data.stateLabel}}</div>

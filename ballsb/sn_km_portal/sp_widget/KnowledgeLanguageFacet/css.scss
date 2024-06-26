@@ -1,0 +1,111 @@
+.panel{
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid #DDDDDD;
+  margin-bottom: 0px;
+}
+.panel-heading{
+  margin-bottom:0px;
+  padding:8px 15px;
+  border-bottom: 1px solid lightgray;
+}
+.panel-title{
+  color: #3A3F51;
+  font-size: 16px;
+  font-weight: 500;
+  a{
+    color: #3A3F51;
+  }
+}
+
+.remove-bottom-border{
+  border-bottom:0px;
+}
+.toggle-icon{
+  font-size: 18px;
+  display:inline-flex;
+  margin-top: 3px;
+}
+.invalid-field{
+  color:$brand-danger;
+  padding: 0 15px;
+  padding-bottom:10px; 
+}
+.kb-facet-filter-block{
+  line-height: 1.5;
+}
+.facet-search{
+  padding: 10px; 
+  border-bottom: 1px solid #DDDDDD;
+}
+.form-control{
+  height:24px;
+}
+.facet-template{
+  overflow: hidden;
+}
+.facet-field-padding{
+  padding: 2px 0 0 15px;
+}
+.facet-scroll{
+  overflow-y: auto; 
+}
+.checkbox{
+  margin-top:0;
+  margin-bottom:0;
+}
+.check-icon{
+  color:$link-color;
+}
+.facet-dropdown{
+  margin-right:15px; 
+}
+.filter-groups{
+  margin-bottom:20px; 
+}
+.facet-title{
+  padding:10px 16px 0px 16px; 
+}
+.cat-facet-title{
+  padding:10px 16px 0px 16px; 
+  border-top:1px solid #eeeeee; 
+}
+a.active,button.active,.checkbox-label.active{
+  color:#000;
+}
+a:hover,a:focus,.checkbox-label:hover,.checkbox-label:focus{
+  color:#000;
+}
+.show-this{
+  display : block !important;
+}
+.checkbox-label{
+  color:$link-color;
+}
+.check-icon {
+  display:none;
+}
+.float-right{
+  float:right;
+  padding-right: 7px;
+}
+.show-more {
+  text-align: center;
+  display: block;
+  height: 40px;
+  padding-top: 9px;
+}
+.transparent-button{
+  color:$text-color;
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: ellipsis;
+  outline:none;
+}
+.link-color{
+  color:$link-color;
+}
+.no-padding{
+  padding:0px;
+}

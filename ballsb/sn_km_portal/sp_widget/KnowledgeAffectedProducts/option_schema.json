@@ -1,0 +1,1 @@
+[{"hint":"Maximum display count for affected products","name":"max_display_count","default_value":"10","section":"other","label":"Maximum display count","type":"integer"},{"hint":"Show even when empty","name":"always_show","section":"other","label":"Show even when empty","type":"boolean"}]

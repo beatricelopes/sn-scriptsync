@@ -1,0 +1,28 @@
+<div ng-class="c.data.showSearchBox ? 'col-md-8' : 'col-md-12'" class="breadcrumbs">
+	<ul class="nav nav-pills nav-sm">
+		<li><a ng-href="?id={{portal.homepage_dv}}">${Home}</a></li>
+  	<li><i class="fa fa-chevron-right flip-icon-rtl"></i></li>
+  	<li ng-if="portal.homepage_dv != 'kb_home'"><a ng-href="?id={{$root.showKbHomeLink? portal.kb_knowledge_page_dv : 'kb_home'}}">${Knowledge}</a></li>
+  	<li ng-if="portal.homepage_dv != 'kb_home'"><i class="fa fa-chevron-right flip-icon-rtl"></i></li>
+  	<li ng-if="!c.breadcrumbs && c.data.page_id!='kb_article_view'"><a href ng-bind="::page.title"></a></li>
+  	<li ng-repeat-start="item in c.breadcrumbs">
+    	<a ng-href="{{::item.url}}" ng-bind="::item.label"></a>
+  	</li>
+  	<li ng-if="!$last" ng-repeat-end>
+    	<i class="fa fa-chevron-right flip-icon-rtl"></i>
+  	</li>
+ </ul>
+</div>
+<div ng-if="c.data.showSearchBox" class="col-md-4 typeahead-search">
+	<widget id="typeahead-search" options="data.search_options"></widget>
+</div>
+
+
+<style>
+  @media only screen and (max-width: 991px){
+    
+    main {
+      padding-top : 0px !important;
+    }
+  }
+</style>
